@@ -31,7 +31,5 @@ public class Vehicle {
 
 		car1.print();
 		car2.print();
-
-		//test
 	}
 }

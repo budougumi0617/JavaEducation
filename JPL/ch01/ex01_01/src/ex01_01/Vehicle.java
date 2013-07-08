@@ -21,15 +21,17 @@ public class Vehicle {
 		car1.owner = "Taro";
 		car1.VehicleID=Vehicle.NextVehicleID;
 		Vehicle.NextVehicleID++;
-		
+
 		Vehicle car2 = new Vehicle();
 		car2.speed = 60.0;
 		car2.angle = Math.PI * 1/3;
 		car2.owner = "Hanako";
 		car2.VehicleID=Vehicle.NextVehicleID;
 		Vehicle.NextVehicleID++;
-		
+
 		car1.print();
 		car2.print();
+
+
 	}
 }

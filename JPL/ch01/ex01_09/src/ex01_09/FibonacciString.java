@@ -14,25 +14,29 @@ package ex01_09;
  *
  */
 public class FibonacciString {
-	static final int MAX_INDEX = 9;
+	static final String TITLE = "値が50未満のフィボナッチ数列を表示する";
+	static final int BUF_MAX = 20; //配列要素数の最大値
 
 	/**
-	 * P17 練習問題 1.10 bool値を保持する配列を用いてImprovedFibonacciを改良する
+	 * P17 練習問題 1.9 数列を配列に保存するFibonacci
 	 */
 	public static void main(String[] args) {
-		int lo = 1;
-		int hi = 1;
-		NumBool[] result = new NumBool[MAX_INDEX];
-		for (int i = 0; i < MAX_INDEX; i++)
-			result[i] = new NumBool();
-		result[0].set(lo);
-		for (int i = 2; i <= MAX_INDEX; i++) {
-			result[i - 1].set(hi);
-			hi = lo + hi;
-			lo = hi - lo;
-		}
-		for (int j = 0; j < MAX_INDEX; j++) {
-			System.out.println(j + 1 + ":" + result[j].print()); // jは1から
-		}
+		// TODO 自動生成されたメソッド・スタブ
+			int lo = 1;
+			int hi = 1;
+			int[] result = new int[BUF_MAX]; // int配列オブジェクト生成
+			System.out.println(TITLE);
+			result[0] = lo;
+
+			for(int i = 1; hi < 50; i++){ //hiが50以下の間ループ
+				result[i] = hi;
+				hi = lo + hi; //new hi
+				lo  = hi - lo;	/* new lo is (Sum - Old lo)
+				 						That is Old hi*/
+			}
+			for(int j = 0; 0 != result[j]; j++){ //result配列の値が0出ない間ループ
+				System.out.println(result[j]);
+			}
 	}
+
 }

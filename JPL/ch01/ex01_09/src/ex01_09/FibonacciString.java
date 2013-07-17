@@ -21,7 +21,6 @@ public class FibonacciString {
 	 * P17 練習問題 1.9 数列を配列に保存するFibonacci
 	 */
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
 			int lo = 1;
 			int hi = 1;
 			int[] result = new int[BUF_MAX]; // int配列オブジェクト生成

@@ -2,7 +2,7 @@
  * @file
  * @par File Name:
  * NumBool.java
- * @author Yoichiro Shimizu/R/RSI
+ * @author Yoichiro Shimizu
  * @date Created on 2013/07/17
  * @par Copyright:
  * Ricoh IT Solutions, LTD.
@@ -10,8 +10,8 @@
 package ex01_09;
 
 /**
- * @author Yoichiro Shimizu/R/RSI
- * 
+ * @author Yoichiro Shimizu
+ *
  */
 public class NumBool {
 	/**

@@ -24,21 +24,20 @@ public class ImprovedFibonacci {
 	 */
 	public static void main(String[] args)
 	{
-		// TODO 自動生成されたメソッド・スタブ
-		int lo = 1;
-		int hi = 1;
-		String result = "1: " + lo;
+		int loｗValue = 1;
+		int highValue = 1;
+		String result = "1: " + loｗValue;
 
 		System.out.println(result);
-		for (int i = 2; i <= MAX_INDEX; i++) {
-			result = i + ": " + hi;
-			if (hi % 2 == 0)
+		for (int count = 2; count <= MAX_INDEX; count++) {
+			result = count + ": " + highValue;
+			if (highValue % 2 == 0)
 				result += "*";
 			else
 				result += "";
 			System.out.println(result);
-			hi = lo + hi;
-			lo = hi - lo;
+			highValue = loｗValue + highValue;
+			loｗValue = highValue - loｗValue;
 		}
 	}
 }

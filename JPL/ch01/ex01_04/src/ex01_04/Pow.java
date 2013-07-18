@@ -15,17 +15,18 @@ package ex01_04;
  */
 public class Pow
 {
+	static final int thresholdValue = 500;
 
 	/** 等比数列を表示する */
 	public static void main(String[] args)
 	{
-			int base = 2;
-			int ratio = 3;
-			System.out.println( base + "から開始される比" + ratio + "の等比数列");
-			while (base < 500){
-				System.out.println(base);
-				base = base* ratio;
-			}
+		int baseValue = 2;
+		int ratio = 3;
+		System.out.println(baseValue + "から開始される比" + ratio + "の等比数列");
+		while (baseValue < thresholdValue) {
+			System.out.println(baseValue);
+			baseValue = baseValue * ratio;
+		}
 	}
 
 }

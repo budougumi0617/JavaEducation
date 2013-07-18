@@ -9,6 +9,7 @@
  */
 package ex01_08;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -20,12 +21,14 @@ import org.junit.Test;
  *
  */
 public class PointTest {
+	Point targetClass;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		targetClass = new Point();
 	}
 
 	/**
@@ -36,8 +39,10 @@ public class PointTest {
 	}
 
 	@Test
-	public void test() {
-		fail("まだ実装されていません");
+	public void testClearMethod() {
+		targetClass.clear();
+		assertThat(targetClass.x, is(0.));
+
 	}
 
 }

@@ -15,6 +15,11 @@ package ex01_08;
  */
 public class Point {
 	public double x, y;
+	Point(){
+
+	}
+
+
 	/**
 	 * P14 練習問題 1.8 Pointオブジェクトにメソッドを追加したもの
 	 * 追加メソッド：
@@ -27,9 +32,9 @@ public class Point {
 	}
 	public double distance(Point that )
 	{
-		double xdiff = this.x - that.x;
-		double ydiff = this.y - that.y;
-		return Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+		double xDiff = this.x - that.x;
+		double yDiff = this.y - that.y;
+		return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
 	}
 	public void move(double x, double y)
 	{

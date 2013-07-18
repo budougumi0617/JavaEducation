@@ -16,7 +16,7 @@ package ex01_10;
  */
 public class NumBool
 {
-	public int x;
+	public int resultFibonacci;
 	public boolean even;
 
 	/**
@@ -25,7 +25,7 @@ public class NumBool
 	 */
 	public String print()
 	{
-		String result = Integer.toString(this.x); //文字列配列に数値をセット
+		String result = Integer.toString(this.resultFibonacci); //文字列配列に数値をセット
 		if (this.even == true) // 偶数だった場合はアスタリスクを文字列にセット
 			result += " *";
 		else
@@ -37,12 +37,9 @@ public class NumBool
 	 * P17 練習問題 1.10
 	 * 結果をセットする
 	 */
-	public void set(int hi)
+	public void set(int resultValue)
 	{
-		this.x = hi; //もらった数値を配列にセット
-		if (x % 2 == 0) //偶数だった場合は真をセット
-			even = true;
-		else
-			even = false;
+		this.resultFibonacci = resultValue; //もらった数値を配列にセット
+		even  = (resultFibonacci % 2 == 0); //偶数だった場合は真をセット
 	}
 }

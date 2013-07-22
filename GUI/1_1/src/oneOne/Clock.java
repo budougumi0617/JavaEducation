@@ -24,9 +24,9 @@ public class Clock extends Frame implements ActionListener, Runnable {
 	 * Windowを作成し、デジタル時計を描画するJavaアプリケーション フリー素材　http://digilog.client.jp/
 	 */
 	private static final long serialVersionUID = 1L;
-	static String h; // 時を入れる変数を宣言
-	static String m; // 分を入れる変数を宣言
-	static String s; // 秒を入れる変数を宣言
+	static String hourValue; // 時を入れる変数を宣言
+	static String minutsValue; // 分を入れる変数を宣言
+	static String secondValue; // 秒を入れる変数を宣言
 	private int fontSize = 100;
 	FontMetrics fo;
 	private int strWidth = 100;
@@ -45,31 +45,26 @@ public class Clock extends Frame implements ActionListener, Runnable {
 
 	}
 
-	boolean a = true;
-
-	// インスタンス化
-	static Clock f = new Clock();
-	static Thread th = new Thread(f);
-
 	public static void main(String args[]) {
-
+		Clock mainFrame = new Clock();
+		Thread threadInstance = new Thread(mainFrame);
 		// フレーム作成
-		f.setVisible(true);
-		f.addWindowListener(new CloseWindow());
+		mainFrame.setVisible(true);
+		mainFrame.addWindowListener(new CloseWindow());
 
-		th.start(); // スレッドスタート
+		threadInstance.start(); // スレッドスタート
 	}
 
 	public void run() {
-		while (a == true) {
-			h = String.format("%1$02d",
+		while (true) {
+			hourValue = String.format("%1$02d",
 					Calendar.getInstance().get(Calendar.HOUR_OF_DAY)); // 時を代入
-			m = String.format("%1$02d",
+			minutsValue = String.format("%1$02d",
 					Calendar.getInstance().get(Calendar.MINUTE)); // 分を代入
-			s = String.format("%1$02d",
+			secondValue = String.format("%1$02d",
 					Calendar.getInstance().get(Calendar.SECOND)); // 秒を代入
 
-			f.setSize((int) (strWidth * 1.5), (int) (strHeight * 1.5));
+			this.setSize((int) (strWidth * 1.5), (int) (strHeight * 1.5));
 			repaint();
 
 			try {
@@ -86,8 +81,8 @@ public class Clock extends Frame implements ActionListener, Runnable {
 		offGraph.setFont(new Font(fontName, Font.PLAIN, this.fontSize));
 		offGraph.setColor(this.fontColor);
 		setBackground(this.backColor);
-		offGraph.drawString(h + ":" + m + ":" + s, strWidth / 4,
-				(int) (strHeight * 1.1));
+		offGraph.drawString(hourValue + ":" + minutsValue + ":" + secondValue,
+				strWidth / 4, (int) (strHeight * 1.1));
 		g.drawImage(offImage, 0, 0, this);
 		fo = offGraph.getFontMetrics();
 		strWidth = fo.stringWidth("00:00:00");

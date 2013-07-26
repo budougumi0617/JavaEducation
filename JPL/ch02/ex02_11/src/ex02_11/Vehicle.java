@@ -41,6 +41,48 @@ public class Vehicle {
 		System.out.println("所有者 = " + owner);
 	}
 
+	/**
+	 * @return speed
+	 */
+	public double getSpeed() {
+		return speed;
+	}
+
+	/**
+	 * @param speed セットする speed
+	 */
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	/**
+	 * @return angle
+	 */
+	public double getAngle() {
+		return angle;
+	}
+
+	/**
+	 * @param angle セットする angle
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+
+	/**
+	 * @return owner
+	 */
+	public String getOwner() {
+		return owner;
+	}
+
+	/**
+	 * @param owner セットする owner
+	 */
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
 	public String toString() {
 		String buf = "ID: " + MyId + "\n" + "速度 " + speed + "\n" + "方向 = "
 				+ angle + "\n" + "所有者 = " + owner;

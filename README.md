@@ -1,4 +1,9 @@
 JavaEducation
 =============
 
-The Java Programming Language (4th Edition)
+
+----------
+
+
+studied The Java Programming Language (4th Edition).  
+and implementation of Watch GUI apli.

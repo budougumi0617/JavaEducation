@@ -24,7 +24,7 @@ public class VehicleTest {
 	public void getMaxIdTest() {
 
 		int resultValue = Vehicle.GetMaxId() + 1;
-		Vehicle TestCar = new Vehicle("TEST");
+		new Vehicle("TEST");
 		assertThat(Vehicle.GetMaxId(), is(resultValue));
 	}
 

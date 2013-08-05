@@ -50,7 +50,7 @@ public class VhicleTest {
 
 	@Test
 	public void getMaxIdTest() {
-		Vehicle TestCar = new Vehicle("TEST");
+		new Vehicle("TEST");
 		int resultValue = Vehicle.GetMaxId();
 		assertThat(Vehicle.GetMaxId(), is(resultValue));
 	}

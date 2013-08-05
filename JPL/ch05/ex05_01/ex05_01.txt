@@ -1,5 +1,5 @@
-Attr�N���X��Attributed�C���^�[�t�F�[�X���Ȃ��Ɛ��藧���Ȃ��B
-���̋t�͐��藧�iAttributrd��Attr���Ȃ��Ƃ��C���^�[�t�F�[�X�Ƃ��ĂȂ肽�j
+AttrクラスはAttributedインターフェースがないと成り立たない。
+その逆は成り立つ（AttributrdはAttrがなくともインターフェースとしてなりたつ）
 
-�����
-Attributed.Attr�ƂȂ�B
+よって
+Attributed.Attrとなる。

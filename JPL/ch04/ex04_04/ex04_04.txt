@@ -1,9 +1,9 @@
-ƒRƒŒƒNƒVƒ‡ƒ“‚ðƒCƒ“ƒ^[ƒtƒF[ƒX‚Æ‚µ‚ÄAƒŠƒXƒg\‘¢‚ðA
-ƒŠƒXƒg\‘¢‚ðƒCƒ“ƒ^[ƒtƒF[ƒX‚Æ‚µ‚ÄAŠeƒŠƒXƒg‚ðÝŒv‚·‚éB
+ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã¨ã—ã¦ã€ãƒªã‚¹ãƒˆæ§‹é€ ã‚’ã€
+ãƒªã‚¹ãƒˆæ§‹é€ ã‚’ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã¨ã—ã¦ã€å„ãƒªã‚¹ãƒˆã‚’è¨­è¨ˆã™ã‚‹ã€‚
 
 Collection
-„¯list
-   „µPointList ƒ|ƒCƒ“ƒgƒNƒ‰ƒX‚ÌƒŠƒXƒg
-   „µCoordList À•W‚ÌƒŠƒXƒg
+â”—list
+   â” PointList ãƒã‚¤ãƒ³ãƒˆã‚¯ãƒ©ã‚¹ã®ãƒªã‚¹ãƒˆ
+   â” CoordList åº§æ¨™ã®ãƒªã‚¹ãƒˆ
 
 

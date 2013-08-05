@@ -1,0 +1,5 @@
+AttrクラスはAttributedインターフェースがないと成り立たない。
+その逆は成り立つ（AttributrdはAttrがなくともインターフェースとしてなりたつ）
+
+よって
+Attributed.Attrとなる。

@@ -1,0 +1,4 @@
+
+interface  EnergySource {
+	 boolean empty();
+}

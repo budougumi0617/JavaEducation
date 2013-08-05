@@ -1,3 +1,4 @@
+package ex06_02;
 public class Vehicle {
 	enum Turn{
 		TURN_LEFT,TURN_RIGHT,

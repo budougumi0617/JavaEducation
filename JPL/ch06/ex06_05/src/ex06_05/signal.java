@@ -1,3 +1,4 @@
+package ex06_05;
 
 public enum signal{
 	GREEN("GREEN"){

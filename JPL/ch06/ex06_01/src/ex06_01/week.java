@@ -1,5 +1,0 @@
-package ex06_01;
-
-public enum week {
-	SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY
-}

@@ -15,18 +15,18 @@ public class Vehicle {
 	private double angle;
 	private String owner = "<unnamed>";
 
-	private final int MyId;// 変更を許さないべき
-	private static int NextId = 0;
+	private final int myId;// 変更を許さないべき
+	private static int nextId = 0;
 	public static final int TURN_LEFT = -1;
 	public static final int TURN_RIGHT = 1;
 
 	Vehicle() {
-		MyId = NextId++;
+		myId = nextId++;
 	}
 
 	Vehicle(String name) {
 		owner = name;
-		MyId = NextId++;
+		myId = nextId++;
 	}
 
 	public double getSpeed() {
@@ -38,7 +38,7 @@ public class Vehicle {
 	}
 
 	public int getMyId() {
-		return MyId;
+		return myId;
 	}
 
 	public String getOwner() {
@@ -46,7 +46,7 @@ public class Vehicle {
 	}
 
 	static int getMaxId() {
-		return NextId - 1;
+		return nextId - 1;
 	}
 
 	public void changeSpeed(double NowSpeed) {
@@ -57,8 +57,8 @@ public class Vehicle {
 		this.speed = 0.0;
 	}
 
-	public void turn(double NewAngle) {
-		this.angle = NewAngle;
+	public void turn(double newAngle) {
+		this.angle = newAngle;
 	}
 
 	public void turn(int angle) {
@@ -73,14 +73,14 @@ public class Vehicle {
 	}
 
 	public void print() {
-		System.out.println("ID: " + MyId);
+		System.out.println("ID: " + myId);
 		System.out.println("Speed: " + speed);
 		System.out.println("方向 = " + angle);
 		System.out.println("所有者 = " + owner);
 	}
 
 	public String toString() {
-		String buf = "ID: " + MyId + "\n" + "速度 " + speed + "\n" + "方向 = "
+		String buf = "ID: " + myId + "\n" + "速度 " + speed + "\n" + "方向 = "
 				+ angle + "\n" + "所有者 = " + owner;
 		return buf;
 	}

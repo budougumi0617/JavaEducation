@@ -1,12 +1,12 @@
 package ex03_06;
 
 public class GasTank extends EnergySource{
-	private double Energy = 0;
+	private double energy = 0;
 	public GasTank(double gass) {
-		this.Energy = gass;
+		this.energy = gass;
 	}
 	boolean empty(){
-		if(this.Energy  <= 0){
+		if(this.energy  <= 0){
 			return true;
 		}else{
 			return false ;

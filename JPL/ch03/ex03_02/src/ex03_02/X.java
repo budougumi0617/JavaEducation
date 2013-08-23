@@ -10,8 +10,15 @@
 
 package ex03_02;
 
-public class X {
+public abstract class X {
+	{
+		PrintStep();
+	}
+
 	protected int xMask = 0x00ff;
+	{
+		PrintStep();
+	}
 	protected int fullMask;
 	private static int step = 0;
 
@@ -41,10 +48,6 @@ public class X {
 		return xMask;
 	}
 
-	public void PrintStep() {
-		System.out.printf("%-2d 0x%04x 0x%04x \n", step, GetxMask(),
-				GetfullMask());
-		PlusStep();
-	}
+	abstract void PrintStep();
 
 }

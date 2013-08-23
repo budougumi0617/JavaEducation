@@ -41,15 +41,15 @@ public class PassengerVehicle extends Vehicle {
 	}
 
 	public static void main(String args[]) {
-		PassengerVehicle Bmw = new PassengerVehicle("Mike");
-		PassengerVehicle Matsuda = new PassengerVehicle("Bob");
-		PassengerVehicle Toyota = new PassengerVehicle("Jerry");
+		PassengerVehicle bmw = new PassengerVehicle("Mike");
+		PassengerVehicle matsuda = new PassengerVehicle("Bob");
+		PassengerVehicle toyota = new PassengerVehicle("Jerry");
 
-		System.out.println(Bmw.toString());
-		Matsuda.addSeatedNum();
-		Matsuda.setSeatNum(4);
-		System.out.println(Matsuda.toString());
-		System.out.println(Toyota.toString());
+		System.out.println(bmw.toString());
+		matsuda.addSeatedNum();
+		matsuda.setSeatNum(4);
+		System.out.println(matsuda.toString());
+		System.out.println(toyota.toString());
 	}
 
 }

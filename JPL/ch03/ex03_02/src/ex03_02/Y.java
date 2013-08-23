@@ -11,8 +11,15 @@
 package ex03_02;
 
 public class Y extends X {
+	{
+		PrintStep();
+	}
+	
 	protected int yMask = 0xff00;
-
+	
+	{
+		PrintStep();
+	}
 	public Y() {
 		PrintStep();
 		fullMask |= yMask;

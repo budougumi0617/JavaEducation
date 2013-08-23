@@ -32,42 +32,42 @@ public class Vehicle {
 		MyId = NextId++;
 	}
 
-	public double GetSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public double GetAngle() {
+	public double getAngle() {
 		return angle;
 	}
 
-	public int GetMyId() {
+	public int getMyId() {
 		return MyId;
 	}
 
-	public String GetOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
-	static int GetMaxId() {
+	static int getMaxId() {
 		return NextId - 1;
 	}
 
-	public void changeSpeed(double NowSpeed) {
-		this.speed = NowSpeed;
+	public void changeSpeed(double nowSpeed) {
+		this.speed = nowSpeed;
 	}
 
 	public void stop() {
 		this.speed = 0.0;
 	}
 
-	public void turn(double NewAngle) {
-		this.angle = NewAngle;
+	public void turn(double newAngle) {
+		this.angle = newAngle;
 	}
 
-	public void turn(int Lr) {
-		if (Lr == Vehicle.TURN_LEFT)
+	public void turn(int leftOrRight) {
+		if (leftOrRight == Vehicle.TURN_LEFT)
 			this.angle -= 45.0;
-		else if (Lr == Vehicle.TURN_RIGHT)
+		else if (leftOrRight == Vehicle.TURN_RIGHT)
 			this.angle += 45.0;
 		else {
 			;
@@ -95,6 +95,6 @@ public class Vehicle {
 		Vehicle honda = new Vehicle("Mike");
 		System.out.println(honda.toString());
 
-		System.out.println("MaxId = " + Vehicle.GetMaxId());
+		System.out.println("MaxId = " + Vehicle.getMaxId());
 	}
 }

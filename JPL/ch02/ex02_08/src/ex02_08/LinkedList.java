@@ -18,10 +18,14 @@ public class LinkedList {
 	public Object data;
 	public LinkedList next;
 
-	LinkedList(Object Obj, LinkedList NextData) {
-		this.data = Obj;
-		this.next = NextData;
+	LinkedList(Object obj, LinkedList nextData) {
+		this.data = obj;
+		this.next = nextData;
 	}
+	LinkedList(Object obj) {
+		this(obj, null);
+	}
+	
 
 	public void show() {
 		if (data instanceof Vehicle) {
@@ -34,7 +38,7 @@ public class LinkedList {
 	}
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+
 
 		Vehicle car = new Vehicle("Satoh");
 		car.speed = 10;

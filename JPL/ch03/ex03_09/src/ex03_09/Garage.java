@@ -19,8 +19,8 @@ public class Garage implements Cloneable {
 	public Garage() {
 	}
 
-	public void addVehicle(Vehicle Obj) {
-		vehicleList.add(Obj);
+	public void addVehicle(Vehicle obj) {
+		vehicleList.add(obj);
 	}
 
 	public ArrayList<Vehicle> getGarage() {

@@ -11,43 +11,43 @@
 package ex03_08;
 
 public class PassengerVehicle extends Vehicle implements Cloneable {
-	private int SeatNum;
-	private int SeatedNum;
+	private int seatNum;
+	private int seatedNum;
 
 	public PassengerVehicle(String Owner) {
 		super(Owner);
-		this.SeatNum = 1; // Car must have a seat,
-		this.SeatedNum = 0;
+		this.seatNum = 1; // Car must have a seat,
+		this.seatedNum = 0;
 	}
 
 	public final void setSeatNum(int n) {
-		this.SeatNum = n;
+		this.seatNum = n;
 	}
 
 	public int getSeatNum() {
-		return this.SeatNum;
+		return this.seatNum;
 	}
 
 	public void addSeatedNum() {
-		this.SeatedNum = this.SeatedNum + 1;
+		this.seatedNum = this.seatedNum + 1;
 	}
 
 	public int getSeatedNum() {
-		return this.SeatedNum;
+		return this.seatedNum;
 	}
 
 	public String toString() {
-		return super.toString() + " 座席数" + SeatNum + " 座っている人数" + SeatedNum;
+		return super.toString() + " 座席数" + seatNum + " 座っている人数" + seatedNum;
 	}
 
 	public static void main(String args[]) {
-		PassengerVehicle Bmw = new PassengerVehicle("Mike");
-		Bmw.setSeatNum(5);
+		PassengerVehicle bmw = new PassengerVehicle("Mike");
+		bmw.setSeatNum(5);
 		try {
-			PassengerVehicle Bmw2 = (PassengerVehicle) Bmw.clone();
-			Bmw2.setOwner("Bob");
-			System.out.println(Bmw);
-			System.out.println(Bmw2);
+			PassengerVehicle bmw2 = (PassengerVehicle) bmw.clone();
+			bmw2.setOwner("Bob");
+			System.out.println(bmw);
+			System.out.println(bmw2);
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}

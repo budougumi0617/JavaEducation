@@ -19,7 +19,7 @@ import org.junit.Test;
 public class LinkedListTest {
 
 	@Test
-	public void LinkedListTest() {
+	public void nextCheckTest() {
 		LinkedList<String> testString = new LinkedList<String>();
 		LinkedList<String> testStringNext = new LinkedList<String>();
 		testString.next = testStringNext;
@@ -29,7 +29,7 @@ public class LinkedListTest {
 	}
 
 	@Test
-	public void testLinkedListInt() {
+	public void intTest() {
 		LinkedList<Integer> testString = new LinkedList<Integer>();
 		LinkedList<Integer> testStringNext = new LinkedList<Integer>();
 		testString.next = testStringNext;

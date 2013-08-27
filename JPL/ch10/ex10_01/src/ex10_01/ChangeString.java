@@ -8,7 +8,7 @@
  * Ricoh IT Solutions, LTD.
  */
 
-package ex10_1;
+package ex10_01;
 
 public class ChangeString {
 

@@ -23,7 +23,7 @@ public class Vehicle {
 	private static int nextId = 0;
 
 	Vehicle() {
-		myId = nextId++;
+		this("<unnamed>");
 	}
 
 	Vehicle(String name) {
@@ -66,10 +66,10 @@ public class Vehicle {
 	public void turn(Turn turn) {
 		switch (turn) {
 		case TURN_LEFT:
-			this.angle -= 45.0;
+			this.angle -= 90.0;
 			break;
 		case TURN_RIGHT:
-			this.angle += 0.0;
+			this.angle += 90.0;
 			break;
 		default:
 			this.angle += 0;

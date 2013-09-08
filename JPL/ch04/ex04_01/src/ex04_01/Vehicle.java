@@ -13,25 +13,39 @@ public class Vehicle {
 	private double speed;
 	private double angle;
 	private String owner = "<unnamed>";
-	private EnergySource es = null;
+	private EnergySource es;
 
 	private final int myId;// 変更を許さないべき
-	private static int nextId = 0;
+	private static int originId = 0;
 	public static final int TURN_LEFT = -1;
 	public static final int TURN_RIGHT = 1;
 
 	Vehicle() {
-		myId = nextId++;
+		this("", null);
 	}
 
 	Vehicle(String name) {
-		owner = name;
-		myId = nextId++;
+		this(name, null);
 	}
 
 	Vehicle(EnergySource es) {
-		this();
+		this("",es);
+	}
+
+	Vehicle(String name, EnergySource es) {
+		myId = originId;
+		owner = name;
 		this.es = es;
+		updateOrginId();
+	}
+	
+	public EnergySource getEnergySource(){
+		return this.es;
+	}
+	
+	
+	static final public void updateOrginId() {
+		originId++;
 	}
 
 	public double getSpeed() {
@@ -51,7 +65,7 @@ public class Vehicle {
 	}
 
 	static int getMaxId() {
-		return nextId - 1;
+		return originId - 1;
 	}
 
 	public void changeSpeed(double nowSpeed) {
@@ -68,9 +82,9 @@ public class Vehicle {
 
 	public void turn(int angle) {
 		if (angle == Vehicle.TURN_LEFT)
-			this.angle -= 45.0;
+			this.angle -= 90.0;
 		else if (angle == Vehicle.TURN_RIGHT)
-			this.angle += 45.0;
+			this.angle += 90.0;
 		else {
 			;
 		}

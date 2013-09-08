@@ -22,4 +22,12 @@ public class Battery implements EnergySource {
 
 	}
 
+	/*
+	 * (非 Javadoc)
+	 * 
+	 * @see ex04_01.EnergySource#getStatusEnergy()
+	 */
+	public double getStatusEnergy() {
+		return energy;
+	}
 }

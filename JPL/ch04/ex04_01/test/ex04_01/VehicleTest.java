@@ -12,6 +12,10 @@ package ex04_01;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +26,8 @@ import org.junit.Test;
  */
 public class VehicleTest {
 	public Vehicle targetClass;
+	private PrintStream defaultOutStream;
+	private ByteArrayOutputStream resultOutStream;
 
 	/**
 	 * @throws java.lang.Exception
@@ -29,6 +35,9 @@ public class VehicleTest {
 	@Before
 	public void setUp() throws Exception {
 		targetClass = new Vehicle();
+		defaultOutStream = System.out;
+		resultOutStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(new BufferedOutputStream(resultOutStream)));
 	}
 
 	/**
@@ -36,6 +45,16 @@ public class VehicleTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		System.setOut(defaultOutStream);
+	}
+
+	private String joinStrings(String... strs) {
+		String newLine = System.getProperty("line.separator");
+		String result = "";
+		for (String s : strs) {
+			result += s + newLine;
+		}
+		return result;
 	}
 
 	/**
@@ -43,7 +62,8 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testVehicle() {
-		fail("まだ実装されていません");
+		targetClass = new Vehicle();
+		assertThat(targetClass.getOwner(), is("<unnamed>"));
 	}
 
 	/**
@@ -51,7 +71,9 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testVehicleString() {
-		fail("まだ実装されていません");
+		String result = "test";
+		targetClass = new Vehicle(result);
+		assertThat(targetClass.getOwner(), is(result));
 	}
 
 	/**
@@ -59,7 +81,9 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testVehicleEnergySource() {
-		fail("まだ実装されていません");
+		EnergySource es = new GasTank(30.);
+		targetClass = new Vehicle(es);
+		assertThat(targetClass.getEnergySource(), is(es));
 	}
 
 	/**
@@ -72,6 +96,7 @@ public class VehicleTest {
 		String ownerName = "foo";
 		targetClass = new Vehicle(ownerName, es);
 		assertThat(targetClass.getOwner(), is(ownerName));
+		assertThat(targetClass.getEnergySource(), is(es));
 	}
 
 	/**
@@ -79,7 +104,11 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testGetSpeed() {
-		fail("まだ実装されていません");
+		assertThat(targetClass.getSpeed(), is(0.));
+		double result = 10.;
+		targetClass.changeSpeed(result);
+		assertThat(targetClass.getSpeed(), is(result));
+
 	}
 
 	/**
@@ -87,7 +116,10 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testGetAngle() {
-		fail("まだ実装されていません");
+		assertThat(targetClass.getAngle(), is(0.));
+		targetClass.turn(Vehicle.TURN_LEFT);
+		assertThat(targetClass.getAngle(), is(-90.));
+
 	}
 
 	/**
@@ -95,7 +127,10 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testGetMyId() {
-		fail("まだ実装されていません");
+		@SuppressWarnings("static-access")
+		int result = targetClass.getMaxId() + 1;
+		targetClass = new Vehicle();
+		assertThat(targetClass.getMyId(), is(result));
 	}
 
 	/**
@@ -103,15 +138,19 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testGetOwner() {
-		fail("まだ実装されていません");
+		String result = "test";
+		targetClass = new Vehicle(result);
+		assertThat(targetClass.getOwner(), is(result));
 	}
 
 	/**
 	 * {@link ex04_01.Vehicle#getMaxId()} のためのテスト・メソッド。
 	 */
+	@SuppressWarnings("static-access")
 	@Test
 	public void testGetMaxId() {
-		fail("まだ実装されていません");
+		int result = targetClass.getMyId();
+		assertThat(targetClass.getMaxId(), is(result));
 	}
 
 	/**
@@ -119,7 +158,10 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testChangeSpeed() {
-		fail("まだ実装されていません");
+		assertThat(targetClass.getSpeed(), is(0.));
+		double result = 33.3;
+		targetClass.changeSpeed(result);
+		assertThat(targetClass.getSpeed(), is(result));
 	}
 
 	/**
@@ -127,7 +169,9 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testStop() {
-		fail("まだ実装されていません");
+		targetClass.changeSpeed(10.);
+		targetClass.stop();
+		assertThat(targetClass.getSpeed(), is(0.));
 	}
 
 	/**
@@ -135,7 +179,9 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testTurnDouble() {
-		fail("まだ実装されていません");
+		double result = 55.5;
+		targetClass.turn(result);
+		assertThat(targetClass.getAngle(), is(result));
 	}
 
 	/**
@@ -143,7 +189,8 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testTurnInt() {
-		fail("まだ実装されていません");
+		targetClass.turn(Vehicle.TURN_RIGHT);
+		assertThat(targetClass.getAngle(), is(90.));
 	}
 
 	/**
@@ -151,15 +198,11 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testPrint() {
-		fail("まだ実装されていません");
-	}
-
-	/**
-	 * {@link ex04_01.Vehicle#toString()} のためのテスト・メソッド。
-	 */
-	@Test
-	public void testToString() {
-		fail("まだ実装されていません");
+		targetClass.print();
+		System.out.flush();
+		assertThat(resultOutStream.toString(),
+				is("ID: " + targetClass.getMyId()
+						+ "\r\nSpeed: 0.0\r\n方向 = 0.0\r\n所有者 = <unnamed>\r\n"));
 	}
 
 	/**
@@ -167,15 +210,18 @@ public class VehicleTest {
 	 */
 	@Test
 	public void testStart() {
-		fail("まだ実装されていません");
-	}
-
-	/**
-	 * {@link ex04_01.Vehicle#main(java.lang.String[])} のためのテスト・メソッド。
-	 */
-	@Test
-	public void testMain() {
-		fail("まだ実装されていません");
+		targetClass = new Vehicle(new GasTank(0.));
+		targetClass.start();
+		System.out.flush();
+		String result = "You Can't Start";
+		result = joinStrings(result);
+		assertThat(resultOutStream.toString(), is(result));
+		result = joinStrings("You Can Start");
+		targetClass = new Vehicle(new GasTank(10.));
+		resultOutStream.reset();
+		targetClass.start();
+		System.out.flush();
+		assertThat(resultOutStream.toString(), is(result));
 	}
 
 	/**

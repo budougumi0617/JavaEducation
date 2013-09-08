@@ -9,6 +9,7 @@
  */
 package ex04_01;
 
+
 public class Vehicle {
 	private double speed;
 	private double angle;
@@ -21,7 +22,7 @@ public class Vehicle {
 	public static final int TURN_RIGHT = 1;
 
 	Vehicle() {
-		this("", null);
+		this("<unnamed>", null);
 	}
 
 	Vehicle(String name) {
@@ -29,21 +30,22 @@ public class Vehicle {
 	}
 
 	Vehicle(EnergySource es) {
-		this("",es);
+		this("<unnamed>", es);
 	}
 
 	Vehicle(String name, EnergySource es) {
 		myId = originId;
 		owner = name;
 		this.es = es;
+		angle = 0.;
+		speed = 0.;
 		updateOrginId();
 	}
-	
-	public EnergySource getEnergySource(){
+
+	public EnergySource getEnergySource() {
 		return this.es;
 	}
-	
-	
+
 	static final public void updateOrginId() {
 		originId++;
 	}

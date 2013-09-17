@@ -8,10 +8,7 @@
  * Ricoh IT Solutions, LTD.
  */
 
-
 package ex09_01;
-
-
 
 public class InfTest {
 	public static void main(String[] args) {

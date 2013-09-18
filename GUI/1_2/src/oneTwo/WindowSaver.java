@@ -19,7 +19,9 @@ import java.awt.event.AWTEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -73,7 +75,15 @@ public class WindowSaver implements AWTEventListener {
 
 	public static void loadSettings(Frame frame) throws IOException {
 		Properties settings = new Properties();
-		settings.load(new FileInputStream("configration.props"));
+		try {
+
+			settings.load(new FileInputStream("configration.props"));
+		} catch (FileNotFoundException fne) {
+			File format = new File("configration.props");
+			format.createNewFile();
+			settings.load(new FileInputStream("configration.props"));
+		}
+
 		String name = frame.getName();
 		int x = getInt(settings, name + ".x", 100);
 		int y = getInt(settings, name + ".y", 100);
@@ -95,14 +105,20 @@ public class WindowSaver implements AWTEventListener {
 
 	public static void saveSettings() throws IOException {
 		Properties settings = new Properties();
-		settings.load(new FileInputStream("configration.props"));
+		try {
+			settings.load(new FileInputStream("configration.props"));
+		} catch (FileNotFoundException fne) {
+			File format = new File("configration.props");
+			format.createNewFile();
+			settings.load(new FileInputStream("configration.props"));
+		}
 
 		for (String name : saver.frameMap.keySet()) {
 			Frame frame = saver.frameMap.get(name);
-			settings.setProperty(name + ".x", " " + frame.getX());
-			settings.setProperty(name + ".y", " " + frame.getY());
-			settings.setProperty(name + ".w", " " + frame.getWidth());
-			settings.setProperty(name + ".h", " " + frame.getHeight());
+			settings.setProperty(name + ".x", "," + frame.getX());
+			settings.setProperty(name + ".y", "," + frame.getY());
+			settings.setProperty(name + ".w", "," + frame.getWidth());
+			settings.setProperty(name + ".h", "," + frame.getHeight());
 		}
 		settings.store(new FileOutputStream("configration.props"), null);
 	}

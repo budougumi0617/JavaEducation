@@ -1,0 +1,10 @@
+3 << 2L - 1 /* 3を2ビットしたあとにマイナス１ */ 
+(3L << 2) - 1 /* 3Lを2ビットしたあとにマイナス１ */
+10 < 12 == 6 > 17 /* Bool値falseが返る。 */
+10 << 12 == 6 >> 17 /* falseが返る10と6を5ビット左にしたものは異なる。*/
+13.5e-1 % Float.POSITIVE_INFNITY /* Nan */
+Float.POSITIVE_INFNITY +Double.POSITIVE_INFNITY /* ∞になる */
+0.0 / - 0.0 == ^0.0 / 0.0 /* NaN とNaNが出るがbool値はfalse*/
+Integer.MAX_VALUE + Integer.MIN_VALUE /* 0xffffffff にプラス0x10000000して桁あふれ  */
+Integer.MAX_VALUE + 5 /* 0xffffffff にプラス5して桁あふれ */
+(short) 5 * (byte) 10 /* 小さい方のbyte型の30になる */

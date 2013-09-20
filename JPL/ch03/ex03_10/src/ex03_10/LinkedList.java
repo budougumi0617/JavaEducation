@@ -51,8 +51,8 @@ public class LinkedList implements Cloneable {
 		return buf;
 	}
 
-	public void setCar(Object car) {
-		this.data = car;
+	public void setObject(Object obj) {
+		this.data = obj;
 	}
 
 	public LinkedList clone() {
@@ -60,7 +60,7 @@ public class LinkedList implements Cloneable {
 			LinkedList obj = (LinkedList) super.clone();
 			LinkedList next = obj.next;
 			if (next != null) {
-				next.clone();
+				next = next.clone();
 			}
 			return obj;
 		} catch (CloneNotSupportedException e) {
@@ -81,7 +81,7 @@ public class LinkedList implements Cloneable {
 
 		LinkedList cloneArg1 = arg1.clone();
 		car = new Vehicle("Suzuki");
-		cloneArg1.setCar(car);
+		cloneArg1.setObject(car);
 
 		System.out.println("toString = " + arg1.toString());
 		System.out.println("CountList = " + arg1.countList());

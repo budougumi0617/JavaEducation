@@ -1,6 +1,20 @@
+/*
+ * @file
+ * @par File Name:
+ * LinkedList.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
 
-
+/*
+ * 以前の練習問題で作成したLinkedListクラスに対するObjectNotFoundExceptionクラスを
+ * 作成しなさい。リスト中のオブジェクトを探すfindメソッドを追加して、要求されたオブジェクトが含まれるLinkedListオブジェクトを
+ * 返すか、オブジェクトがリスト中に発見されなかったときにNullを返すより、例外をスローするほうがなぜ好ましいですか。
+ * 何か付け加えるとしたら、ObejctNotFoundExceptionはどのような追加データを保持すべきですか。
+ */
 public class LinkedList implements Cloneable{
   private Object data; //変更を許さない
   private LinkedList next;

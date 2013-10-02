@@ -1,0 +1,31 @@
+・PassengerVehicleオブジェクトの定員を負の値に設定しようとした。
+
+IllegalSeatValueExceptopn extends Exception(int num){}を作成する。
+クラスはtry・catchをしてIllegalSeatValueExceptopnがスローされていないか確認
+する。
+
+・オブジェクトがその初期値を設定するのに使用する設定ファイルに文法エラーが
+見つかった。
+期待通りの入力がない状態なので、
+java.io.IOExceptionをcatchする。
+
+・プログラマが指定した単語を文字列の配列から検索するメソッドが、その単語を
+発見できなかった。
+検索が文字列の終端に来た場合、StreamEndExceptionをcatchする
+
+・openメソッドへ指定されたファイルが存在しない。
+クラスはtry・catchをして FileNotFoundExceptionがスローされていないか確認す
+る。
+
+・openメソッドへ指定されたファイルは存在するが、セキュリティにより使用でき
+ない。
+java.security.AccessControlExceptionをcatchする
+
+・リモートのサーバプロセスにネットワークコネクションを確立しようとする
+が、リモートマシンと接続出来ない。
+java.rmi.RemoteExceptionをcatchする
+
+
+・リモートのサーバプロセスのやりとりの最中に、ネットワークコネクションが切
+れる。
+java.net.SocketExceptionをcatchする。

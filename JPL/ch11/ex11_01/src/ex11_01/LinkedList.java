@@ -11,6 +11,9 @@
 
 package ex11_01;
 
+/*
+ * 練習問題2.2で始めたLinkedListクラスを見直して、ジェネリッククラスとして書き直しなさい。
+ */
 public class LinkedList <E>{
   public E data;
   public LinkedList <E>next;

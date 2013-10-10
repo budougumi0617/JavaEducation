@@ -1,4 +1,19 @@
+/*
+ * @file
+ * @par File Name:
+ * Attr.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
+
+package ex11_02;
+
+/*
+ * 第3章のAtttrクラスをジェネリッククラスに書き直しなさい。
+ */
 public class Attr <E> {
 	private final String name;
 	private E value = null;

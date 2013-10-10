@@ -1,4 +1,21 @@
+/*
+ * @file
+ * @par File Name:
+ * GetSubStrings.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
+
+package ex13_03;
+
+
+/*
+ * 本文中のdelimitedStringメソッドは、１つの入力文字列に１つの区切られた文字列しかないと
+ * 仮定しています。全ての区切られた文字列を取得して配列にして返すバージョンを作成しなさい。
+ */
 public class GetSubStrings {
 	public static String delimitedString(String from, char start, char end){
 		String result;

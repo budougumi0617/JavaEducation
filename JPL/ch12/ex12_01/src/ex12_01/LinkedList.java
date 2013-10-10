@@ -8,6 +8,8 @@
  * Ricoh IT Solutions, LTD.
  */
 
+package ex12_01;
+
 
 /*
  * 以前の練習問題で作成したLinkedListクラスに対するObjectNotFoundExceptionクラスを

@@ -1,3 +1,15 @@
+package ex12_01;
+/*
+ * @file
+ * @par File Name:
+ * Vehicle.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+
 public class Vehicle implements Cloneable{
 	private double speed;
 	private double angle;

@@ -1,4 +1,19 @@
+/*
+ * @file
+ * @par File Name:
+ * ObjectNotFoundException.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
+package ex13_05;
+
+/*
+ * 10進数を含む文字列を、右から3桁ごとにカンマで区切られた数に変換するメソッドを書きなさい。
+ * たとえば、文字列"1543729"が与えられたら、そのメソッドは文字列"1,543,729"を返します。
+ */
 public class ChangeNum {
 	public static String addDot(String num){
 		String result = "";

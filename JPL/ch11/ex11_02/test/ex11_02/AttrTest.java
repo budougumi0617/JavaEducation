@@ -1,3 +1,15 @@
+/*
+ * @file
+ * @par File Name:
+ * AttrTest.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+
+package ex11_02;
 import java.awt.Point;
 
 import junit.framework.TestCase;

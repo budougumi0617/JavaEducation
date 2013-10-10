@@ -1,4 +1,18 @@
+/*
+ * @file
+ * @par File Name:
+ * ObjectNotFoundException.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
+package ex13_06;
+
+/*
+ * 区切り文字と、区切り文字間の桁数を指定するパラメータを受け付けるようにメソッドを修正しなさい。
+ */
 public class ChangeNum {
 	public static String addDot(String num, int range, char c){
 		String result = "";

@@ -1,3 +1,14 @@
+/*
+ * @file
+ * @par File Name:
+ * ObjectNotFoundException.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/10/03
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+package ex13_03;
 
 public class StringSearch {
 

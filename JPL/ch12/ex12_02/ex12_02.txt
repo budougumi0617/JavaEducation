@@ -1,3 +1,8 @@
+
+
+
+
+
 ・PassengerVehicleオブジェクトの定員を負の値に設定しようとした。
 
 IllegalSeatValueExceptopn extends Exception(int num){}を作成する。

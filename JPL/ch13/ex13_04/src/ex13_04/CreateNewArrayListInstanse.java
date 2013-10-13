@@ -10,6 +10,7 @@
 
 package ex13_04;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +33,67 @@ public class CreateNewArrayListInstanse {
 
 	public CreateNewArrayListInstanse(FileReader inputFile) {
 		arrayList = new ArrayList<Object>();
+
+		try {
+			BufferedReader br = new BufferedReader(inputFile);
+			String readLine = br.readLine();
+
+			while (readLine != null) {
+				String[] splitReadLine = readLine.split(" ");
+				System.out.println(readLine);
+				if (splitReadLine.length != 2) {
+					throw new IOException();
+				}
+				String types = splitReadLine[0];
+				if (types.equals("Boolean")) {
+					System.out.println("types is Bool!!");
+					// arrayList.add(new Boolean(splitReadLine[1]));
+					//arrayList.add(addList(splitReadLine));
+				}
+				arrayList.add(addList(splitReadLine));
+
+				readLine = br.readLine();
+			}
+
+			br.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private Object addList(String[] splitReadLine) throws IOException {
+		String types = splitReadLine[0];
+		if (types.equals("Boolean")) {
+			System.out.println("types is Bool!!");
+			return new Boolean(splitReadLine[1]);
+		} else if (types.equals("Integer")) {
+			return new Integer(splitReadLine[1]);
+		} else if (types.equals("Double")) {
+			return new Double(splitReadLine[1]);
+		} else if (types.equals("Byte")) {
+			return new Byte(splitReadLine[1]);
+		} else if (types.equals("Short")) {
+			return new Short(splitReadLine[1]);
+		} else if (types.equals("Long")) {
+			return new Long(splitReadLine[1]);
+		} else if (types.equals("Character")) {
+			return new Character(splitReadLine[1].toCharArray()[0]);
+		} else if (types.equals("Float")) {
+			return new Float(splitReadLine[1]);
+		} else {
+			throw new IOException();
+		}
+
+	}
+
+	public void printArrayList() {
+		// TODO
+		System.out.println("now implement");
+		for (Object data : arrayList) {
+			System.out.println(data.getClass() + " " + data.toString());
+		}
 	}
 
 	public static void main(String[] args) {
@@ -40,7 +102,7 @@ public class CreateNewArrayListInstanse {
 				.createFileReaderInstanse();
 		CreateNewArrayListInstanse targetClass = new CreateNewArrayListInstanse(
 				fileReader);
-
+		targetClass.printArrayList();
 	}
 
 	private static FileReader createFileReaderInstanse() {
@@ -54,7 +116,7 @@ public class CreateNewArrayListInstanse {
 		}
 		pw.println("Boolean true");
 		pw.println("Boolean true");
-		pw.println("Int 100");
+		pw.println("Integer 100");
 		pw.println("Double 100.0");
 		pw.close();
 

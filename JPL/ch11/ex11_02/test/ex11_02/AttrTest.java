@@ -8,35 +8,40 @@
  * Ricoh IT Solutions, LTD.
  */
 
-
 package ex11_02;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.awt.Point;
 
 import junit.framework.TestCase;
 
+import org.junit.Test;
 
 public class AttrTest extends TestCase {
 
+	@Test
 	public void testAttrString() {
 		Attr<String> test = new Attr<String>("test");
-		assertEquals(test.getName(), "test");
+		assertThat(test.getName(), is("test"));
 
 	}
 
+	@Test
 	public void testAttrStringE() {
 		Point testPoint = new Point(10, 20);
 		Attr<Point> test = new Attr<Point>("test", testPoint);
-		assertEquals(test.getValue(), testPoint);
+		assertThat(test.getValue(), is(testPoint));
 	}
 
+	@Test
 	public void testSetValue() {
 		Attr<Point> test = new Attr<Point>("test", null);
 		test.setValue(new Point());
 		Point pointTest = test.getValue();
 		pointTest.x = 10;
-		assertEquals(test.getValue(), pointTest);
+		assertThat(test.getValue(), is(pointTest));
 	}
-
-
 
 }

@@ -39,8 +39,6 @@ public class Clock extends Window implements ActionListener, Runnable,
 	static String s; // 秒を入れる変数を宣言
 	static private int clockX = 0;
 	static private int clockY = 0;
-	private int x, y;
-	private int tx, ty;
 	private int fontSize = 100;
 	FontMetrics fo;
 	private int strWidth = 100;
@@ -76,6 +74,12 @@ public class Clock extends Window implements ActionListener, Runnable,
 		// [Font]-[SansSerif]
 		MenuItem fontSansSerif = new MenuItem("SansSerif");
 		fontMenu.add(fontSansSerif);
+		MenuItem fontMonospaced = new MenuItem("Monospaced");
+		fontMenu.add(fontMonospaced);
+		MenuItem fontDialogInput = new MenuItem("DialogInput");
+		fontMenu.add(fontDialogInput);
+		MenuItem fontDialog = new MenuItem("Dialog");
+		fontMenu.add(fontDialog);
 		// [FontSize]
 		Menu sizeMenu = new Menu("FontSize");
 		sizeMenu.addActionListener(this);
@@ -86,24 +90,71 @@ public class Clock extends Window implements ActionListener, Runnable,
 		// [FontSize]-[Nomal]
 		MenuItem fontNormal = new MenuItem("Normal");
 		sizeMenu.add(fontNormal);
+		MenuItem fontSmall = new MenuItem("Small");
+		sizeMenu.add(fontSmall);
 		// [Color]
 		Menu colorMenu = new Menu("Color");
 		propMenu.add(colorMenu);
 		// [Color]-[White]
-		MenuItem colorWhite = new MenuItem("White");
+		MenuItem colorWhite = new MenuItem("WHITE");
 		colorMenu.add(colorWhite);
 		// [Color]-[White]
-		MenuItem colorBlack = new MenuItem("Black");
+		MenuItem colorBlack = new MenuItem("BLACK");
 		colorMenu.add(colorBlack);
+		MenuItem colorBlue = new MenuItem("BLUE");
+		colorMenu.add(colorBlue);
+		MenuItem colorCyan = new MenuItem("CYAN");
+		colorMenu.add(colorCyan);
+		MenuItem colorDarkGray = new MenuItem("DARK_GRAY");
+		colorMenu.add(colorDarkGray);
+		MenuItem colorGray = new MenuItem("GRAY");
+		colorMenu.add(colorGray);
+		MenuItem colorLightGray = new MenuItem("LIGHT_GRAY");
+		colorMenu.add(colorLightGray);
+		MenuItem colorMagenta = new MenuItem("MAGENTA");
+		colorMenu.add(colorMagenta);
+		MenuItem colorOrange = new MenuItem("ORANGE");
+		colorMenu.add(colorOrange);
+		MenuItem colorPink = new MenuItem("PINK");
+		colorMenu.add(colorPink);
+		MenuItem colorRed = new MenuItem("RED");
+		colorMenu.add(colorRed);
+		MenuItem colorYellow = new MenuItem("YELLOW");
+		colorMenu.add(colorYellow);
+		MenuItem colorGreen = new MenuItem("GREEN");
+		colorMenu.add(colorGreen);
+
 		// [BackColor]
 		Menu backColorMenu = new Menu("BackColor");
 		propMenu.add(backColorMenu);
-		// [BackColor]-[White]
-		MenuItem backColorWhite = new MenuItem("White");
+		// [Color]-[White]
+		MenuItem backColorWhite = new MenuItem("WHITE");
 		backColorMenu.add(backColorWhite);
-		// [BackColor]-[White]
-		MenuItem backColorBlack = new MenuItem("Black");
+		// [Color]-[White]
+		MenuItem backColorBlack = new MenuItem("BLACK");
 		backColorMenu.add(backColorBlack);
+		MenuItem backColorBlue = new MenuItem("BLUE");
+		backColorMenu.add(backColorBlue);
+		MenuItem backColorCyan = new MenuItem("CYAN");
+		backColorMenu.add(backColorCyan);
+		MenuItem backColorDarkGray = new MenuItem("DARK_GRAY");
+		backColorMenu.add(backColorDarkGray);
+		MenuItem backColorGray = new MenuItem("GRAY");
+		backColorMenu.add(backColorGray);
+		MenuItem backColorLightGray = new MenuItem("LIGHT_GRAY");
+		backColorMenu.add(backColorLightGray);
+		MenuItem backColorMagenta = new MenuItem("MAGENTA");
+		backColorMenu.add(backColorMagenta);
+		MenuItem backColorOrange = new MenuItem("ORANGE");
+		backColorMenu.add(backColorOrange);
+		MenuItem backColorPink = new MenuItem("PINK");
+		backColorMenu.add(backColorPink);
+		MenuItem backColorRed = new MenuItem("RED");
+		backColorMenu.add(backColorRed);
+		MenuItem backColorYellow = new MenuItem("YELLOW");
+		backColorMenu.add(backColorYellow);
+		MenuItem backColorGreen = new MenuItem("GREEN");
+		backColorMenu.add(backColorGreen);
 		propMenu.addSeparator();
 		// [exit]
 		MenuItem closeClock = new MenuItem("exit");
@@ -115,10 +166,46 @@ public class Clock extends Window implements ActionListener, Runnable,
 		fontNormal.addActionListener(this);
 		colorWhite.addActionListener(this);
 		colorBlack.addActionListener(this);
+		colorBlue.addActionListener(this);
+		colorYellow.addActionListener(this);
+		colorCyan.addActionListener(this);
+		colorDarkGray.addActionListener(this);
+		colorGray.addActionListener(this);
+		colorGreen.addActionListener(this);
+		colorLightGray.addActionListener(this);
+		colorMagenta.addActionListener(this);
+		colorOrange.addActionListener(this);
+		colorPink.addActionListener(this);
+		colorRed.addActionListener(this);
 		backColorWhite.addActionListener(this);
 		backColorWhite.setActionCommand("BackWhite");
 		backColorBlack.addActionListener(this);
 		backColorBlack.setActionCommand("BackBlack");
+		backColorBlue.addActionListener(this);
+		backColorBlue.setActionCommand("BackBlue");
+		backColorYellow.addActionListener(this);
+		backColorYellow.setActionCommand("BackYellow");
+		backColorCyan.addActionListener(this);
+		backColorCyan.setActionCommand("BackCyan");
+		backColorDarkGray.addActionListener(this);
+		backColorDarkGray.setActionCommand("BackDarkGray");
+		backColorGray.addActionListener(this);
+		backColorGray.setActionCommand("BackGray");
+
+		backColorGreen.addActionListener(this);
+		backColorGreen.setActionCommand("BackGreen");
+
+		backColorLightGray.addActionListener(this);
+		backColorLightGray.setActionCommand("BackLightGray");
+
+		backColorMagenta.addActionListener(this);
+		backColorMagenta.setActionCommand("BackMagenta");
+		backColorOrange.addActionListener(this);
+		backColorOrange.setActionCommand("BackOrange");
+		backColorPink.addActionListener(this);
+		backColorPink.setActionCommand("BackPink");
+		backColorRed.addActionListener(this);
+		backColorRed.setActionCommand("BackRed");
 		closeClock.addActionListener(this);
 		addMouseMotionListener(this);
 	}
@@ -209,18 +296,73 @@ public class Clock extends Window implements ActionListener, Runnable,
 			this.fontName = "Serif";
 		if (e.getActionCommand() == "SansSerif")
 			this.fontName = "SansSerif";
+		if (e.getActionCommand() == "Monospaced")
+			this.fontName = "Monospaced";
+		if (e.getActionCommand() == "DialogInput")
+			this.fontName = "DialogInput";
+		if (e.getActionCommand() == "Dialog")
+			this.fontName = "Dialog";
 		if (e.getActionCommand() == "Large")
-			this.fontSize = 100;
+			this.fontSize = 150;
 		if (e.getActionCommand() == "Normal")
+			this.fontSize = 100;
+		if (e.getActionCommand() == "Small")
 			this.fontSize = 50;
-		if (e.getActionCommand() == "Black")
+		if (e.getActionCommand() == "BLACK")
 			this.fontColor = Color.black;
-		if (e.getActionCommand() == "White")
+		if (e.getActionCommand() == "WHITE")
 			this.fontColor = Color.white;
+		if (e.getActionCommand() == "YELLOW")
+			this.fontColor = Color.yellow;
+		if (e.getActionCommand() == "BLUE")
+			this.fontColor = Color.blue;
+		if (e.getActionCommand() == "CYAN")
+			this.fontColor = Color.cyan;
+		if (e.getActionCommand() == "DARK_GRAY")
+			this.fontColor = Color.darkGray;
+		if (e.getActionCommand() == "GRAY")
+			this.fontColor = Color.gray;
+		if (e.getActionCommand() == "GREEN")
+			this.fontColor = Color.green;
+		if (e.getActionCommand() == "LIGHT_GRAY")
+			this.fontColor = Color.lightGray;
+		if (e.getActionCommand() == "MAGENTA")
+			this.fontColor = Color.magenta;
+		if (e.getActionCommand() == "ORANGE")
+			this.fontColor = Color.orange;
+		if (e.getActionCommand() == "PINK")
+			this.fontColor = Color.pink;
+		if (e.getActionCommand() == "RED")
+			this.fontColor = Color.red;
+
 		if (e.getActionCommand() == "BackBlack")
 			this.backColor = Color.black;
 		if (e.getActionCommand() == "BackWhite")
 			this.backColor = Color.white;
+		if (e.getActionCommand() == "BackBlue")
+			this.backColor = Color.blue;
+
+		if (e.getActionCommand() == "BackYellow")
+			this.backColor = Color.yellow;
+
+		if (e.getActionCommand() == "BackDarkGray")
+			this.backColor = Color.darkGray;
+		if (e.getActionCommand() == "BackCyan")
+			this.backColor = Color.cyan;
+		if (e.getActionCommand() == "BackLightGray")
+			this.backColor = Color.lightGray;
+		if (e.getActionCommand() == "BackGray")
+			this.backColor = Color.gray;
+		if (e.getActionCommand() == "BackGreen")
+			this.backColor = Color.green;
+		if (e.getActionCommand() == "BackMagenta")
+			this.backColor = Color.magenta;
+		if (e.getActionCommand() == "BackOrange")
+			this.backColor = Color.orange;
+		if (e.getActionCommand() == "BackPink")
+			this.backColor = Color.pink;
+		if (e.getActionCommand() == "BackRed")
+			this.backColor = Color.red;
 
 	}
 
@@ -232,21 +374,33 @@ public class Clock extends Window implements ActionListener, Runnable,
 		this.fontSize = size;
 	}
 
-	public void setFontColor(String obj) {
-		this.fontColor = returnColor(obj);
-	}
-
-	public void setBackColor(String obj) {
-		this.backColor = returnColor(obj);
-	}
-
 	public Color returnColor(String obj) {
 		if (obj.equals("Black"))
 			return Color.black;
-		else if (obj.equals("White"))
+		else if (obj.equals("CYAN"))
+			return Color.CYAN;
+		else if (obj.equals("DARK_GRAY"))
+			return Color.DARK_GRAY;
+		else if (obj.equals("GRAY"))
+			return Color.GRAY;
+		else if (obj.equals("GREEN"))
+			return Color.GREEN;
+		else if (obj.equals("LIGHT_GRAY"))
+			return Color.LIGHT_GRAY;
+		else if (obj.equals("MAGENTA"))
+			return Color.MAGENTA;
+		else if (obj.equals("ORANGE"))
+			return Color.ORANGE;
+		else if (obj.equals("PINK"))
+			return Color.PINK;
+		else if (obj.equals("RED"))
+			return Color.RED;
+		else if (obj.equals("WHITE"))
 			return Color.white;
-		else if (obj.equals("Blue"))
+		else if (obj.equals("BLUE"))
 			return Color.blue;
+		else if (obj.equals("YELLOW"))
+			return Color.YELLOW;
 		else
 			return Color.white;
 	}
@@ -278,4 +432,5 @@ public class Clock extends Window implements ActionListener, Runnable,
 			this.setLocation(e.getX() - clockX, e.getY() - clockY);
 		}
 	}
+
 }

@@ -1,3 +1,14 @@
+/*
+ * @file
+ * @par File Name:
+ * PingPong.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/11/28
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+package ex14_01;
 
 public class PingPong extends Thread {
 

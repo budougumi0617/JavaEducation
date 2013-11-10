@@ -23,7 +23,6 @@ public class TestThreadPool {
 	private static class CounterTask implements Runnable {
 		private int runCount = 0;
 		
-		@Override
 		public synchronized void run() {
 			runCount++;
 			notifyAll();

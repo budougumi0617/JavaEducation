@@ -1,3 +1,15 @@
+/*
+ * @file
+ * @par File Name:
+ * PrintServer.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/11/28
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+
+package ex14_02;
 
 public class PrintServer implements Runnable {
 	private final PrintQueue requests = new PrintQueue();

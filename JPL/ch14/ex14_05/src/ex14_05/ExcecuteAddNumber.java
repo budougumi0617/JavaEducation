@@ -1,4 +1,14 @@
+/*
+ * @file
+ * @par File Name:
+ * ExecuteAddNumber.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/11/28
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
 
+package ex14_05;
 
 public class ExcecuteAddNumber extends Thread{
 
@@ -12,8 +22,9 @@ public class ExcecuteAddNumber extends Thread{
 
 	public void run(){
 		try {
+			result.addNumber(100);
 			for(;;){
-				result.addNumber(number);
+				result.subNumber(number);
 				Thread.sleep(1000);
 			}
 		} catch (InterruptedException e){

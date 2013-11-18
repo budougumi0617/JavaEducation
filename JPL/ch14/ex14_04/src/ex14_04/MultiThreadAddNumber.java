@@ -1,3 +1,15 @@
+/*
+ * @file
+ * @par File Name:
+ * MultiThreadAddNumber.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/11/28
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+
+package ex14_04;
 
 public class MultiThreadAddNumber {
 

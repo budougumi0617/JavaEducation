@@ -1,3 +1,15 @@
+/*
+ * @file
+ * @par File Name:
+ * ShowMessageEverySecX.java
+ * @author Yoichiro Shimizu
+ * @date Created on 2013/11/28
+ * @par Copyright:
+ * Ricoh IT Solutions, LTD.
+ */
+
+
+package ex14_06;
 
 public class ShowMessageEverySecX extends Thread{
 	private final int secX;

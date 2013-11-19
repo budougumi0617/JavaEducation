@@ -21,19 +21,22 @@ public class FunctionReflection {
 
 	public Object methodInvoke(Object targetObject, Method executeMethod,
 			Object... args) throws Throwable {
-		Throwable failureReason;
-
+		Throwable failureReason = null;
+		Object resultObject = null;
 		try {
 			executeMethod.setAccessible(true);
-			return executeMethod.invoke(targetObject, (Object[]) args);
+			resultObject = executeMethod.invoke(targetObject, (Object[]) args);
 		} catch (InvocationTargetException e) {
 			failureReason = e.getCause();
 		} catch (IllegalArgumentException e) {
-			failureReason = e.getCause();
+			failureReason = e;
 		} catch (IllegalAccessException e) {
-			failureReason = e.getCause();
+			failureReason = e;
 		}
-		throw failureReason;
+		if (failureReason != null) {
+			throw failureReason;
+		}
+		return resultObject;
 
 	}
 
@@ -74,15 +77,15 @@ public class FunctionReflection {
 		return resultList;
 	}
 
-	public void setField(Object targetObject, String fieldName, String value)
+	public void setField(Object targetObject, String fieldName, Object value)
 			throws Throwable {
 		Throwable failureReason = null;
 		try {
 			Field targetField = targetObject.getClass().getDeclaredField(
 					fieldName);
 			targetField.setAccessible(true);
-			Object inputValue = changeType(targetField.getClass(), value);
-			targetField.set(targetObject, inputValue);
+			//Object inputValue = changeType(targetField.getClass(), value);
+			targetField.set(targetObject, value);
 
 		} catch (SecurityException e) {
 			failureReason = e.getCause();
@@ -141,4 +144,5 @@ public class FunctionReflection {
 		}
 		return resultObject;
 	}
+
 }

@@ -1,3 +1,4 @@
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Method;
@@ -52,6 +53,7 @@ public class FunctionReflectionTest {
 		String targetObjectString = new String("test");
 		Method executeMethod = null;
 		Object resultObject = null;
+		/* test arg method */
 		try {
 			executeMethod = String.class.getDeclaredMethod("charAt", int.class);
 			assertNotNull(executeMethod);
@@ -68,9 +70,10 @@ public class FunctionReflectionTest {
 			e.printStackTrace();
 			fail();
 		}
-		
+
 		assertEquals(resultObject, targetObjectString.charAt(1));
-		
+
+		/* test nothing arg method */
 		try {
 			executeMethod = String.class.getDeclaredMethod("toString");
 			assertNotNull(executeMethod);
@@ -112,7 +115,7 @@ public class FunctionReflectionTest {
 	 */
 	@Test
 	public void testGetFieldList() {
-		Integer targetObjString = new Integer(10);
+		String targetObjString = new String("testGetFieldList");
 		List<String> result = targetClass.getFieldList(targetObjString);
 		for (String string : result) {
 			System.out.println(string);
@@ -126,7 +129,21 @@ public class FunctionReflectionTest {
 	 */
 	@Test
 	public void testSetField() {
-		fail("まだ実装されていません");
+		String targetObjString = new String("testSetField");
+		try {
+			targetClass.setField(targetObjString, "hash", 1);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			fail();
+		}
+		assertThat(targetObjString.hashCode(), is(1));
+		try {
+			targetClass.setField(targetObjString, "count", 10);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			fail();
+		}
+		assertThat(targetObjString.length(), is(10));
 	}
 
 	/**

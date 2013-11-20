@@ -1,3 +1,4 @@
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -84,7 +85,7 @@ public class FunctionReflection {
 			Field targetField = targetObject.getClass().getDeclaredField(
 					fieldName);
 			targetField.setAccessible(true);
-			//Object inputValue = changeType(targetField.getClass(), value);
+			// Object inputValue = changeType(targetField.getClass(), value);
 			targetField.set(targetObject, value);
 
 		} catch (SecurityException e) {
@@ -141,6 +142,27 @@ public class FunctionReflection {
 			if (resultObject == null) {
 				throw new NullPointerException();
 			}
+		}
+		return resultObject;
+	}
+
+	public Object makeInstanceByConstructor(Constructor<?> c, Object... args)
+			throws Throwable {
+		Throwable failureReason = null;
+		Object resultObject = null;
+		try {
+			resultObject = c.newInstance(args);
+		} catch (IllegalArgumentException e) {
+			failureReason = e;
+		} catch (InstantiationException e) {
+			failureReason = e;
+		} catch (IllegalAccessException e) {
+			failureReason = e;
+		} catch (InvocationTargetException e) {
+			failureReason = e;
+		}
+		if (failureReason != null) {
+			throw failureReason;
 		}
 		return resultObject;
 	}

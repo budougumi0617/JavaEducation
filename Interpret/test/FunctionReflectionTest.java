@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import org.junit.Before;
@@ -227,6 +228,42 @@ public class FunctionReflectionTest {
 		}
 		String result = targetClass.splitMethodName(inputMethod);
 		assertEquals("compareTo(java.lang.Double)", result);
+	}
+	
+	
+	
+	@Test
+	public void testGetMethodParamType(){
+		Method inputMethod = null;
+		try {
+			inputMethod = Double.class.getDeclaredMethod("compareTo", Double.class);
+
+		} catch (SecurityException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			fail();
+			e.printStackTrace();
+		}
+		Type[] result = targetClass.getMethodParamType(inputMethod);
+		assertEquals(Double.class.toString(), result[0].toString());
+	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public <T> void testGetConstructorParamType(){
+		Constructor<T> inputConstructor = null;
+		try {
+			inputConstructor = (Constructor<T>) Double.class.getDeclaredConstructor(Double.class);
+
+		} catch (SecurityException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			fail();
+			e.printStackTrace();
+		}
+		Type[] result = targetClass.getConstructorParamType(inputConstructor);
+		assertEquals(Double.class.toString(), result[0].toString());
 	}
 
 }

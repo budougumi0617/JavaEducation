@@ -62,12 +62,32 @@ public class FunctionReflection {
 
 	}
 
+	public Type[] getMethodParamType(Method method) {
+		method.setAccessible(true);
+		Type[] results = method.getParameterTypes();
+		for (Type t : results) {
+			System.out.println(t.toString());
+		}
+		return results;
+	}
+	
+	public <T> Type[] getConstructorParamType(Constructor<T> constructor) {
+		constructor.setAccessible(true);
+		Type[] results = constructor.getParameterTypes();
+		for (Type t : results) {
+			System.out.println(t.toString());
+		}
+		return results;
+	}
+	
+
 	public String splitMethodName(Method method) {
 		System.out.println(method.toString());
 		String[] methodNames = method.toString().split("\\(");
 		String foo = methodNames[0];
 		String[] bar = foo.toString().split("\\.");
-		System.out.println(bar[bar.length - 1] + "(" + methodNames[methodNames.length - 1]);
+		System.out.println(bar[bar.length - 1] + "("
+				+ methodNames[methodNames.length - 1]);
 		return bar[bar.length - 1] + "(" + methodNames[methodNames.length - 1];
 	}
 

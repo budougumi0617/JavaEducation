@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import com.jgoodies.forms.factories.DefaultComponentFactory;
+
 /*
  * @file
  * @par File Name:
@@ -17,6 +19,10 @@ import javax.swing.JTextField;
  */
 
 public class InterpretPanel extends JFrame {
+	/**
+	 * @wbp.nonvisual location=108,-4
+	 */
+	private final JLabel label = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
 

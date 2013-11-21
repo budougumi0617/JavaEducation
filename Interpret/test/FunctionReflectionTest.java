@@ -1,6 +1,7 @@
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -17,10 +18,6 @@ import org.junit.Test;
  * Ricoh IT Solutions, LTD.
  */
 
-/**
- * @author z00s000723
- * 
- */
 public class FunctionReflectionTest {
 
 	private FunctionReflection targetClass;
@@ -162,6 +159,74 @@ public class FunctionReflectionTest {
 	@Test
 	public void testChangeType() {
 		fail("まだ実装されていません");
+	}
+
+	@Test
+	public void testMakeInstanceByConstructor() {
+		Constructor<?> targetConstructor = null;
+		Object resultObject = null;
+		try {
+			targetConstructor = String.class.getConstructor(String.class);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		try {
+			resultObject = targetClass.makeInstanceByConstructor(
+					targetConstructor, "test");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		assertEquals(resultObject.toString(), "test");
+		resultObject = null;
+		try {
+			targetConstructor = String.class.getConstructor();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		try {
+			resultObject = targetClass
+					.makeInstanceByConstructor(targetConstructor);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		assertNotNull(resultObject);
+	}
+
+	@Test
+	public void testMakeArrayNewInstance() {
+		Object[] resultObject = null;
+		int dim = 4;
+		resultObject = targetClass.makeArrayNewInstance(int.class, dim);
+		assertNotNull(resultObject);
+		assertEquals(resultObject.length, dim);
+		Object[][] resultDouble = null;
+		int dim2 = 3;
+		Object d = new Double(2);
+		resultDouble = targetClass
+				.makeArrayNewInstance(d, dim, dim2);
+		assertEquals(resultDouble[0].length, dim2);
+		assertEquals(Double.class, resultDouble.getClass().getComponentType().getComponentType());
+	}
+	
+	@Test
+	public void testSplitMethodName(){
+		Method inputMethod = null;
+		try {
+			inputMethod = Double.class.getDeclaredMethod("compareTo", Double.class);
+
+		} catch (SecurityException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			fail();
+			e.printStackTrace();
+		}
+		String result = targetClass.splitMethodName(inputMethod);
+		assertEquals("compareTo(java.lang.Double)", result);
 	}
 
 }

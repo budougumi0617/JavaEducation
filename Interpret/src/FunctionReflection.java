@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -41,9 +42,33 @@ public class FunctionReflection {
 
 	}
 
-	private String splitMethodName(Method method) {
-		String[] methodNames = method.getName().split(".");
-		return methodNames[methodNames.length - 1];
+	@SuppressWarnings("rawtypes")
+	public Constructor[] getClassConstractor(Class<?> c) {
+		try {
+			return c.getDeclaredConstructors();
+		} catch (SecurityException e) {
+			e.getCause();
+		}
+		return null;
+	}
+
+	public Method[] getClassMethod(Class<?> c) {
+		try {
+			return c.getDeclaredMethods();
+		} catch (SecurityException e) {
+			e.getCause();
+		}
+		return null;
+
+	}
+
+	public String splitMethodName(Method method) {
+		System.out.println(method.toString());
+		String[] methodNames = method.toString().split("\\(");
+		String foo = methodNames[0];
+		String[] bar = foo.toString().split("\\.");
+		System.out.println(bar[bar.length - 1] + "(" + methodNames[methodNames.length - 1]);
+		return bar[bar.length - 1] + "(" + methodNames[methodNames.length - 1];
 	}
 
 	public void setMethodMap(Method[] methods) {
@@ -96,7 +121,6 @@ public class FunctionReflection {
 		if (failureReason != null) {
 			throw failureReason;
 		}
-
 	}
 
 	public Object getField(Object targetObject, String fieldName)
@@ -165,6 +189,18 @@ public class FunctionReflection {
 			throw failureReason;
 		}
 		return resultObject;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T[] makeArrayNewInstance(Class<T> arrayClass, int dim) {
+		return (T[]) Array.newInstance(arrayClass.getClass(), dim);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T> T makeArrayNewInstance(Object array, int dim, int dim2) {
+		Class<?> type = array.getClass();
+		T grown = (T) Array.newInstance(type, dim, dim2);
+		return grown;
 	}
 
 }

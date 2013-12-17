@@ -23,11 +23,16 @@ public class DecryptInputStream extends FilterInputStream {
 
 	public int read() throws IOException {
 		int c = super.read();
-		if (c != -1) {
-			c = c ^ key;
-		}
+		c = c ^ key;
 		return c;
 	}
-	
-	
+
+	public int read(byte[] b, int off, int len) throws IOException {
+		int ret = super.read(b, off, len);
+		for (int i = off; i < b.length; i++) {
+			int tmp = b[i] ^ key;
+			b[i] = (byte) tmp;
+		}
+		return ret;
+	}
 }

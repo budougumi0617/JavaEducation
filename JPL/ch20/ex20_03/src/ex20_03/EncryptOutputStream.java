@@ -23,8 +23,8 @@ public class EncryptOutputStream extends FilterOutputStream {
 	}
 
 	public void write(int b) throws IOException {
-		b = b ^ key;
-		super.write(b);
+		byte tmp = (byte)(b ^ key);
+		super.write(tmp);
 	}
 
 }

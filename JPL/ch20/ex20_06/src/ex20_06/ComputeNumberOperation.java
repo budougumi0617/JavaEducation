@@ -67,13 +67,6 @@ public class ComputeNumberOperation {
 		}
 		inputStrings[2] = inputStrings[2].replaceAll("\\r\\n", "");
 		inputStrings[2] = inputStrings[2].replaceAll("\\n", "");
-		System.out.println("OK " + inputStrings[2]);
-		if(inputStrings[2].equals("10")){
-			System.out.println("OK");
-		}
-		if(inputStrings[2].toString().equals("10")){
-			System.out.println("OK OK");
-		}
 		if (inputStrings[1].equals("+")) {
 			op.PLUS.changeVaueByOperation(inputStrings[0],
 					Integer.valueOf(inputStrings[2]));

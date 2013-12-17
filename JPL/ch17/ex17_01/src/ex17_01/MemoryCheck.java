@@ -13,19 +13,19 @@ public class MemoryCheck {
 
 	/*
 	 * 実行結果
-	 * Start ProgramMemory :15841704
-	 * Create ObjectsMemory :12528112
-	 * after GCMemory :16068976
+	 *  Start ProgramMemory :254190536 
+	 *  Create ObjectsMemory :244234168 
+	 *  after GCMemory :254022392
 	 */
 
-	public static void printMemory(String state){
+	public static void printMemory(String state) {
 		Runtime rt = Runtime.getRuntime();
 		System.out.println(state + "Memory :" + rt.freeMemory());
 	}
 
 	public static void main(String[] args) {
 		MemoryCheck.printMemory("Start Program");
-		for(int i = 0; i < 10000000; i++)
+		for (int i = 0; i < 100000000; i++)
 			new MemoryCheck();
 		MemoryCheck.printMemory("Create Objects");
 		Runtime.getRuntime().gc();

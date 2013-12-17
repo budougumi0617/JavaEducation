@@ -9,18 +9,37 @@
  */
 package ex20_04;
 
+import java.io.FilterReader;
+import java.io.IOException;
+import java.io.Reader;
+
 /**
- * @author Yoichiro Shimizu
- * 1行全体がそろうまで待つメソッドを使用して、
- * 1度に1行の入力を返すFilterReaderのサブクラスを作成しなさい
+ * @author Yoichiro Shimizu 1行全体がそろうまで待つメソッドを使用して、
+ *         1度に1行の入力を返すFilterReaderのサブクラスを作成しなさい
  */
-public class PrintLine {
+public class PrintLine extends FilterReader {
+
+	protected PrintLine(Reader in) {
+		super(in);
+	}
 
 	/**
-	 * @param args
+	 * 1 行全体が揃うまで read し続け、揃ったら行を返却する。
+	 * 
+	 * @return
+	 * @throws IOException
 	 */
-	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
+	public String readLine() throws IOException {
+
+		String ls = System.getProperty("line.separator");
+		StringBuffer sb = new StringBuffer();
+
+		while (!sb.toString().endsWith(ls)) {
+			//System.out.println(ready());
+			sb.append((char) read());
+		}
+
+		return sb.toString();
 
 	}
 

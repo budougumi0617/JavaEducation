@@ -46,14 +46,46 @@ public class Game {
 		 * { reportException(name, e); } }
 		 */
 		Game g = new Game();
+		PlayerLoader pl = new PlayerLoader();
+		Class clazz = null;
+		//Player player1 = new FirstPlayer(g);
+		//Player player2 = new SecondPlayer(g);
+		try {
+			clazz = pl.findClass("ex16_11.FirstPlayer");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Player player1 = null;
+		try {
+			player1 = (Player) clazz.newInstance();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			clazz = pl.findClass("ex16_11.SecondPlayer");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		Player player2 = null;
+		try {
+			player2 = (Player) clazz.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		player1.setTargetPlayer(player2);
+		player1.setGame(g);
+		player2.setTargetPlayer(player1);
+		player2.setGame(g);
 		int v, i, j;
 		for (i = 0; i < SIZE; i++) {
-			/* 初期化 */
-		
 			/* 初手 */
 			board[i] = MARU;
 			/* 相手の手番 */
-			v = g.thinkBatu(1);
+			v =player2.play(1);
 			/* 結果 */
 			System.out.printf("初手 %d: 評価値 %d\n", i, v);
 		}
@@ -73,58 +105,17 @@ public class Game {
 		return DRAW;
 	}
 
-	/* 先手 */
-	int thinkMaru(int n) {
-		int i, v, value = MIN_VALUE;
-		for (i = 0; i < SIZE; i++) {
-			if (board[i] != FREE)
-				continue;
-			/* MARU を書く */
-			board[i] = MARU;
-			/* 勝敗の判定 */
-			v = checkWinner();
-			/* 決着していなければ相手の手番へ */
-			if (v == DRAW && n < SIZE - 1)
-				v = thinkBatu(n + 1);
-			/* ミニマックス */
-			if (v > value)
-				value = v;
-			/* 元に戻す */
-			board[i] = FREE;
-		}
-		return value;
-	}
 
-	/* 後手 */
-	int thinkBatu(int n) {
-		int i, v, value = MAX_VALUE;
-		for (i = 0; i < SIZE; i++) {
-			if (board[i] != FREE)
-				continue;
-			/* BATU を書く */
-			board[i] = (char) BATU;
-			/* 勝敗の判定 */
-			v = checkWinner();
-			/* 決着していなければ相手の手番へ */
-			if (v == DRAW && n < SIZE - 1)
-				v = thinkMaru(n + 1);
-			/* ミニマックス */
-			if (v < value)
-				value = v;
-			/* 元に戻す */
-			board[i] = FREE;
-		}
-		return value;
-	}
+
 
 	static String getNextPlayer() {
 		String name;
 		switch (count) {
 		case 0:
-			name = "first";
+			name = "FirstPlayer";
 			break;
 		case 1:
-			name = "second";
+			name = "SecondPlayer";
 			break;
 		default:
 			name = null;

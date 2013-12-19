@@ -34,7 +34,7 @@ public class InterpretPanel extends JFrame {
 			.createTitle("New JGoodies title");
 	private JTextField txtTest;
 	private JTextField inputNewValueField;
-	private JTextField textField;
+	private JTextField inputInsField;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
@@ -86,10 +86,14 @@ public class InterpretPanel extends JFrame {
 		btnShow.setBounds(176, 27, 91, 21);
 		panel.add(btnShow);
 		
-		textField = new JTextField();
-		textField.setBounds(183, 103, 96, 19);
-		panel.add(textField);
-		textField.setColumns(10);
+		inputInsField = new JTextField();
+		inputInsField.setBounds(183, 103, 96, 19);
+		panel.add(inputInsField);
+		inputInsField.setColumns(10);
+		
+		JButton btnAddObj = new JButton("Add Obj");
+		btnAddObj.setBounds(191, 136, 91, 21);
+		panel.add(btnAddObj);
 
 		JTabbedPane classMamberpane = new JTabbedPane();
 		classMamberpane.setBounds(291, 0, 347, 462);

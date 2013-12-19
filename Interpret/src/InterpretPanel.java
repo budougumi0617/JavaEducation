@@ -4,7 +4,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +34,7 @@ public class InterpretPanel extends JFrame {
 			.createTitle("New JGoodies title");
 	private JTextField txtTest;
 	private JTextField inputNewValueField;
+	private JTextField textField;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
@@ -50,10 +50,10 @@ public class InterpretPanel extends JFrame {
 		setForeground(new Color(102, 102, 102));
 		setTitle("Interpret");
 		setBackground(new Color(204, 153, 255));
-		getContentPane().setLayout(
-				new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+		getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 291, 462);
 		panel.setBackground(new Color(204, 153, 255));
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -81,8 +81,18 @@ public class InterpretPanel extends JFrame {
 		
 		JTextArea consoleMessage = new JTextArea();
 		consolePanel.setViewportView(consoleMessage);
+		
+		JButton btnShow = new JButton("show");
+		btnShow.setBounds(176, 27, 91, 21);
+		panel.add(btnShow);
+		
+		textField = new JTextField();
+		textField.setBounds(183, 103, 96, 19);
+		panel.add(textField);
+		textField.setColumns(10);
 
 		JTabbedPane classMamberpane = new JTabbedPane();
+		classMamberpane.setBounds(291, 0, 347, 462);
 		classMamberpane.setBackground(new Color(204, 153, 255));
 
 		JPanel cstTabPanel = new JPanel();
@@ -140,9 +150,9 @@ public class InterpretPanel extends JFrame {
 		lblMethodList.setBounds(12, 10, 143, 22);
 		methodTabPanel.add(lblMethodList);
 		
-		JList list = new JList();
-		list.setBounds(12, 42, 307, 146);
-		methodTabPanel.add(list);
+		JList methodList = new JList();
+		methodList.setBounds(12, 42, 307, 146);
+		methodTabPanel.add(methodList);
 		
 		JButton executeBtn = new JButton("execute");
 		executeBtn.setBounds(105, 395, 121, 28);
@@ -156,14 +166,11 @@ public class InterpretPanel extends JFrame {
 		btnSelect.setBounds(122, 198, 91, 21);
 		methodTabPanel.add(btnSelect);
 		
-		JList list_1 = new JList();
-		list_1.setBounds(12, 229, 307, 164);
-		methodTabPanel.add(list_1);
+		JList methodArgList = new JList();
+		methodArgList.setBounds(12, 229, 307, 164);
+		methodTabPanel.add(methodArgList);
 
 		getContentPane().add(classMamberpane);
-
-		JTabbedPane listDisp = new JTabbedPane(JTabbedPane.TOP);
-		classMamberpane.addTab("ListDisp", null, listDisp, null);
 	}
 
 	private JPanel createListElemment(String className) {
@@ -175,7 +182,7 @@ public class InterpretPanel extends JFrame {
 		argType.setBounds(0, 0, 140, 44);
 		args.add(argType);
 
-		argValue = new JTextField();
+		JTextField argValue = new JTextField();
 		argValue.setBounds(137, 0, 60, 44);
 		args.add(argValue);
 		argValue.setColumns(10);

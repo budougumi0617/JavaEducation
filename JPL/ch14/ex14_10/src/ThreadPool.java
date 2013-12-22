@@ -22,7 +22,7 @@ public class ThreadPool {
 	private Queue<Runnable> runnableQueue;
 	private final int queueMaxSize;
 	private Thread threadPool[];
-	private Boolean isThreadAvailable;
+	private volatile Boolean isThreadAvailable;
 	private Object threadLock = new Object();
 
 	/**

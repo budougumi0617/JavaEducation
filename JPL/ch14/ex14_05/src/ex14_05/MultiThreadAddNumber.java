@@ -14,33 +14,32 @@ package ex14_05;
 public class MultiThreadAddNumber {
 
 	public static int resultNumber = 0;
-	private final Object lockA = new Object();
 
 	MultiThreadAddNumber(){
 		resultNumber = 0;
 	}
 
 	public void addNumber(int number){
-		synchronized(lockA){
+		synchronized(MultiThreadAddNumber.class){
 			resultNumber += number;
 			System.out.println("resultNumber = " + resultNumber);
 		}
 	}
 	public void subNumber(int number){
-		synchronized(lockA){
+		synchronized(MultiThreadAddNumber.class){
 			resultNumber -= number;
 			System.out.println("resultNumber = " + resultNumber);
 		}
 	}
 
 	public int getNumber(){
-		synchronized(lockA){
+		synchronized(MultiThreadAddNumber.class){
 			return resultNumber;
 		}
 	}
 
 	public int setNumber(int number){
-		synchronized(lockA){
+		synchronized(MultiThreadAddNumber.class){
 			resultNumber = number;
 			return resultNumber;
 		}

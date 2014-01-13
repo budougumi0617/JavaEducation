@@ -35,6 +35,9 @@ public class TranslateByte {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException {
+		args = new String[2];
+		args[0] = "t";
+		args[1] = "T";
 		TranslateByte target = new TranslateByte();
 		byte from = (byte) args[0].charAt(0);
 		byte to = (byte) args[1].charAt(0);

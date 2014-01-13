@@ -83,11 +83,16 @@ public class ThreadPool {
 				synchronized (threadPool) {
 					Boolean aliveThread = true;
 					while (aliveThread) {
-						aliveThread = false;
+						int count = 0;
 						for (Thread thread : threadPool) {
 							if (thread != null && thread.isAlive()) {
-								aliveThread = true;
+								thread.interrupt();
+							} else {
+								count++;
 							}
+						}
+						if (count == threadPool.length) {
+							aliveThread = false;
 						}
 					}
 				}
@@ -129,7 +134,7 @@ public class ThreadPool {
 				if (thread == null || !thread.isAlive()) {
 					thread = new Thread(runnableQueue.poll());
 					thread.start();
-					break;
+					//break;
 				}
 			}
 		}

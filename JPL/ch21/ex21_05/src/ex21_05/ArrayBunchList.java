@@ -15,6 +15,9 @@ import sun.security.util.Length;
 
 /**
  * @author budougumi0617
+ * @note ArrayBunchListに対してもっと効率的なListIteratorを実装しなさい。
+ * ListIteratorメソッドの特定の契約について注意してください。
+ * 例えば、setは、nextあるいはpreviousが呼びだされるまでよびだせないとか
  * 
  */
 public class ArrayBunchList<E> extends AbstractList<E> {

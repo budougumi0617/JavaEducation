@@ -14,8 +14,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 /**
- * @author Yoichiro Shimizu 1つかそれ以上のパス名を渡されて、それが表すファイルについて得られる全ての情報を
- *         表示するメソッドを書きなさい。
+ * @author Yoichiro Shimizu
+ * @note 1つかそれ以上のパス名を渡されて、それが表すファイルについて
+ *       得られる全ての情報を表示するメソッドを書きなさい。
  */
 public class PrintFileInformation {
 
@@ -59,7 +60,8 @@ public class PrintFileInformation {
 		args = new String[2];
 		args[0] = ".project";
 		args[1] = "testest";
-		// File src = new File(".." + File.separator, args[0].toString());
+		// File src = new File(".." +
+		// File.separator, args[0].toString());
 		File src2 = new File(".." + File.separator, args[1].toString());
 		PrintFileInformation p = new PrintFileInformation();
 		try {

@@ -13,6 +13,13 @@ package ex20_11;
 import java.io.File;
 import java.io.FilenameFilter;
 
+/**
+ * 
+ * @author budougumi0617
+ * @note ディレクトリと接尾語をパラメータとして取り、
+ *       その接尾語を持つ全てのファイルを表示するプログラムをFilenameFilterあるいは
+ *       FileFilterを使用して作成しなさい。
+ */
 public class PrintDirOnlySpecifiedTailName implements FilenameFilter {
 
 	public static void main(String[] args) {

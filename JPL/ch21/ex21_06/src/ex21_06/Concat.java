@@ -21,10 +21,11 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * @author budougumi0617 
+ * @author budougumi0617
  * 
- * P463のプログラムConcatを書きなおして、１度に１つのFileInputStreamオブジェクトだけを
- * オープンするEnumerationの実装を使用するようにしなさい。
+ * @note P463のプログラムConcatを書きなおして、
+ *       １度に１つのFileInputStreamオブジェクトだけを
+ *       オープンするEnumerationの実装を使用するようにしなさい。
  */
 public class Concat {
 

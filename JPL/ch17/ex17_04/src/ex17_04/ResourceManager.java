@@ -16,7 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author budougumi0617 刈り取りスレッドを修正して、すべての割り当てられたリソースが開放されるまで、
+ * @author budougumi0617 
+ * @note 刈り取りスレッドを修正して、すべての割り当てられたリソースが開放されるまで、
  *         シャットダウン後も生き続けるようにしなさい。
  */
 public final class ResourceManager {

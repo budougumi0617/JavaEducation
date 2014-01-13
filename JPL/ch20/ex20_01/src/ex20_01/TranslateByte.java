@@ -12,7 +12,12 @@ package ex20_01;
 import java.io.IOException;
 /**
  * @author Yoichiro Shimizu
- * 
+ * @note TranslateByteプログラムをメソッドに書き直してInputStreamの内容を
+ * OutputStreamに変換するようにしなさい。変換マッピングとストリームはメソッドの
+ * パラメータとして渡します、本性で述べられる各InputStreamとOutputStreamについて、
+ * その型のストリームに対して操作を行うために、変換メソッドを使用する新たなmainメソッド
+ * を書きなさい。もし入力と出力で一対となるストリームならば、1つのmainメソッドで
+ * 両方を扱うことが出来ます。
  */
 public class TranslateByte {
 

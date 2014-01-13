@@ -14,8 +14,9 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * @author Yoichiro Shimizu 1行全体がそろうまで待つメソッドを使用して、
- *         1度に1行の入力を返すFilterReaderのサブクラスを作成しなさい
+ * @author Yoichiro Shimizu
+ * @note 1行全体がそろうまで待つメソッドを使用して、
+ * 1度に1行の入力を返すFilterReaderのサブクラスを作成しなさい
  */
 public class PrintLine extends FilterReader {
 
@@ -35,7 +36,7 @@ public class PrintLine extends FilterReader {
 		StringBuffer sb = new StringBuffer();
 
 		while (!sb.toString().endsWith(ls)) {
-			//System.out.println(ready());
+			// System.out.println(ready());
 			sb.append((char) read());
 		}
 

@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 /**
  * @author Yoichiro Shimizu
- * 
+ * @note TranslateByteクラスをフィルターとして書き直しなさい。
  */
 public class FilterTranslateByte extends FilterInputStream {
 

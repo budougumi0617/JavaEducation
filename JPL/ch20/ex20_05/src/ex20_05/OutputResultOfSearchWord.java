@@ -19,8 +19,9 @@ import java.io.LineNumberReader;
 import java.io.PrintWriter;
 
 /**
- * @author Yoichiro Shimizu 指定されたファイルを読み込んで、指定された単語を検索するプログラムを作成しなさい。
- *         単語が発見された全ての行を、行の前に行番号をつけて表示しなさい。
+ * @author Yoichiro Shimizu
+ * @note 指定されたファイルを読み込んで、指定された単語を検索するプログラムを作成しなさい。
+ *       単語が発見された全ての行を、行の前に行番号をつけて表示しなさい。
  */
 public class OutputResultOfSearchWord {
 	static File file;
@@ -37,7 +38,8 @@ public class OutputResultOfSearchWord {
 		String lines = "";
 		try {
 			while ((lines = in.readLine()) != null) {
-				//System.out.println("Check Line : " + in.getLineNumber()); //For Debug
+				// System.out.println("Check Line : " + in.getLineNumber());
+				// //For Debug
 				String[] words = lines.split(" ");
 				for (String word : words) {
 					if (word.equals(match)) {

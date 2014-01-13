@@ -14,6 +14,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
+/**
+ * DataHandlerクラスを修正して、lastFileも弱く保存されるようにしなさい。
+ * @author budougumi0617
+ *
+ */
 public class DataHandler {
 	private WeakReference<File> lastFile;
 	private WeakReference<byte[]> lastData;

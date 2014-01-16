@@ -46,11 +46,7 @@ public class MyListSelectionListener implements ListSelectionListener {
 		System.out.println("List select");
 		if (e.getSource().equals(mainWindow.cstList)) {
 			System.out.println("cstList");
-			mainWindow
-					.viewParam(
-							mainWindow.cstList,
-							fr.getConstructorParamType((Constructor<?>) mainWindow.cstList
-									.getSelectedValue()));
+			
 		} else if (e.getSource().equals(mainWindow.methodArgList)) {
 			System.out.println("method list");
 			/*

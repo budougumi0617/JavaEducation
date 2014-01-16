@@ -14,8 +14,10 @@ public class FunctionReflection {
 	Map<String, Object> objectMap;
 	Map<String, Method> methodMap;
 	List<String> methodList;
+	InterpretPanel mainWindow;
 
-	FunctionReflection() {
+	FunctionReflection(InterpretPanel mainWindow) {
+		this.mainWindow = mainWindow;
 		objectMap = new HashMap<String, Object>();
 		methodMap = new HashMap<String, Method>();
 		methodList = new ArrayList<String>();

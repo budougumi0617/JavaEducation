@@ -1,6 +1,8 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
@@ -15,8 +17,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+import java.awt.Rectangle;
+
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+
+
 
 /*
  * @file
@@ -32,8 +40,7 @@ public class InterpretPanel extends JFrame {
 	/**
 	 * @wbp.nonvisual location=108,-4
 	 */
-	private final JLabel label = DefaultComponentFactory.getInstance()
-			.createTitle("New JGoodies title");
+
 	public JTextField inputClassName;
 	public JTextField inputNewValueField;
 	public JTextField inputInsField;
@@ -55,7 +62,7 @@ public class InterpretPanel extends JFrame {
 	private JList methodList;
 	private ListSelectionListener listSelectionListener;
 	private JScrollPane cstPane;
-	public JScrollPane scrollPane;
+	private JTable constructorVariable;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
@@ -67,6 +74,8 @@ public class InterpretPanel extends JFrame {
 	}
 
 	InterpretPanel() {
+		setBounds(new Rectangle(0, 22, 700, 500));
+		getContentPane().setBounds(new Rectangle(100, 100, 700, 500));
 		actionListener = new MyActionListener(this);
 		listSelectionListener = new MyListSelectionListener(this);
 
@@ -152,9 +161,18 @@ public class InterpretPanel extends JFrame {
 		cstCreateBtn.addActionListener(actionListener);
 		cstCreateBtn.setBounds(95, 366, 112, 43);
 		cstTabPanel.add(cstCreateBtn);
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 130, 307, 215);
-		cstTabPanel.add(scrollPane);
+		String[] columnNames = {"Type", "Value"};
+		 DefaultTableModel tableModel
+	     = new DefaultTableModel(columnNames, 0);
+		constructorVariable = new JTable(tableModel);
+		String[] data = {"tewwwwwwwwwwwwwwwwwwwwwwwwwwwte", "teset"};
+		tableModel.addRow(data);
+		JScrollPane constructorVariablePanel =  new JScrollPane(constructorVariable);
+		constructorVariablePanel.setLocation(12, 119);
+		constructorVariablePanel.setSize(307, 243);
+		constructorVariablePanel.setPreferredSize(new Dimension(308, 219));
+		cstTabPanel.add(constructorVariablePanel);
+		
 
 		
 		//scrollPane.getViewport().setView(argPanel);

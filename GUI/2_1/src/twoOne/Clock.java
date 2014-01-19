@@ -1,4 +1,3 @@
-
 /*
  * @file
  * @par File Name:
@@ -13,14 +12,16 @@ package twoOne;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 
-public class Clock extends Frame implements ActionListener, Runnable {
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+
+public class Clock extends JFrame implements ActionListener, Runnable {
 	private static final long serialVersionUID = 1L;
 	static String hourValue; // 時を入れる変数を宣言
 	static String minutsValue; // 分を入れる変数を宣言
@@ -32,15 +33,16 @@ public class Clock extends Frame implements ActionListener, Runnable {
 	private Color fontColor = Color.white;
 	private Color backColor = Color.black;
 	private String fontName = "Serif";
-
+/*
 	public void update(Graphics graohInstance) {
 		paint(graohInstance);
 	}
-
+*/
 	Clock() {
 		this.setTitle("Shimizu's Clock");
 		this.setSize(clockDataWidth, clockDataHeight);
-
+		setContentPane(new ImageComponent());
+		setBackground(backColor);
 	}
 
 	public static void main(String args[]) {
@@ -48,10 +50,11 @@ public class Clock extends Frame implements ActionListener, Runnable {
 		Thread threadInstance = new Thread(mainFrame);
 		// フレーム作成
 		mainFrame.setVisible(true);
-		mainFrame.addWindowListener(new CloseWindow());
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		threadInstance.start(); // スレッドスタート
 	}
+
 	public void run() {
 		while (true) {
 			hourValue = String.format("%1$02d",
@@ -61,7 +64,8 @@ public class Clock extends Frame implements ActionListener, Runnable {
 			secondValue = String.format("%1$02d",
 					Calendar.getInstance().get(Calendar.SECOND)); // 秒を代入
 
-			this.setSize((int) (clockDataWidth * 1.5), (int) (clockDataHeight * 1.5));
+			this.setSize((int) (clockDataWidth * 1.5),
+					(int) (clockDataHeight * 1.5));
 			repaint();
 
 			try {
@@ -71,22 +75,23 @@ public class Clock extends Frame implements ActionListener, Runnable {
 		}
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		Image offImage = createImage((int) (clockDataWidth * 1.5),
-				(int) (clockDataHeight * 1.5));
-		Graphics offGraph = offImage.getGraphics();
-		offGraph.setFont(new Font(fontName, Font.PLAIN, this.fontSize));
-		offGraph.setColor(this.fontColor);
-		setBackground(this.backColor);
-		offGraph.drawString(hourValue + ":" + minutsValue + ":" + secondValue,
-				clockDataWidth / 4, (int) (clockDataHeight * 1.1));
-		g.drawImage(offImage, 0, 0, this);
-		fo = offGraph.getFontMetrics();
-		clockDataWidth = fo.stringWidth("00:00:00");
-		clockDataHeight = fo.getHeight();
+	public class ImageComponent extends JComponent {
+		public void paintComponent(Graphics g) {
+			Image offImage = createImage((int) (clockDataWidth * 1.5),
+					(int) (clockDataHeight * 1.5));
+			Graphics offGraph = offImage.getGraphics();
+			offGraph.setFont(new Font(fontName, Font.PLAIN, fontSize));
+			offGraph.setColor(fontColor);
+			offGraph.drawString(hourValue + ":" + minutsValue + ":"
+					+ secondValue, clockDataWidth / 4,
+					(int) (clockDataHeight * 1.1));
+			g.drawImage(offImage, 0, 0, this);
+			fo = offGraph.getFontMetrics();
+			clockDataWidth = fo.stringWidth("00:00:00");
+			clockDataHeight = fo.getHeight();
+		}
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getActionCommand());
 	}

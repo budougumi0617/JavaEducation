@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
 
 /*
  * @file
@@ -21,14 +23,15 @@ public class MyActionListener implements ActionListener {
 
 	MyActionListener(InterpretPanel window) {
 		mainWindow = window;
-		fr = new FunctionReflection(mainWindow);
+		fr = window.fr;
 	}
 
 	/*
 	 * (非 Javadoc)
 	 * 
 	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 * java.awt.event.ActionListener#actionPerformed
+	 * (java.awt.event.ActionEvent)
 	 */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
@@ -44,6 +47,20 @@ public class MyActionListener implements ActionListener {
 			}
 		} else if (cmd.equals("create")) {
 			System.out.println("create");
+			Object args[] = new Object[fr.cstParamTableModel.getRowCount()];
+			for (int i = 0; i < args.length; i++) {
+				args[i] = fr.changeType(
+						(Type) fr.cstParamTableModel.getValueAt(i, 0),
+						(String) fr.cstParamTableModel.getValueAt(i, 1));
+			}
+			try {
+				fr.makeInstanceByConstructor(
+						(Constructor<?>) mainWindow.cstList.getSelectedValue(),
+						args);
+			} catch (Throwable e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 
 		} else if (cmd.equals("fieldUpdate")) {
 
@@ -51,7 +68,7 @@ public class MyActionListener implements ActionListener {
 
 		} else if (cmd.equals("select")) {
 
-		}else if (cmd.equals("addObj")) {
+		} else if (cmd.equals("addObj")) {
 
 		}
 

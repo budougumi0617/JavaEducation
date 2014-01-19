@@ -1,7 +1,9 @@
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Type;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * @file
@@ -26,19 +28,21 @@ public class MyListSelectionListener implements ListSelectionListener {
 	 */
 	public MyListSelectionListener(InterpretPanel window) {
 		mainWindow = window;
-		fr = new FunctionReflection(mainWindow);
+		fr = window.fr;
 	}
 
 	/*
-	 * viewParam(argList, fr.getConstructorParamType((Constructor<?>) cstList
-	 * .getSelectedValue()));
+	 * viewParam(argList,
+	 * fr.getConstructorParamType((Constructor<?>)
+	 * cstList .getSelectedValue()));
 	 */
 
 	/*
 	 * (非 Javadoc)
 	 * 
 	 * @see
-	 * javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event
+	 * javax.swing.event.ListSelectionListener
+	 * #valueChanged(javax.swing.event
 	 * .ListSelectionEvent)
 	 */
 	@Override
@@ -46,16 +50,22 @@ public class MyListSelectionListener implements ListSelectionListener {
 		System.out.println("List select");
 		if (e.getSource().equals(mainWindow.cstList)) {
 			System.out.println("cstList");
-			
-		} else if (e.getSource().equals(mainWindow.methodArgList)) {
+			fr.cstParamTableModel.setRowCount(0);
+			Type[] paramList = fr
+					.getConstructorParamType((Constructor<?>) mainWindow.cstList
+							.getSelectedValue());
+			setParam(fr.cstParamTableModel, paramList);					
+
+		} else if (e.getSource().equals(mainWindow.methodList)) {
 			System.out.println("method list");
-			/*
-			 * mainWindow .viewParam( mainWindow.methodModel,
-			 * fr.getConstructorParamType((Constructor<?>) mainWindow.cstList
-			 * .getSelectedValue()));
-			 */
+			
 		}
 
 	}
-
+	void setParam(DefaultTableModel tableModel, Type[] inputTypes){
+		for (Type t : inputTypes) {
+			Object[] s = { t, "" };
+			tableModel.addRow(s);
+		}
+	}
 }

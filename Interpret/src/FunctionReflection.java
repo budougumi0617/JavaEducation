@@ -10,17 +10,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.table.DefaultTableModel;
+
 public class FunctionReflection {
 	Map<String, Object> objectMap;
 	Map<String, Method> methodMap;
 	List<String> methodList;
-	InterpretPanel mainWindow;
+	DefaultTableModel cstParamTableModel;
+	
 
-	FunctionReflection(InterpretPanel mainWindow) {
-		this.mainWindow = mainWindow;
+	FunctionReflection() {
 		objectMap = new HashMap<String, Object>();
 		methodMap = new HashMap<String, Method>();
 		methodList = new ArrayList<String>();
+		String[] columnNames = { "Type", "Value" };
+		cstParamTableModel = new DefaultTableModel(columnNames, 0);
 	}
 
 	public Object methodInvoke(Object targetObject, Method executeMethod,
@@ -72,7 +76,7 @@ public class FunctionReflection {
 		}
 		return results;
 	}
-	
+
 	public <T> Type[] getConstructorParamType(Constructor<T> constructor) {
 		constructor.setAccessible(true);
 		Type[] results = constructor.getParameterTypes();
@@ -81,7 +85,6 @@ public class FunctionReflection {
 		}
 		return results;
 	}
-	
 
 	public String splitMethodName(Method method) {
 		System.out.println(method.toString());
@@ -132,7 +135,9 @@ public class FunctionReflection {
 			Field targetField = targetObject.getClass().getDeclaredField(
 					fieldName);
 			targetField.setAccessible(true);
-			// Object inputValue = changeType(targetField.getClass(), value);
+			// Object inputValue =
+			// changeType(targetField.getClass(),
+			// value);
 			targetField.set(targetObject, value);
 
 		} catch (SecurityException e) {
@@ -223,6 +228,10 @@ public class FunctionReflection {
 		Class<?> type = array.getClass();
 		T grown = (T) Array.newInstance(type, dim, dim2);
 		return grown;
+	}
+	
+	public void putObject(String key, Object value){
+		objectMap.put(key, value);
 	}
 
 }

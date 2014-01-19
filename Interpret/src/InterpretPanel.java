@@ -24,8 +24,6 @@ import java.awt.Rectangle;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 
-
-
 /*
  * @file
  * @par File Name:
@@ -44,6 +42,7 @@ public class InterpretPanel extends JFrame {
 	public JTextField inputClassName;
 	public JTextField inputNewValueField;
 	public JTextField inputInsField;
+	
 	public ActionListener actionListener;
 	JList cstList;
 	JButton btnShow;
@@ -53,16 +52,18 @@ public class InterpretPanel extends JFrame {
 	JButton btnSelect;
 	JButton cstCreateBtn;
 	JList methodArgList;
-	DefaultListModel methodModel;
+	
 	JList arrayList;
 	JList fieldList;
 	private JButton filedUpdatBtn;
 	private JButton executeBtn;
 	private JButton btnAddObj;
-	private JList methodList;
+	JList methodList;
+	DefaultListModel methodListModel;
 	private ListSelectionListener listSelectionListener;
 	private JScrollPane cstPane;
-	private JTable constructorVariable;
+	private JTable cstParamTable;
+	public FunctionReflection fr;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
@@ -76,9 +77,9 @@ public class InterpretPanel extends JFrame {
 	InterpretPanel() {
 		setBounds(new Rectangle(0, 22, 700, 500));
 		getContentPane().setBounds(new Rectangle(100, 100, 700, 500));
+		fr = new FunctionReflection();
 		actionListener = new MyActionListener(this);
 		listSelectionListener = new MyListSelectionListener(this);
-
 		setFont(new Font("Inconsolata", Font.PLAIN, 12));
 		setForeground(new Color(102, 102, 102));
 		setTitle("Interpret");
@@ -161,22 +162,20 @@ public class InterpretPanel extends JFrame {
 		cstCreateBtn.addActionListener(actionListener);
 		cstCreateBtn.setBounds(95, 366, 112, 43);
 		cstTabPanel.add(cstCreateBtn);
-		String[] columnNames = {"Type", "Value"};
-		 DefaultTableModel tableModel
-	     = new DefaultTableModel(columnNames, 0);
-		constructorVariable = new JTable(tableModel);
-		String[] data = {"tewwwwwwwwwwwwwwwwwwwwwwwwwwwte", "teset"};
-		tableModel.addRow(data);
-		JScrollPane constructorVariablePanel =  new JScrollPane(constructorVariable);
-		constructorVariablePanel.setLocation(12, 119);
-		constructorVariablePanel.setSize(307, 243);
-		constructorVariablePanel.setPreferredSize(new Dimension(308, 219));
-		cstTabPanel.add(constructorVariablePanel);
-		
 
 		
-		//scrollPane.getViewport().setView(argPanel);
-		//scrollPane.getViewport().setView(cstList);
+		cstParamTable = new JTable(fr.cstParamTableModel);
+		String[] data = { "tewwwwwwwwwwwwwwwwwwwwwwwwwwwte", "teset" };
+		fr.cstParamTableModel.addRow(data);
+		JScrollPane constructorVariablePanel = new JScrollPane(
+				cstParamTable);
+		constructorVariablePanel.setLocation(12, 119);
+		constructorVariablePanel.setSize(307, 200);
+		constructorVariablePanel.setPreferredSize(new Dimension(308, 219));
+		cstTabPanel.add(constructorVariablePanel);
+
+		// scrollPane.getViewport().setView(argPanel);
+		// scrollPane.getViewport().setView(cstList);
 		classMamberpane.addTab("Field", fieldTabPanel);
 		fieldTabPanel.setLayout(null);
 
@@ -208,8 +207,8 @@ public class InterpretPanel extends JFrame {
 		JScrollPane methodPane = new JScrollPane();
 		methodPane.setBounds(12, 42, 307, 146);
 		methodTabPanel.add(methodPane);
-		methodModel = new DefaultListModel();
-		methodList = new JList(methodModel);
+		methodListModel = new DefaultListModel();
+		methodList = new JList(methodListModel);
 		methodList.setBounds(12, 42, 307, 146);
 		methodTabPanel.add(methodList);
 		methodPane.getViewport().setView(methodList);
@@ -298,6 +297,7 @@ public class InterpretPanel extends JFrame {
 		}
 
 	}
+
 	public void outputConsole(String result) {
 		consoleMessage.append(result + "\n");
 	}

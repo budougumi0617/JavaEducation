@@ -42,44 +42,51 @@ public class InterpretPanel extends JFrame {
 	public JTextField inputClassName;
 	public JTextField inputNewValueField;
 	public JTextField inputInsField;
-	
+
 	public ActionListener actionListener;
 	JList cstList;
 	JButton btnShow;
 	JTextArea consoleMessage;
 	JList objectList;
-	DefaultListModel argModel;
 	JButton btnSelect;
 	JButton cstCreateBtn;
-	JList methodArgList;
-	
+	JList methodList;
+	DefaultListModel methodListModel;
+
 	JList arrayList;
-	JList fieldList;
+	JTable fieldParamTable;
 	private JButton filedUpdatBtn;
 	private JButton executeBtn;
 	private JButton btnAddObj;
-	JList methodList;
-	DefaultListModel methodListModel;
+
 	private ListSelectionListener listSelectionListener;
 	private JScrollPane cstPane;
 	private JTable cstParamTable;
+	private JTable methodParamTable;
 	public FunctionReflection fr;
+	public JTextField inputObjectNameField;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setBounds(10, 10, 660, 500);
-		frame.setTitle("Interpret");
-		frame.setVisible(true);
+		/*
+		 * frame.setDefaultCloseOperation(JFrame.
+		 * EXIT_ON_CLOSE); frame.setBounds(10, 10,
+		 * 660, 500); frame.setTitle("Interpret");
+		 * frame.setVisible(true);
+		 */
 	}
 
 	InterpretPanel() {
-		setBounds(new Rectangle(0, 22, 700, 500));
-		getContentPane().setBounds(new Rectangle(100, 100, 700, 500));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setBounds(10, 10, 660, 500);
+		setTitle("Interpret");
+
 		fr = new FunctionReflection();
 		actionListener = new MyActionListener(this);
 		listSelectionListener = new MyListSelectionListener(this);
+		setBounds(new Rectangle(0, 22, 700, 500));
+		getContentPane().setBounds(new Rectangle(100, 100, 700, 500));
 		setFont(new Font("Inconsolata", Font.PLAIN, 12));
 		setForeground(new Color(102, 102, 102));
 		setTitle("Interpret");
@@ -103,7 +110,8 @@ public class InterpretPanel extends JFrame {
 		instansePane.setBounds(12, 80, 255, 217);
 		panel.add(instansePane);
 
-		objectList = new JList();
+		objectList = new JList(fr.objListModel);
+		objectList.addListSelectionListener(listSelectionListener);
 		instansePane.addTab("Object", null, objectList, null);
 
 		arrayList = new JList();
@@ -153,9 +161,6 @@ public class InterpretPanel extends JFrame {
 		cstTabPanel.add(cstPane);
 		cstPane.getViewport().setView(cstList);
 
-		argModel = new DefaultListModel();
-		argModel.addElement(new JLabel("teatea"));
-
 		cstCreateBtn = new JButton("create");
 		cstCreateBtn.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 16));
 		cstCreateBtn.setActionCommand("create");
@@ -163,19 +168,15 @@ public class InterpretPanel extends JFrame {
 		cstCreateBtn.setBounds(95, 366, 112, 43);
 		cstTabPanel.add(cstCreateBtn);
 
-		
 		cstParamTable = new JTable(fr.cstParamTableModel);
 		String[] data = { "tewwwwwwwwwwwwwwwwwwwwwwwwwwwte", "teset" };
 		fr.cstParamTableModel.addRow(data);
-		JScrollPane constructorVariablePanel = new JScrollPane(
-				cstParamTable);
+		JScrollPane constructorVariablePanel = new JScrollPane(cstParamTable);
 		constructorVariablePanel.setLocation(12, 119);
 		constructorVariablePanel.setSize(307, 200);
 		constructorVariablePanel.setPreferredSize(new Dimension(308, 219));
 		cstTabPanel.add(constructorVariablePanel);
 
-		// scrollPane.getViewport().setView(argPanel);
-		// scrollPane.getViewport().setView(cstList);
 		classMamberpane.addTab("Field", fieldTabPanel);
 		fieldTabPanel.setLayout(null);
 
@@ -183,9 +184,12 @@ public class InterpretPanel extends JFrame {
 		fieldLabel.setBounds(12, 10, 127, 22);
 		fieldTabPanel.add(fieldLabel);
 
-		fieldList = new JList();
-		fieldList.setBounds(12, 42, 307, 210);
-		fieldTabPanel.add(fieldList);
+		fieldParamTable = new JTable(fr.fieldParamTableModel);
+		JScrollPane fieldPanel = new JScrollPane(fieldParamTable);
+		fieldPanel.setLocation(12, 44);
+		fieldPanel.setSize(307, 210);
+		fieldPanel.setPreferredSize(new Dimension(307, 210));
+		fieldTabPanel.add(fieldPanel);
 
 		inputNewValueField = new JTextField();
 		inputNewValueField.setText("input new value");
@@ -205,16 +209,16 @@ public class InterpretPanel extends JFrame {
 		methodTabPanel.add(lblMethodList);
 
 		JScrollPane methodPane = new JScrollPane();
-		methodPane.setBounds(12, 42, 307, 146);
+		methodPane.setBounds(12, 29, 307, 146);
 		methodTabPanel.add(methodPane);
-		methodListModel = new DefaultListModel();
-		methodList = new JList(methodListModel);
-		methodList.setBounds(12, 42, 307, 146);
+		methodList = new JList();
+		methodList.setBounds(12, 29, 307, 146);
+		methodList.addListSelectionListener(listSelectionListener);
 		methodTabPanel.add(methodList);
 		methodPane.getViewport().setView(methodList);
 
 		executeBtn = new JButton("execute");
-		executeBtn.setBounds(105, 395, 121, 28);
+		executeBtn.setBounds(105, 388, 121, 28);
 		executeBtn.setActionCommand("execute");
 		executeBtn.addActionListener(actionListener);
 		methodTabPanel.add(executeBtn);
@@ -222,25 +226,38 @@ public class InterpretPanel extends JFrame {
 		btnSelect = new JButton("select");
 		btnSelect.setActionCommand("select");
 		btnSelect.addActionListener(actionListener);
-		btnSelect.setBounds(122, 198, 91, 21);
+		btnSelect.setBounds(122, 187, 91, 21);
 		methodTabPanel.add(btnSelect);
 
-		methodArgList = new JList();
-		methodArgList.setBounds(12, 229, 307, 164);
-		methodTabPanel.add(methodArgList);
+		methodParamTable = new JTable(fr.methodParamTableModel);
+		data = new String[] { "tets", "test" };
+		fr.methodParamTableModel.addRow(data);
+		JScrollPane methodVariablePanel = new JScrollPane(methodParamTable);
+
+		inputObjectNameField = new JTextField("foo");
+		inputObjectNameField.setBounds(156, 331, 163, 28);
+		cstTabPanel.add(inputObjectNameField);
+		inputObjectNameField.setColumns(10);
+
+		JLabel lblObjectName = new JLabel("Object Name");
+		lblObjectName.setBounds(12, 331, 124, 28);
+		cstTabPanel.add(lblObjectName);
+		methodVariablePanel.setBounds(12, 219, 307, 164);
+		methodTabPanel.add(methodVariablePanel);
 
 		getContentPane().add(classMamberpane);
 
 		JPanel arrayListTub = new JPanel();
+		arrayListTub.setBackground(new Color(204, 153, 255));
 		classMamberpane.addTab("ArrayList", null, arrayListTub, null);
 		arrayListTub.setLayout(null);
 
 		JList list = new JList();
-		list.setBounds(12, 10, 318, 268);
+		list.setBounds(12, 10, 297, 268);
 		arrayListTub.add(list);
 
 		inputInsField = new JTextField();
-		inputInsField.setBounds(12, 318, 318, 19);
+		inputInsField.setBounds(12, 318, 297, 19);
 		arrayListTub.add(inputInsField);
 		inputInsField.setColumns(10);
 
@@ -249,6 +266,7 @@ public class InterpretPanel extends JFrame {
 		btnAddObj.setActionCommand("addObj");
 		btnAddObj.addActionListener(actionListener);
 		arrayListTub.add(btnAddObj);
+		setVisible(true);
 	}
 
 	public JPanel createListElemment(String className) {

@@ -10,21 +10,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class FunctionReflection {
 	Map<String, Object> objectMap;
 	Map<String, Method> methodMap;
-	List<String> methodList;
+	List<String> methodSortedList;
+	DefaultListModel objListModel;
 	DefaultTableModel cstParamTableModel;
-	
+	DefaultTableModel methodParamTableModel;
+	DefaultTableModel fieldParamTableModel;
 
 	FunctionReflection() {
 		objectMap = new HashMap<String, Object>();
 		methodMap = new HashMap<String, Method>();
-		methodList = new ArrayList<String>();
+		objListModel = new DefaultListModel();
+		methodSortedList = new ArrayList<String>();
 		String[] columnNames = { "Type", "Value" };
 		cstParamTableModel = new DefaultTableModel(columnNames, 0);
+		methodParamTableModel = new DefaultTableModel(columnNames, 0);
+		String[] fieldNames = { "Field Type", "Value" };
+		fieldParamTableModel = new DefaultTableModel(fieldNames, 0);
 	}
 
 	public Object methodInvoke(Object targetObject, Method executeMethod,
@@ -37,9 +44,9 @@ public class FunctionReflection {
 		} catch (InvocationTargetException e) {
 			failureReason = e.getCause();
 		} catch (IllegalArgumentException e) {
-			failureReason = e;
+			failureReason = e.getCause();
 		} catch (IllegalAccessException e) {
-			failureReason = e;
+			failureReason = e.getCause();
 		}
 		if (failureReason != null) {
 			throw failureReason;
@@ -60,7 +67,7 @@ public class FunctionReflection {
 
 	public Method[] getClassMethod(Class<?> c) {
 		try {
-			return c.getDeclaredMethods();
+			return c.getMethods();
 		} catch (SecurityException e) {
 			e.getCause();
 		}
@@ -98,16 +105,16 @@ public class FunctionReflection {
 
 	public void setMethodMap(Method[] methods) {
 		methodMap.clear();
-		methodList.clear();
+		methodSortedList.clear();
 		for (Method method : methods) {
 			method.setAccessible(true);
 			String methodName = splitMethodName(method);
 			if (!methodMap.containsKey(methodName)) {
 				methodMap.put(methodName, method);
-				methodList.add(methodName);
+				methodSortedList.add(methodName);
 			}
 		}
-		Collections.sort(methodList);
+		Collections.sort(methodSortedList);
 	}
 
 	public Method getMethodMap(String methodName) {
@@ -135,10 +142,10 @@ public class FunctionReflection {
 			Field targetField = targetObject.getClass().getDeclaredField(
 					fieldName);
 			targetField.setAccessible(true);
-			// Object inputValue =
-			// changeType(targetField.getClass(),
-			// value);
-			targetField.set(targetObject, value);
+			 Object inputValue =
+			 changeType(targetField.getType(),
+			 (String)value);
+			targetField.set(targetObject, inputValue);
 
 		} catch (SecurityException e) {
 			failureReason = e.getCause();
@@ -170,6 +177,8 @@ public class FunctionReflection {
 	public Object changeType(Type objectType, String value)
 			throws NullPointerException {
 		Object resultObject = null;
+		System.out.println("in changeType Type: " + objectType + ", value : "
+				+ value);
 		if (int.class.equals(objectType)) {
 			resultObject = new Integer(value);
 		} else if (double.class.equals(objectType)) {
@@ -191,7 +200,7 @@ public class FunctionReflection {
 		} else {
 			resultObject = objectMap.get(value);
 			if (resultObject == null) {
-				throw new NullPointerException();
+				throw new NullPointerException("No found object");
 			}
 		}
 		return resultObject;
@@ -229,9 +238,18 @@ public class FunctionReflection {
 		T grown = (T) Array.newInstance(type, dim, dim2);
 		return grown;
 	}
-	
-	public void putObject(String key, Object value){
+
+	public void putObject(String key, Object value) {
 		objectMap.put(key, value);
+		objListModel.addElement(key);
 	}
 
+	public Object[] getArgs(DefaultTableModel paramTableModel) {
+		Object args[] = new Object[paramTableModel.getRowCount()];
+		for (int i = 0; i < args.length; i++) {
+			args[i] = changeType((Type) paramTableModel.getValueAt(i, 0),
+					(String) paramTableModel.getValueAt(i, 1));
+		}
+		return args;
+	}
 }

@@ -114,7 +114,11 @@ public class MyActionListener implements ActionListener {
 
 		} else if (cmd.equals("addObj")) {
 			Object obj = fr.objectMap.get(mainWindow.inputInsField.getText());
+			System.out.println("Instanse : " + obj);
+			System.out.println("Instanse getClass : " + obj.getClass());
+			System.out.println("Instanse toString : " + obj.getClass().toString());
 			Object[] array = fr.arrayMap.get(mainWindow.arrayList.getSelectedValue());
+			System.out.println("Array type : " + array.getClass().getComponentType());
 			int num = (Integer) mainWindow.arrayParamTable.getValueAt(mainWindow.arrayParamTable.getSelectedRow(), 0);
 			Array.set(array, num, obj);
 		}

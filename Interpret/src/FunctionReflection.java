@@ -149,9 +149,8 @@ public class FunctionReflection {
 			Field targetField = targetObject.getClass().getDeclaredField(
 					fieldName);
 			targetField.setAccessible(true);
-			 Object inputValue =
-			 changeType(targetField.getType(),
-			 (String)value);
+			Object inputValue = changeType(targetField.getType(),
+					(String) value);
 			targetField.set(targetObject, inputValue);
 
 		} catch (SecurityException e) {
@@ -235,8 +234,9 @@ public class FunctionReflection {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T[] makeArrayNewInstance(Class<T> arrayClass, int dim) {
-		return (T[]) Array.newInstance(arrayClass.getClass(), dim);
+	public Object[] makeArrayNewInstance(Class<?> arrayClass, int dim) {
+		System.out.println("Array type : " + arrayClass);
+		return (Object[]) Array.newInstance(arrayClass, dim);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -250,6 +250,7 @@ public class FunctionReflection {
 		objectMap.put(key, value);
 		objListModel.addElement(key);
 	}
+
 	public void putArray(String key, Object[] value) {
 		arrayMap.put(key, value);
 		arrayListModel.addElement(key);

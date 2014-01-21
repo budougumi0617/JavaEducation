@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultListModel;
@@ -13,16 +13,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.Rectangle;
-
-import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 
 /*
  * @file
@@ -78,6 +73,7 @@ public class InterpretPanel extends JFrame {
 	}
 
 	InterpretPanel() {
+		getContentPane().setBackground(new Color(204, 153, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// setBounds(10, 10, 660, 500);
 		setTitle("Interpret");

@@ -15,23 +15,30 @@ import javax.swing.table.DefaultTableModel;
 
 public class FunctionReflection {
 	Map<String, Object> objectMap;
+	Map<String, Object[]> arrayMap;
 	Map<String, Method> methodMap;
 	List<String> methodSortedList;
 	DefaultListModel objListModel;
+	DefaultListModel arrayListModel;
 	DefaultTableModel cstParamTableModel;
 	DefaultTableModel methodParamTableModel;
 	DefaultTableModel fieldParamTableModel;
+	DefaultTableModel arrayParamTableModel;
 
 	FunctionReflection() {
 		objectMap = new HashMap<String, Object>();
 		methodMap = new HashMap<String, Method>();
+		arrayMap = new HashMap<String, Object[]>();
 		objListModel = new DefaultListModel();
+		arrayListModel = new DefaultListModel();
 		methodSortedList = new ArrayList<String>();
 		String[] columnNames = { "Type", "Value" };
 		cstParamTableModel = new DefaultTableModel(columnNames, 0);
 		methodParamTableModel = new DefaultTableModel(columnNames, 0);
 		String[] fieldNames = { "Field Type", "Value" };
 		fieldParamTableModel = new DefaultTableModel(fieldNames, 0);
+		String[] arrayLabel = { "array No.", "Value" };
+		arrayParamTableModel = new DefaultTableModel(arrayLabel, 0);
 	}
 
 	public Object methodInvoke(Object targetObject, Method executeMethod,
@@ -242,6 +249,10 @@ public class FunctionReflection {
 	public void putObject(String key, Object value) {
 		objectMap.put(key, value);
 		objListModel.addElement(key);
+	}
+	public void putArray(String key, Object[] value) {
+		arrayMap.put(key, value);
+		arrayListModel.addElement(key);
 	}
 
 	public Object[] getArgs(DefaultTableModel paramTableModel) {

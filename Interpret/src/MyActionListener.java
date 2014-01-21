@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -64,6 +65,20 @@ public class MyActionListener implements ActionListener {
 				mainWindow.outputConsole(e.getCause().toString());
 			}
 
+		} else if (cmd.equals("createArray")) {
+			System.out.println("Create Array");
+			int size = Integer.parseInt(mainWindow.arraySize.getText());
+			System.out.println("size = " + size);
+			String className = mainWindow.inputClassName.getText();
+			String objName = mainWindow.inputObjectNameField.getText();
+			Object[] arrayObject = null;
+			try {
+				arrayObject = fr.makeArrayNewInstance(Class.forName(className), size);
+			} catch (ClassNotFoundException e) {
+				mainWindow.outputConsole("create array result : " + e.toString());
+			}
+			fr.putArray(objName, arrayObject);
+
 		} else if (cmd.equals("execute")) {
 			System.out.println("execute");
 			Object args[] = fr.getArgs(fr.methodParamTableModel);
@@ -82,20 +97,26 @@ public class MyActionListener implements ActionListener {
 			System.out.println("fieldUpdate");
 			Object targetObject = fr.objectMap.get(mainWindow.objectList
 					.getSelectedValue());
-			String fieldName = fr.fieldParamTableModel.getValueAt(mainWindow.fieldParamTable.getSelectedRow(), 0).toString();
+			String fieldName = fr.fieldParamTableModel.getValueAt(
+					mainWindow.fieldParamTable.getSelectedRow(), 0).toString();
 			System.out.println("fieldName : " + fieldName);
-			Object value = fr.fieldParamTableModel.getValueAt(mainWindow.fieldParamTable.getSelectedRow(), 1).toString();
+			Object value = fr.fieldParamTableModel.getValueAt(
+					mainWindow.fieldParamTable.getSelectedRow(), 1).toString();
 			System.out.println("value : " + value);
 			try {
 				fr.setField(targetObject, fieldName, value);
 			} catch (Throwable e) {
 				e.printStackTrace();
-				mainWindow.outputConsole("Change field result : " + e.toString());
+				mainWindow.outputConsole("Change field result : "
+						+ e.toString());
 			}
 		} else if (cmd.equals("select")) {
 
 		} else if (cmd.equals("addObj")) {
-
+			Object obj = fr.objectMap.get(mainWindow.inputInsField.getText());
+			Object[] array = fr.arrayMap.get(mainWindow.arrayList.getSelectedValue());
+			int num = (Integer) mainWindow.arrayParamTable.getValueAt(mainWindow.arrayParamTable.getSelectedRow(), 0);
+			Array.set(array, num, obj);
 		}
 
 	}

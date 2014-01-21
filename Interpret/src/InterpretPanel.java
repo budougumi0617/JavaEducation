@@ -35,7 +35,6 @@ public class InterpretPanel extends JFrame {
 	 */
 
 	public JTextField inputClassName;
-	public JTextField inputNewValueField;
 	public JTextField inputInsField;
 
 	public ActionListener actionListener;
@@ -58,8 +57,10 @@ public class InterpretPanel extends JFrame {
 	private JScrollPane cstPane;
 	private JTable cstParamTable;
 	private JTable methodParamTable;
+	public JTable arrayParamTable;
 	public FunctionReflection fr;
 	public JTextField inputObjectNameField;
+	public JTextField arraySize;
 
 	public static void main(String[] args) {
 		InterpretPanel frame = new InterpretPanel();
@@ -98,7 +99,7 @@ public class InterpretPanel extends JFrame {
 		inputClassName = new JTextField();
 		inputClassName.setText("java.lang.String");
 		inputClassName.setBackground(new Color(204, 204, 255));
-		inputClassName.setBounds(12, 42, 153, 19);
+		inputClassName.setBounds(102, 10, 153, 19);
 		panel.add(inputClassName);
 		inputClassName.setColumns(10);
 
@@ -110,7 +111,8 @@ public class InterpretPanel extends JFrame {
 		objectList.addListSelectionListener(listSelectionListener);
 		instansePane.addTab("Object", null, objectList, null);
 
-		arrayList = new JList();
+		arrayList = new JList(fr.arrayListModel);
+		arrayList.addListSelectionListener(listSelectionListener);
 		instansePane.addTab("Array", null, arrayList, null);
 
 		JScrollPane consolePanel = new JScrollPane();
@@ -121,15 +123,30 @@ public class InterpretPanel extends JFrame {
 		consolePanel.setViewportView(consoleMessage);
 
 		btnShow = new JButton("show");
-		btnShow.setBounds(176, 41, 91, 21);
+		btnShow.setBounds(221, 41, 64, 21);
 		btnShow.setActionCommand("showCst");
 		btnShow.addActionListener(actionListener);
 		panel.add(btnShow);
 
-		JLabel className = new JLabel("Input Class Name");
+		JLabel className = new JLabel("Class Name");
 		className.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
-		className.setBounds(12, 10, 127, 22);
+		className.setBounds(12, 10, 90, 22);
 		panel.add(className);
+		
+		arraySize = new JTextField();
+		arraySize.setBounds(46, 36, 56, 28);
+		panel.add(arraySize);
+		arraySize.setColumns(10);
+		
+		JLabel arraySizeLabel = new JLabel("Size");
+		arraySizeLabel.setBounds(12, 42, 46, 16);
+		panel.add(arraySizeLabel);
+		
+		JButton btnCreateArray = new JButton("Create Array");
+		btnCreateArray.setBounds(102, 39, 108, 29);
+		btnCreateArray.setActionCommand("createArray");
+		btnCreateArray.addActionListener(actionListener);
+		panel.add(btnCreateArray);
 
 		JTabbedPane classMamberpane = new JTabbedPane();
 		classMamberpane.setBounds(291, 0, 347, 462);
@@ -183,15 +200,9 @@ public class InterpretPanel extends JFrame {
 		fieldParamTable = new JTable(fr.fieldParamTableModel);
 		JScrollPane fieldPanel = new JScrollPane(fieldParamTable);
 		fieldPanel.setLocation(12, 44);
-		fieldPanel.setSize(307, 210);
+		fieldPanel.setSize(307, 257);
 		fieldPanel.setPreferredSize(new Dimension(307, 210));
 		fieldTabPanel.add(fieldPanel);
-
-		inputNewValueField = new JTextField();
-		inputNewValueField.setText("input new value");
-		inputNewValueField.setBounds(12, 262, 307, 29);
-		fieldTabPanel.add(inputNewValueField);
-		inputNewValueField.setColumns(10);
 
 		filedUpdatBtn = new JButton("update");
 		filedUpdatBtn.setBounds(116, 313, 91, 21);
@@ -248,9 +259,10 @@ public class InterpretPanel extends JFrame {
 		classMamberpane.addTab("ArrayList", null, arrayListTub, null);
 		arrayListTub.setLayout(null);
 
-		JList list = new JList();
-		list.setBounds(12, 10, 297, 268);
-		arrayListTub.add(list);
+		arrayParamTable = new JTable(fr.arrayParamTableModel);
+		JScrollPane arrayValuePanel = new JScrollPane(arrayParamTable);
+		arrayValuePanel.setBounds(12, 10, 297, 268);
+		arrayListTub.add(arrayValuePanel);
 
 		inputInsField = new JTextField();
 		inputInsField.setBounds(12, 318, 297, 19);

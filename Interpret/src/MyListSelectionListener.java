@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -70,7 +71,7 @@ public class MyListSelectionListener implements ListSelectionListener {
 			}
 			setParam(fr.methodParamTableModel, paramList);
 		} else if (e.getSource().equals(mainWindow.objectList)) {
-			System.out.println("object list");
+			System.out.println("method list");
 			Method[] methods = fr.getClassMethod(fr.objectMap.get(
 					mainWindow.objectList.getSelectedValue()).getClass());
 			fr.setMethodMap(methods);
@@ -88,6 +89,16 @@ public class MyListSelectionListener implements ListSelectionListener {
 				}
 			}
 			setField(fr.fieldParamTableModel, obj, list);
+		} else if (e.getSource().equals(mainWindow.arrayList)) {
+			System.out.println("array list");
+			Object[] array = fr.arrayMap.get(mainWindow.arrayList
+					.getSelectedValue());
+			int length = array.length;
+			fr.arrayParamTableModel.setRowCount(0);
+			for (int i = 0; i < length; i++) {
+				Object[] result = { i, Array.get(array, i) };
+				fr.arrayParamTableModel.addRow(result);
+			}
 
 		}
 

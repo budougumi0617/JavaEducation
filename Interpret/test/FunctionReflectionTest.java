@@ -129,14 +129,14 @@ public class FunctionReflectionTest {
 	public void testSetField() {
 		String targetObjString = new String("testSetField");
 		try {
-			targetClass.setField(targetObjString, "hash", 1);
+			targetClass.setField(targetObjString, "hash", "1");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			fail();
 		}
 		assertThat(targetObjString.hashCode(), is(1));
 		try {
-			targetClass.setField(targetObjString, "count", 10);
+			targetClass.setField(targetObjString, "count", "10");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			fail();
@@ -201,7 +201,7 @@ public class FunctionReflectionTest {
 	public void testMakeArrayNewInstance() {
 		Object[] resultObject = null;
 		int dim = 4;
-		resultObject = targetClass.makeArrayNewInstance(int.class, dim);
+		resultObject = (Object[])targetClass.makeArrayNewInstance(Integer.class, dim);
 		assertNotNull(resultObject);
 		assertEquals(resultObject.length, dim);
 		Object[][] resultDouble = null;
@@ -253,17 +253,18 @@ public class FunctionReflectionTest {
 	public <T> void testGetConstructorParamType(){
 		Constructor<T> inputConstructor = null;
 		try {
-			inputConstructor = (Constructor<T>) Double.class.getDeclaredConstructor(Double.class);
+			inputConstructor = (Constructor<T>) Double.class.getConstructor(String.class);
 
 		} catch (SecurityException e) {
 			fail();
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			fail();
+			
 			e.printStackTrace();
+			fail();
 		}
 		Type[] result = targetClass.getConstructorParamType(inputConstructor);
-		assertEquals(Double.class.toString(), result[0].toString());
+		assertEquals(String.class.toString(), result[0].toString());
 	}
 
 }

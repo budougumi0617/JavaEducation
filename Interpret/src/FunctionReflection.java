@@ -3,8 +3,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +76,17 @@ public class FunctionReflection {
 
 	public Method[] getClassMethod(Class<?> c) {
 		try {
-			return c.getMethods();
+			List<Method> resultMethods = new ArrayList<Method>(Arrays.asList(c
+					.getMethods()));
+			Method[] methods = c.getDeclaredMethods();
+			for (Method m : methods) {
+				if (Modifier.isPrivate(m.getModifiers())
+						|| Modifier.isProtected(m.getModifiers())) {
+					resultMethods.add(m);
+				}
+			}
+			return (Method[])resultMethods.toArray(new Method[0]);
+			// return c.getMethods();
 		} catch (SecurityException e) {
 			e.getCause();
 		}

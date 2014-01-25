@@ -42,7 +42,6 @@ public class InterpretPanel extends JFrame {
 	JButton btnShow;
 	JTextArea consoleMessage;
 	JList objectList;
-	JButton btnSelect;
 	JButton cstCreateBtn;
 	JList methodList;
 	DefaultListModel methodListModel;
@@ -108,22 +107,27 @@ public class InterpretPanel extends JFrame {
 		panel.add(instansePane);
 
 		objectList = new JList(fr.objListModel);
+		objectList.setBackground(new Color(204, 204, 255));
 		objectList.addListSelectionListener(listSelectionListener);
 		instansePane.addTab("Object", null, objectList, null);
 
 		arrayList = new JList(fr.arrayListModel);
+		arrayList.setBackground(new Color(204, 204, 255));
 		arrayList.addListSelectionListener(listSelectionListener);
 		instansePane.addTab("Array", null, arrayList, null);
+		instansePane.setBackgroundAt(1, new Color(204, 204, 255));
 
 		JScrollPane consolePanel = new JScrollPane();
 		consolePanel.setBounds(12, 307, 255, 143);
 		panel.add(consolePanel);
 
 		consoleMessage = new JTextArea();
+		consoleMessage.setBackground(new Color(204, 204, 255));
 		consolePanel.setViewportView(consoleMessage);
 
 		btnShow = new JButton("show");
-		btnShow.setBounds(221, 41, 64, 21);
+		btnShow.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
+		btnShow.setBounds(208, 39, 71, 21);
 		btnShow.setActionCommand("showCst");
 		btnShow.addActionListener(actionListener);
 		panel.add(btnShow);
@@ -134,16 +138,19 @@ public class InterpretPanel extends JFrame {
 		panel.add(className);
 		
 		arraySize = new JTextField();
-		arraySize.setBounds(46, 36, 56, 28);
+		arraySize.setBackground(new Color(204, 204, 255));
+		arraySize.setBounds(46, 36, 35, 28);
 		panel.add(arraySize);
 		arraySize.setColumns(10);
 		
 		JLabel arraySizeLabel = new JLabel("Size");
+		arraySizeLabel.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		arraySizeLabel.setBounds(12, 42, 46, 16);
 		panel.add(arraySizeLabel);
 		
 		JButton btnCreateArray = new JButton("Create Array");
-		btnCreateArray.setBounds(102, 39, 108, 29);
+		btnCreateArray.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 11));
+		btnCreateArray.setBounds(85, 36, 111, 29);
 		btnCreateArray.setActionCommand("createArray");
 		btnCreateArray.addActionListener(actionListener);
 		panel.add(btnCreateArray);
@@ -182,7 +189,7 @@ public class InterpretPanel extends JFrame {
 		cstTabPanel.add(cstCreateBtn);
 
 		cstParamTable = new JTable(fr.cstParamTableModel);
-		String[] data = { "tewwwwwwwwwwwwwwwwwwwwwwwwwwwte", "teset" };
+		String[] data = { "", "" };
 		fr.cstParamTableModel.addRow(data);
 		JScrollPane constructorVariablePanel = new JScrollPane(cstParamTable);
 		constructorVariablePanel.setLocation(12, 119);
@@ -194,6 +201,7 @@ public class InterpretPanel extends JFrame {
 		fieldTabPanel.setLayout(null);
 
 		JLabel fieldLabel = new JLabel("Field List");
+		fieldLabel.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		fieldLabel.setBounds(12, 10, 127, 22);
 		fieldTabPanel.add(fieldLabel);
 
@@ -205,6 +213,7 @@ public class InterpretPanel extends JFrame {
 		fieldTabPanel.add(fieldPanel);
 
 		filedUpdatBtn = new JButton("update");
+		filedUpdatBtn.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		filedUpdatBtn.setBounds(116, 313, 91, 21);
 		filedUpdatBtn.setActionCommand("fieldUpdate");
 		filedUpdatBtn.addActionListener(actionListener);
@@ -212,11 +221,12 @@ public class InterpretPanel extends JFrame {
 		classMamberpane.addTab("Method", methodTabPanel);
 
 		JLabel lblMethodList = new JLabel("Method List");
+		lblMethodList.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		lblMethodList.setBounds(12, 10, 143, 22);
 		methodTabPanel.add(lblMethodList);
 
 		JScrollPane methodPane = new JScrollPane();
-		methodPane.setBounds(12, 29, 307, 146);
+		methodPane.setBounds(12, 29, 307, 180);
 		methodTabPanel.add(methodPane);
 		methodList = new JList();
 		methodList.setBounds(12, 29, 307, 146);
@@ -225,19 +235,14 @@ public class InterpretPanel extends JFrame {
 		methodPane.getViewport().setView(methodList);
 
 		executeBtn = new JButton("execute");
+		executeBtn.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		executeBtn.setBounds(105, 388, 121, 28);
 		executeBtn.setActionCommand("execute");
 		executeBtn.addActionListener(actionListener);
 		methodTabPanel.add(executeBtn);
 
-		btnSelect = new JButton("select");
-		btnSelect.setActionCommand("select");
-		btnSelect.addActionListener(actionListener);
-		btnSelect.setBounds(122, 187, 91, 21);
-		methodTabPanel.add(btnSelect);
-
 		methodParamTable = new JTable(fr.methodParamTableModel);
-		data = new String[] { "tets", "test" };
+		data = new String[] { "", "" };
 		fr.methodParamTableModel.addRow(data);
 		JScrollPane methodVariablePanel = new JScrollPane(methodParamTable);
 
@@ -247,6 +252,7 @@ public class InterpretPanel extends JFrame {
 		inputObjectNameField.setColumns(10);
 
 		JLabel lblObjectName = new JLabel("Object Name");
+		lblObjectName.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		lblObjectName.setBounds(12, 331, 124, 28);
 		cstTabPanel.add(lblObjectName);
 		methodVariablePanel.setBounds(12, 219, 307, 164);
@@ -270,10 +276,16 @@ public class InterpretPanel extends JFrame {
 		inputInsField.setColumns(10);
 
 		btnAddObj = new JButton("Add Obj");
+		btnAddObj.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
 		btnAddObj.setBounds(100, 358, 139, 54);
 		btnAddObj.setActionCommand("addObj");
 		btnAddObj.addActionListener(actionListener);
 		arrayListTub.add(btnAddObj);
+		
+		JLabel lbInputInsField = new JLabel("Input add Object name");
+		lbInputInsField.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 12));
+		lbInputInsField.setBounds(12, 288, 209, 24);
+		arrayListTub.add(lbInputInsField);
 		setVisible(true);
 	}
 

@@ -9,19 +9,21 @@
  */
 package ex17_03;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @author budougumi0617
  * 
  */
 public class ResourceImpl implements Resource {
-	Object key;
+	WeakReference<Object> keyObject;
 	boolean needsRelease = false;
 
 	/**
 	 * 
 	 */
 	public ResourceImpl(Object key) {
-		this.key = key;
+		keyObject = new WeakReference<Object>(key);
 		System.out.println("Setting External Resource.");
 	}
 
@@ -30,9 +32,8 @@ public class ResourceImpl implements Resource {
 	 * 
 	 * @see ex17_03.Resource#use(java.lang.Object, java.lang.Object[])
 	 */
-	@Override
 	public void use(Object key, Object... args) {
-		if (this.key.equals(key)) {
+		if (keyObject.get().equals(key)) {
 			throw new IllegalArgumentException("wrong key");
 		}
 		System.out.println("Use Resource : ");
@@ -47,7 +48,6 @@ public class ResourceImpl implements Resource {
 	 * 
 	 * @see ex17_03.Resource#release()
 	 */
-	@Override
 	public synchronized void release() {
 		if (needsRelease) {
 			needsRelease = false;

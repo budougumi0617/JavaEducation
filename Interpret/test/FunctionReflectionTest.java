@@ -201,7 +201,7 @@ public class FunctionReflectionTest {
 	public void testMakeArrayNewInstance() {
 		Object[] resultObject = null;
 		int dim = 4;
-		resultObject = targetClass.makeArrayNewInstance(int.class, dim);
+		resultObject = (Object[])targetClass.makeArrayNewInstance(Integer.class, dim);
 		assertNotNull(resultObject);
 		assertEquals(resultObject.length, dim);
 		Object[][] resultDouble = null;
@@ -253,17 +253,22 @@ public class FunctionReflectionTest {
 	public <T> void testGetConstructorParamType(){
 		Constructor<T> inputConstructor = null;
 		try {
-			inputConstructor = (Constructor<T>) Double.class.getDeclaredConstructor(Double.class);
+			inputConstructor = (Constructor<T>) Double.class.getConstructor(String.class);
 
 		} catch (SecurityException e) {
 			e.printStackTrace();
+<<<<<<< HEAD
 			fail();
 		} catch (NoSuchMethodException e) {
+=======
+		} catch (NoSuchMethodException e) {
+			
+>>>>>>> d3597e75833a8bea8c2c6e92df254918bf4821ae
 			e.printStackTrace();
 			fail();
 		}
 		Type[] result = targetClass.getConstructorParamType(inputConstructor);
-		assertEquals(Double.class.toString(), result[0].toString());
+		assertEquals(String.class.toString(), result[0].toString());
 	}
 
 }

@@ -129,14 +129,14 @@ public class FunctionReflectionTest {
 	public void testSetField() {
 		String targetObjString = new String("testSetField");
 		try {
-			targetClass.setField(targetObjString, "hash", 1);
+			targetClass.setField(targetObjString, "hash", "1");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			fail();
 		}
 		assertThat(targetObjString.hashCode(), is(1));
 		try {
-			targetClass.setField(targetObjString, "count", 10);
+			targetClass.setField(targetObjString, "count", "10");
 		} catch (Throwable e) {
 			e.printStackTrace();
 			fail();
@@ -256,11 +256,11 @@ public class FunctionReflectionTest {
 			inputConstructor = (Constructor<T>) Double.class.getDeclaredConstructor(Double.class);
 
 		} catch (SecurityException e) {
-			fail();
 			e.printStackTrace();
+			fail();
 		} catch (NoSuchMethodException e) {
-			fail();
 			e.printStackTrace();
+			fail();
 		}
 		Type[] result = targetClass.getConstructorParamType(inputConstructor);
 		assertEquals(Double.class.toString(), result[0].toString());

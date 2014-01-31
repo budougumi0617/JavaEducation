@@ -30,7 +30,6 @@ public class ResourceImpl implements Resource {
 	 * 
 	 * @see ex17_03.Resource#use(java.lang.Object, java.lang.Object[])
 	 */
-	@Override
 	public void use(Object key, Object... args) {
 		if (this.key.equals(key)) {
 			throw new IllegalArgumentException("wrong key");
@@ -47,7 +46,6 @@ public class ResourceImpl implements Resource {
 	 * 
 	 * @see ex17_03.Resource#release()
 	 */
-	@Override
 	public synchronized void release() {
 		if (needsRelease) {
 			needsRelease = false;

@@ -256,10 +256,14 @@ public class FunctionReflectionTest {
 			inputConstructor = (Constructor<T>) Double.class.getConstructor(String.class);
 
 		} catch (SecurityException e) {
-			fail();
 			e.printStackTrace();
+<<<<<<< HEAD
+			fail();
+		} catch (NoSuchMethodException e) {
+=======
 		} catch (NoSuchMethodException e) {
 			
+>>>>>>> d3597e75833a8bea8c2c6e92df254918bf4821ae
 			e.printStackTrace();
 			fail();
 		}

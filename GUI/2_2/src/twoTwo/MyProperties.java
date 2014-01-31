@@ -130,6 +130,7 @@ class ComboLabel{
 	  }
 	}
 
+@SuppressWarnings("serial")
 class MyCellRenderer extends JLabel implements ListCellRenderer {
 	  public Component getListCellRendererComponent(
 	            JList list,

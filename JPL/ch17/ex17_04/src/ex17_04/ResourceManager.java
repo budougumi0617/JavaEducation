@@ -57,7 +57,7 @@ public final class ResourceManager {
 
 		public void run() {
 			// ReferenceQueueに参照可能なオブジェクトがなくなるまで続行
-			while (true) {
+			while (!(shutdown && refs.isEmpty())) {
 				try {
 					Reference<?> ref = queue.remove(); // リファレンスがなくなるまで続け
 					Resource res = null;
@@ -71,10 +71,11 @@ public final class ResourceManager {
 					// 割り込まれても終了はしない。
 					System.out.println("ResourceManager is shutdown.");
 				}
+				/*
 				// ReferenceQueueに参照可能なオブジェクトがあるか確認
 				if (queue.poll() == null) {
 					break;
-				}
+				}*/
 			}
 		}
 

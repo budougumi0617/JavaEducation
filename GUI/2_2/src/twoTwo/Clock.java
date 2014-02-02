@@ -181,7 +181,6 @@ public class Clock extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Prop"){
-			dialog.setSize(400 , 600);
 			dialog.setVisible(true);
 		}
 
@@ -189,19 +188,5 @@ public class Clock extends JFrame implements ActionListener {
 }
 
 
-class FillIcon implements Icon {
-	int width , height;
-	Color color = Color.BLACK;
-	public FillIcon(Color color , int width , int height) {
-		this.color = color;
-		this.width = width;
-		this.height = height;
-	}
-	public int getIconWidth() { return width; }
-	public int getIconHeight() { return height; }
-	public void paintIcon(Component c , Graphics g , int x , int y) {
-		g.setColor(color);
-		g.fillRect(x , y , width , height);
-	}
-}
+
 

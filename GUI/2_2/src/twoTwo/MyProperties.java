@@ -2,13 +2,12 @@ package twoTwo;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -17,132 +16,111 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-class MyProperties extends JDialog {
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 4152986896575750289L;
+public class MyProperties extends JDialog{
+	JComboBox cbBackColor;
+	JComboBox cbFontType;
+	JComboBox cbFontColor;
+	JComboBox cbFontSize;
+	Color myColor;
 	public Clock owner;
-	JButton okBtn = new JButton("OK");
-	JComboBox fontColor;
-	JComboBox backColor;
-	JComboBox fontSize = new JComboBox();
-	JComboBox fontType = new JComboBox();
-	JButton ngBtn = new JButton("NG");
-	FillIcon black = new FillIcon(Color.BLACK, 20, 20);
-	FillIcon white = new FillIcon(Color.WHITE, 20, 20);
-	FillIcon blue = new FillIcon(Color.BLUE, 20, 20);
+	private ActionListener actionListener;
 	MyCellRenderer fontRenderer = new MyCellRenderer();
 	MyCellRenderer backRenderer = new MyCellRenderer();
-	DefaultComboBoxModel fontModel = new DefaultComboBoxModel();
-	DefaultComboBoxModel backModel = new DefaultComboBoxModel();
-	GridBagLayout gbl = new GridBagLayout();
-	private ActionListener actionListener;
-
-	public MyProperties(Clock owner) {
+	DefaultComboBoxModel fontColorModel = new DefaultComboBoxModel();
+	DefaultComboBoxModel backColorModel = new DefaultComboBoxModel();
+	FillIcon blackIcon = new FillIcon(Color.BLACK, 20, 20);
+	FillIcon whiteIcon = new FillIcon(Color.WHITE, 20, 20);
+	FillIcon blueIcon = new FillIcon(Color.BLUE, 20, 20);
+	
+	public MyProperties(Clock clock) {
+		owner = clock;
 		
-		super(owner, "properties", false);
-		this.owner = owner;
 		actionListener = new MyActionListener(this);
-		this.setLayout(new GridLayout(0, 2));
+		setTitle("Properties");
+		//setMinimumSize(new Dimension(200, 280));
+		setBounds(100, 100, 278, 321);
+		myColor = new Color(241, 160, 241);
+		setBackground(myColor);
+		getContentPane().setBackground(myColor);
+		getContentPane().setLayout(null);
+		getContentPane().setBounds(0, 0, 280, 320);
 		
-		okBtn.addActionListener(actionListener);
-		ngBtn.addActionListener(actionListener);
-		fontSize.addActionListener(actionListener);
-		fontSize.setActionCommand("fontSize");
-		fontType.addActionListener(actionListener);
-		fontType.setActionCommand("fontType");
-		fontModel.addElement(new ComboLabel("black", black));
-		fontModel.addElement(new ComboLabel("White", white));
-		fontModel.addElement(new ComboLabel("Blue", blue));
-		backModel.addElement(new ComboLabel("black", black));
-		backModel.addElement(new ComboLabel("White", white));
-		backModel.addElement(new ComboLabel("Blue", blue));
-		this.add(new JLabel("FontType", JLabel.CENTER));
-		// this.addComp(new JLabel("FontType", JLabel.CENTER), 0, 0, 1, 1);
-		fontType.addItem("Serif");
-		fontType.addItem("SansSerif");
-		this.add(fontType);
-		// this.addComp(fontType, 1, 0, 1, 1);
-		this.add(new JLabel("FontSize", JLabel.CENTER));
-		// this.addComp(new JLabel("FontSize", JLabel.CENTER), 0, 1, 1, 1);
-		fontSize.addItem("Small");
-		fontSize.addItem("Middle");
-		fontSize.addItem("Large");
-		// this.addComp(fontSize, 1, 1, 1, 1);
-		this.add(fontSize);
-		this.add(new JLabel("FontColor", JLabel.CENTER));
-		// this.addComp(new JLabel("FontColor", JLabel.CENTER), 0, 2, 1, 1);
-		fontColor = new JComboBox(fontModel);
-		fontColor.addActionListener(actionListener);
-		fontColor.setActionCommand("fontColor");
-		fontColor.setRenderer(fontRenderer);
-		this.add(fontColor);
-
-		fontColor.setSelectedIndex(1);
-		// this.addComp(fontColor, 1, 2, 1, 1);
-		this.add(new JLabel("BackColor", JLabel.CENTER));
-		// this.addComp(new JLabel("BackColor", JLabel.CENTER), 0, 3, 1, 1);
-		backColor = new JComboBox(backModel);
-		backColor.addActionListener(actionListener);
-		backColor.setActionCommand("backColor");
-		backColor.setRenderer(backRenderer);
-		this.add(backColor);
-		// this.addComp(backColor, 1, 3, 1, 1);
-		this.add(okBtn);
-		this.add(ngBtn);
-		okBtn.setSize(20, 40);
-		// this.addComp(okBtn, 0, 4, 2, 2);
-		// this.addComp(ngBtn, 0, 1, 0, 2);
+		
+		
+		fontColorModel.addElement(new ComboLabel("black", blackIcon));
+		fontColorModel.addElement(new ComboLabel("White", whiteIcon));
+		fontColorModel.addElement(new ComboLabel("Blue", blueIcon));
+		backColorModel.addElement(new ComboLabel("black", blackIcon));
+		backColorModel.addElement(new ComboLabel("White", whiteIcon));
+		backColorModel.addElement(new ComboLabel("Blue", blueIcon));
+		
+		
+		
+		
+		JLabel lblFontType = new JLabel("FontType");
+		lblFontType.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 14));
+		lblFontType.setBounds(33, 14, 84, 29);
+		getContentPane().add(lblFontType);
+		
+		
+		
+		JLabel lblFontSize = new JLabel("FontSize");
+		lblFontSize.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 14));
+		lblFontSize.setBounds(31, 81, 84, 34);
+		getContentPane().add(lblFontSize);
+		
+		JLabel lblFontColor = new JLabel("FontColor");
+		lblFontColor.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 14));
+		lblFontColor.setBounds(31, 141, 86, 34);
+		
+		getContentPane().add(lblFontColor);
+		
+		JLabel lblBackColor = new JLabel("BackColor");
+		lblBackColor.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 14));
+		lblBackColor.setBounds(29, 209, 86, 38);
+		getContentPane().add(lblBackColor);
+		
+		cbFontType = new JComboBox();
+		cbFontType.setBounds(129, 10, 143, 36);
+		getContentPane().add(cbFontType);
+		cbFontType.addItem("Serif");
+		cbFontType.addItem("SansSerif");
+		cbFontType.addActionListener(actionListener);
+		cbFontType.setActionCommand("fontType");
+		
+		cbFontSize = new JComboBox();
+		cbFontSize.setBounds(129, 80, 143, 36);
+		getContentPane().add(cbFontSize);
+		cbFontSize.addItem("Small");
+		cbFontSize.addItem("Middle");
+		cbFontSize.addItem("Large");
+		cbFontSize.addActionListener(actionListener);
+		cbFontSize.setActionCommand("fontSize");
+		cbFontColor = new JComboBox(fontColorModel);
+		cbFontColor.setBounds(129, 141, 143, 36);
+		
+		getContentPane().add(cbFontColor);
+		cbFontColor.addActionListener(actionListener);
+		cbFontColor.setActionCommand("fontColor");
+		cbFontColor.setRenderer(fontRenderer);
+		
+		
+		
+		
+		cbBackColor = new JComboBox(backColorModel);
+		cbBackColor.setBounds(129, 211, 143, 36);
+		cbBackColor.addActionListener(actionListener);
+		cbBackColor.setActionCommand("backColor");
+		cbBackColor.setRenderer(backRenderer);
+		getContentPane().add(cbBackColor);
+		
+		JButton btnOk = new JButton("OK");
+		btnOk.setBackground(new Color(221, 160, 221));
+		btnOk.setFont(new Font("ゆたぽん（コーディング）Backsl", Font.PLAIN, 14));
+		btnOk.setBounds(78, 257, 105, 36);
+		btnOk.addActionListener(actionListener);
+		getContentPane().add(btnOk);
 	}
-
-	void addComp(JComponent b, int x, int y, int w, int h) {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridx = x;
-		gbc.gridy = y;
-		gbc.gridwidth = w;
-		gbc.gridheight = h;
-		gbl.setConstraints((Component) b, gbc);
-		add((Component) b);
-	}
-
-
-
-
 
 }
-class ComboLabel{
-	  String text;
-	  FillIcon icon;
 
-	  ComboLabel(String text, FillIcon icon){
-	    this.text = text;
-	    this.icon = icon;
-	  }
-
-	  public String getText(){
-	    return text;
-	  }
-
-	  public Icon getIcon(){
-	    return icon;
-	  }
-	}
-
-@SuppressWarnings("serial")
-class MyCellRenderer extends JLabel implements ListCellRenderer {
-	  public Component getListCellRendererComponent(
-	            JList list,
-	            Object value,
-	            int index,
-	            boolean isSelected,
-	            boolean cellHasFocus){
-
-	      ComboLabel data = (ComboLabel)value;
-	      setText(data.getText());
-	      setIcon(data.getIcon());
-
-	    return this;
-	  }
-	}

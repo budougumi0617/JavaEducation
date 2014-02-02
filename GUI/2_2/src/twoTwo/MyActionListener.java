@@ -41,10 +41,10 @@ public class MyActionListener implements ActionListener {
 		} else if (cmd.equals("NG")) {
 			myProperties.setVisible(false);
 		} else if (cmd.equals("fontType")) {
-			if (myProperties.fontType.getSelectedIndex() == 0) {
+			if (myProperties.cbFontType.getSelectedIndex() == 0) {
 				myProperties.owner.setFontName(Font.SERIF);
 			}
-			if (myProperties.fontType.getSelectedIndex() == 1) {
+			if (myProperties.cbFontType.getSelectedIndex() == 1) {
 				myProperties.owner.setFontName(Font.SANS_SERIF);
 				System.out.println("font = SANS");
 			}
@@ -53,11 +53,11 @@ public class MyActionListener implements ActionListener {
 					myProperties.owner.getFontSize());
 		}
 		if (cmd.equals("fontSize")) {
-			if (myProperties.fontSize.getSelectedIndex() == 0)
+			if (myProperties.cbFontSize.getSelectedIndex() == 0)
 				myProperties.owner.setFontSize(50);
-			if (myProperties.fontSize.getSelectedIndex() == 1)
+			if (myProperties.cbFontSize.getSelectedIndex() == 1)
 				myProperties.owner.setFontSize(100);
-			if (myProperties.fontSize.getSelectedIndex() == 2) {
+			if (myProperties.cbFontSize.getSelectedIndex() == 2) {
 				myProperties.owner.setFontSize(150);
 				System.out.println("fontSize = 150");
 			}
@@ -66,10 +66,10 @@ public class MyActionListener implements ActionListener {
 					myProperties.owner.getFontSize());
 		}
 		if (cmd.equals("fontColor")) {
-			changeFontColor(myProperties.fontColor);
+			changeFontColor(myProperties.cbFontColor);
 		}
 		if (cmd.equals("backColor")) {
-			changeBackground(myProperties.backColor);
+			changeBackground(myProperties.cbBackColor);
 		}
 	}
 

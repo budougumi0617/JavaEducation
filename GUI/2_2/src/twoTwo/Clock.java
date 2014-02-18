@@ -175,6 +175,10 @@ public class Clock extends JFrame implements ActionListener {
 			return Color.white;
 		else if (obj.equals("BLUE"))
 			return Color.blue;
+		else if (obj.equals("RED"))
+			return Color.red;
+		else if (obj.equals("YELLOW"))
+			return Color.yellow;
 		else
 			return Color.white;
 	}

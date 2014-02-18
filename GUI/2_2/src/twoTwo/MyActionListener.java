@@ -82,20 +82,27 @@ public class MyActionListener implements ActionListener {
 			System.out.println("owner.fontcolor = "
 					+ myProperties.owner.getFontColor());
 		}
-		if (obj.getSelectedIndex() == 2)
+		if (obj.getSelectedIndex() == 2){
 			myProperties.owner.setFontColor("BLUE");
+		}else if (obj.getSelectedIndex() == 3)
+			myProperties.owner.setFontColor("RED");
+		else if (obj.getSelectedIndex() == 4)
+			myProperties.owner.setFontColor("YELLOW");
 	}
 
 	void changeBackground(JComboBox obj) {
 		if (obj.getSelectedIndex() == 0)
 			myProperties.owner.setBackColor("BLACK");
-		if (obj.getSelectedIndex() == 1)
+		else if (obj.getSelectedIndex() == 1)
 			myProperties.owner.setBackColor("WHITE");
-		if (obj.getSelectedIndex() == 2) {
+		else if (obj.getSelectedIndex() == 2) {
 			myProperties.owner.setBackColor("BLUE");
 			System.out.println("backcolor = blue");
 			System.out.println("owner.backcolor = "
 					+ myProperties.owner.getBackColor());
-		}
+		}else if (obj.getSelectedIndex() == 3)
+			myProperties.owner.setBackColor("RED");
+		else if (obj.getSelectedIndex() == 4)
+			myProperties.owner.setBackColor("YELLOW");
 	}
 }

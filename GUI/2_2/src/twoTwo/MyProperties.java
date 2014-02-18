@@ -31,6 +31,8 @@ public class MyProperties extends JDialog{
 	FillIcon blackIcon = new FillIcon(Color.BLACK, 20, 20);
 	FillIcon whiteIcon = new FillIcon(Color.WHITE, 20, 20);
 	FillIcon blueIcon = new FillIcon(Color.BLUE, 20, 20);
+	FillIcon redIcon = new FillIcon(Color.RED, 20, 20);
+	FillIcon yellowIcon = new FillIcon(Color.YELLOW, 20, 20);
 	
 	public MyProperties(Clock clock) {
 		owner = clock;
@@ -50,9 +52,14 @@ public class MyProperties extends JDialog{
 		fontColorModel.addElement(new ComboLabel("black", blackIcon));
 		fontColorModel.addElement(new ComboLabel("White", whiteIcon));
 		fontColorModel.addElement(new ComboLabel("Blue", blueIcon));
+		fontColorModel.addElement(new ComboLabel("Red", redIcon));
+		fontColorModel.addElement(new ComboLabel("Yellow", yellowIcon));
+		
 		backColorModel.addElement(new ComboLabel("black", blackIcon));
 		backColorModel.addElement(new ComboLabel("White", whiteIcon));
 		backColorModel.addElement(new ComboLabel("Blue", blueIcon));
+		backColorModel.addElement(new ComboLabel("Red", redIcon));
+		backColorModel.addElement(new ComboLabel("Yellow", yellowIcon));
 		
 		
 		

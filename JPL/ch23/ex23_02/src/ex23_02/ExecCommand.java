@@ -18,39 +18,45 @@ import java.util.List;
 
 /**
  * @author budougumi0617
- * @note コマンドラインの引数に対して、execを実行して、コマンドから出力を表示する
- *       プログラムを作成しなさい。各出力行の前には行番号を表示しなさい。
+ * @note コマンドラインの引数に対して、execを実行して、コマンドから出力を表示する プログラムを作成しなさい。各出力行の前には行番号を表示しなさい。
  *       出力中に特定の文字列が現れたらそのコマンドを終了させるようにしなさい。
  */
 public class ExecCommand {
 	String[] execCommand(String cmd) {
-		cmd = "dir";
+		List<String> lines = new ArrayList<String>();
 		try {
-			String[] cmdArray = { cmd, "", "./" };
+			String[] cmdArray = { cmd, "", "" };
 			Process child = Runtime.getRuntime().exec(cmdArray);
 			InputStream cmdOut = child.getInputStream();
 			InputStreamReader r = new InputStreamReader(cmdOut);
 			BufferedReader in = new BufferedReader(r);
 
-			List<String> lines = new ArrayList<String>();
 			String line;
 			int count = 0;
 			while ((line = in.readLine()) != null) {
-				lines.add(count + ":" + line);
+				lines.add(count + " : " + line);
+				count++;
 			}
 			if (child.waitFor() != 0) {
 				throw new IOException("command faild");
 			}
-			count++;
+			return lines.toArray(new String[0]);
+		} catch (InterruptedException e) {
+			
+			System.out.println(e.toString());
 			return lines.toArray(new String[0]);
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
 		ExecCommand ec = new ExecCommand();
-		System.out.println(ec.execCommand("test"));
+		String[] result = ec.execCommand("ipconfig");
+		System.out.println("Command Result");
+		for (String line : result) {
+			System.out.println(line);
+		}
 	}
 }

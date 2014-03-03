@@ -13,12 +13,9 @@ import java.util.ArrayList;
 
 /**
  * @author budougumi0617
- * 
- * @note スタッククラスはArrayListを内部で保持するべき
- *       理由：ArrayListクラスのサブクラスとした場合
- *       、利用を想定していないメソッドを 実行されてしまう可能性がある。
- *       内部でArrayListクラスを保持することで
- *       、外部からArrayListのメソッドが呼ばれることをふせぐ。
+ * @note ArrayListを使用してスタックを実装しなさい。スタック固有の異なるメソッドを提供するために
+ * @note スタッククラスはArrayListを内部で保持するべき 理由：ArrayListクラスのサブクラスとした場合 、利用を想定していないメソッドを
+ *       実行されてしまう可能性がある。 内部でArrayListクラスを保持することで 、外部からArrayListのメソッドが呼ばれることをふせぐ。
  * 
  */
 public class Stack<E> {

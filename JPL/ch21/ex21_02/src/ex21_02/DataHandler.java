@@ -22,6 +22,9 @@ import java.util.WeakHashMap;
  *       WeeakHashMapを使用して返されたデータを保持するようにしなさい。
  */
 public class DataHandler {
+	/**
+	 * keyはFILEではなくてLastDataのほう！
+	 */
 	private WeakHashMap<File, byte[]> lastFileData;
 
 	byte[] readFile(File file) {

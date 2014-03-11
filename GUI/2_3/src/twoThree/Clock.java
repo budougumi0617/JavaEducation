@@ -6,6 +6,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +22,19 @@ import javax.swing.JPopupMenu;
 import javax.swing.JWindow;
 import javax.swing.event.MouseInputListener;
 
-public class Clock extends JWindow implements ActionListener,
-		MouseInputListener {
+/**
+ * 
+ * @author budougumi0617
+ * @note 
+ *       JFrameではなくJWindowクラスを使用して、フレーム枠のないデジタル時計にする
+ *       。
+ *       課題2-2のダイアログ指定できた属性は、マウスの右クリックでポップアップメニューを表示
+ *       して、カスケード形式で選択出来るようにする(ダイアログは開かない)。
+ *       時計内をマウスの左ボタンでクリックしたまま
+ *       、デスクトップ上でウインドウを移動させることができるようにする。
+ */
+public class Clock extends JWindow implements MouseInputListener,
+		ActionListener {
 	private static final long serialVersionUID = 1L;
 	static String h; // 時を入れる変数を宣言
 	static String m; // 分を入れる変数を宣言
@@ -66,6 +79,7 @@ public class Clock extends JWindow implements ActionListener,
 
 		public MainPanel(Clock owner) {
 			this.owner = owner;
+
 		}
 
 		public void paintComponent(Graphics g) {
@@ -76,9 +90,11 @@ public class Clock extends JWindow implements ActionListener,
 			this.setForeground(fontColor);
 			this.setFont(fontType);
 			owner.setFont(fontType);
-			// System.out.println("__LINE__" + "fontSize = " +
+			// System.out.println("__LINE__" +
+			// "fontSize = " +
 			// owner.getFontSize());
-			// System.out.println("paintcomp" + "fontType = "+
+			// System.out.println("paintcomp" +
+			// "fontType = "+
 			// owner.getFontName());
 			g.drawString(h + ":" + m + ":" + s, (int) (strWidth * 0.05),
 					(int) (strHeight * 0.5));
@@ -98,11 +114,12 @@ public class Clock extends JWindow implements ActionListener,
 				if (strHeight < 200)
 					strHeight = 200;
 				mainClock.setSize(strWidth - 8, strHeight);
-				// System.out.println("Height = " + (int)(strHeight));
+				// System.out.println("Height = "
+				// + (int)(strHeight));
 				owner.setSize(strWidth - 8, strHeight);
 				repaint();
 				try {
-					Thread.sleep(200); // スリープ1秒
+					Thread.sleep(500); // スリープ1秒
 				} catch (InterruptedException e) {
 				}
 			}
@@ -114,17 +131,17 @@ public class Clock extends JWindow implements ActionListener,
 
 	// JPanel mainClock;
 
-	Clock(String title) {
-		this.setName(title);
+	Clock(GraphicsConfiguration gc) {
+		super(gc);
 		mainClock = new MainPanel(this);
-		this.setSize(strWidth, strHeight);
 		this.setSize(strWidth, strHeight);
 		this.setLayout(new BorderLayout());
 		this.add(mainClock, BorderLayout.CENTER);
 		this.fontType = new Font(this.fontName, Font.PLAIN, this.fontSize);
 		this.prpMenu = createPropMenu(mainClock);
-		this.addMouseListener(this);
-		this.addMouseMotionListener(this);
+		addMouseListener(this);
+		addMouseMotionListener(this);
+
 	}
 
 	boolean a = true;
@@ -132,9 +149,12 @@ public class Clock extends JWindow implements ActionListener,
 	public static void main(String args[]) {
 
 		// フレーム作成
-		Clock clock = new Clock("Shimizu's Clock");
+		Clock clock = new Clock(GraphicsEnvironment
+				.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+				.getDefaultConfiguration());
 		Thread th = new Thread(clock.mainClock);
-		// clock.setSize(clock.strWidth, clock.strHeight);
+		// clock.setSize(clock.strWidth,
+		// clock.strHeight);
 
 		clock.setVisible(true);
 		clock.setFontColor("WHITE");
@@ -178,6 +198,7 @@ public class Clock extends JWindow implements ActionListener,
 		// [Color]-[White]
 		JMenuItem colorBlack = new JMenuItem("Black");
 		colorMenu.add(colorBlack);
+		colorMenu.add(new JMenuItem("Red"));
 		// [BackColor]
 		JMenu backColorMenu = new JMenu("BackColor");
 		propMenu.add(backColorMenu);
@@ -239,6 +260,7 @@ public class Clock extends JWindow implements ActionListener,
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("getActionCommand() " + e.getActionCommand());
 		if (e.getActionCommand() == "exit") {
 			System.exit(0);
 		}
@@ -259,7 +281,7 @@ public class Clock extends JWindow implements ActionListener,
 		if (e.getActionCommand() == "BackWhite")
 			setBackColor("WHITE");
 		fontType = new Font(getFontName(), Font.PLAIN, getFontSize());
-
+	
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -268,8 +290,16 @@ public class Clock extends JWindow implements ActionListener,
 		}
 	}
 
+	private int newClockX = 0;
+	private int newClockY = 0;
+	private int oldClockX = 0;
+	private int oldClockY = 0;
+	String info = "";// デバッグ用の文字列
+
 	public void mousePressed(MouseEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
+		Point foo = e.getLocationOnScreen();
+		newClockX = foo.x;
+		newClockY = foo.y;
 
 	}
 
@@ -288,35 +318,42 @@ public class Clock extends JWindow implements ActionListener,
 
 	}
 
-	private int newClockX = 0;
-	private int newClockY = 0;
-	private int oldClockX = 0;
-	private int oldClockY = 0;
-	String info = "";// デバッグ用の文字列
-
 	public void mouseDragged(MouseEvent e) {
 		// 時計がマウスに合わせて動く処理
-		if (this.equals(e.getSource())) {
-			e.consume();
-			Point foo = e.getPoint();
-			oldClockX = newClockX;
-			oldClockY = newClockY;
-			newClockX = foo.x;// - x;
-			newClockY = foo.y;// - y;
-			System.out.println("Dragged: clockX = " + newClockX + " clockY = "
-					+ newClockY);
-			// System.out.println("Dragged: X = " + x + " Y = " + y);
 
-			this.mainClock.x += (newClockX - oldClockX);
-			this.mainClock.y += (newClockY - oldClockY);
-			info = "(" + this.mainClock.x + ":" + this.mainClock.y + ")";
-			this.setLocation(this.mainClock.x, this.mainClock.y);
-			System.out.println(info);
-		}
+		Point foo = e.getLocationOnScreen();
+		oldClockX = newClockX;
+		oldClockY = newClockY;
+		newClockX = foo.x;// - x;
+		newClockY = foo.y;// - y;
+		System.out.println("Dragged: clockX = " + newClockX + " clockY = "
+				+ newClockY);
+		System.out.println("Dragged: oldX = " + oldClockX + " oldY = "
+				+ oldClockY);
+
+		Point oldPoint = this.getLocationOnScreen();
+		this.mainClock.x = oldPoint.x + (newClockX - oldClockX);
+		this.mainClock.y = oldPoint.y + (newClockY - oldClockY);
+		info = "(" + this.mainClock.x + ":" + this.mainClock.y + ")";
+
+		this.setLocation(this.mainClock.x, this.mainClock.y);
+
+		System.out.println(info);
+
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		// TODO 自動生成されたメソッド・スタブ
+		/*
+		 * Point nowPoint = e.getPoint();
+		 * oldClockX = newClockX; oldClockY =
+		 * newClockY; newClockX = nowPoint.x;
+		 * newClockY = nowPoint.y;
+		 * this.mainClock.x += (newClockX -
+		 * oldClockX); this.mainClock.y +=
+		 * (newClockY - oldClockY);
+		 */
+		// this.setLocation(this.mainClock.x,
+		// this.mainClock.y);
 
 	}
 }

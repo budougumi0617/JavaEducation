@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
@@ -44,8 +43,9 @@ public class Concat {
 				bufIn = new BufferedInputStream(fileIn);
 				inputs.add(bufIn);
 			}
+			//ファイル名をもらったら上のnew FileInputStream()をするようなInputFileEnumerationを実装する。
 			Enumeration<InputStream> files = Collections.enumeration(inputs);
-			in = new SequenceInputStream(files);
+			in = new SequenceInputStream(files);//このままでよい？
 		}
 		int ch;
 		while ((ch = in.read()) != -1) {

@@ -91,6 +91,14 @@ public class CSVEditClass {
 		try {
 			fr = new FileReader(file);
 			list = CSVEditClass.readCSVFile(fr, 5);
+			for(String[] s : list){
+				for(int i = 0; i < s.length; i++){
+					System.out.print(s[i] + ", ");
+				}
+				System.out.println();
+			}
+			fr = new FileReader(file);
+			list = CSVEditClass.readCSVFile(fr, 4);
 		} catch (FileNotFoundException e1) {
 			// TODO 自動生成された catch ブロック
 			e1.printStackTrace();
@@ -98,12 +106,8 @@ public class CSVEditClass {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		for(String[] s : list){
-			for(int i = 0; i < s.length; i++){
-				System.out.print(s[i] + ", ");
-			}
-			System.out.println();
-		}
+		
+		
 	}
 	public static void createFile(String fileName) {
 		try {

@@ -10,7 +10,7 @@ public class GlobalRes_ja extends GlobalRes{
 	}
 	
 	private static final Object[][] contents =  {
-		{GlobalRes.HELLO, "おはよう"},
+		{GlobalRes.HELLO, "おはよう in ja.java"},
 		{GlobalRes.GOODBYE, "さようなら"},
 	};
 }

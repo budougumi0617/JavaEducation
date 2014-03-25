@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @author budougumi0617
- * @note コマンドラインの引数に対して、execを実行して、コマンドから出力を表示する プログラムを作成しなさい。各出力行の前には行番号を表示しなさい。
+ * @note コマンドラインの引数に対して、execを実行して、コマンドから出力を表示する プログラムを作成しなさい。
  *       出力中に特定の文字列が現れたらそのコマンドを終了させるようにしなさい。
  */
 public class ExecCommand {
@@ -33,10 +33,9 @@ public class ExecCommand {
 			BufferedReader in = new BufferedReader(r);
 
 			String line;
-			int count = 0;
+
 			while ((line = in.readLine()) != null) {
-				lines.add(count + " : " + line);
-				count++;
+				lines.add(line);
 				if (line.indexOf(endCondition) != -1) {
 					child.destroy();
 					throw new InterruptedException("Command Finish");
@@ -58,7 +57,7 @@ public class ExecCommand {
 
 	public static void main(String[] args) {
 		ExecCommand ec = new ExecCommand();
-		String[] result = ec.execCommand("ipconfig", "Windows");
+		String[] result = ec.execCommand("ipconfig", "DNS");
 		System.out.println("Command Result");
 		for (String line : result) {
 			System.out.println(line);

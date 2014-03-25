@@ -2,7 +2,6 @@ package twoThree;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
-import javax.swing.Icon;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -25,12 +23,9 @@ import javax.swing.event.MouseInputListener;
 /**
  * 
  * @author budougumi0617
- * @note 
- *       JFrameではなくJWindowクラスを使用して、フレーム枠のないデジタル時計にする
- *       。
+ * @note JFrameではなくJWindowクラスを使用して、フレーム枠のないデジタル時計にする 。
  *       課題2-2のダイアログ指定できた属性は、マウスの右クリックでポップアップメニューを表示
- *       して、カスケード形式で選択出来るようにする(ダイアログは開かない)。
- *       時計内をマウスの左ボタンでクリックしたまま
+ *       して、カスケード形式で選択出来るようにする(ダイアログは開かない)。 時計内をマウスの左ボタンでクリックしたまま
  *       、デスクトップ上でウインドウを移動させることができるようにする。
  */
 public class Clock extends JWindow implements MouseInputListener,
@@ -98,6 +93,7 @@ public class Clock extends JWindow implements MouseInputListener,
 			// owner.getFontName());
 			g.drawString(h + ":" + m + ":" + s, (int) (strWidth * 0.05),
 					(int) (strHeight * 0.5));
+
 
 		}
 
@@ -179,6 +175,12 @@ public class Clock extends JWindow implements MouseInputListener,
 		// [Font]-[SansSerif]
 		JMenuItem fontSansSerif = new JMenuItem("SansSerif");
 		fontMenu.add(fontSansSerif);
+		JMenuItem fontDialog = new JMenuItem("Dialog");
+		fontMenu.add(fontDialog);
+		JMenuItem fontDialogInput = new JMenuItem("Dialog_input");
+		fontMenu.add(fontDialogInput);
+		JMenuItem fontMonospaced = new JMenuItem("Monospaced");
+		fontMenu.add(fontMonospaced);
 		// [FontSize]
 		JMenu sizeMenu = new JMenu("FontSize");
 		sizeMenu.addActionListener(this);
@@ -198,7 +200,14 @@ public class Clock extends JWindow implements MouseInputListener,
 		// [Color]-[White]
 		JMenuItem colorBlack = new JMenuItem("Black");
 		colorMenu.add(colorBlack);
-		colorMenu.add(new JMenuItem("Red"));
+		JMenuItem colorRed = new JMenuItem("Red");
+		colorMenu.add(colorRed);
+		JMenuItem colorBlue = new JMenuItem("Blue");
+		colorMenu.add(colorBlue);
+		JMenuItem colorYellow = new JMenuItem("Yellow");
+		colorMenu.add(colorYellow);
+		JMenuItem colorPink = new JMenuItem("Pink");
+		colorMenu.add(colorPink);
 		// [BackColor]
 		JMenu backColorMenu = new JMenu("BackColor");
 		propMenu.add(backColorMenu);
@@ -208,6 +217,14 @@ public class Clock extends JWindow implements MouseInputListener,
 		// [BackColor]-[White]
 		JMenuItem backColorBlack = new JMenuItem("Black");
 		backColorMenu.add(backColorBlack);
+		JMenuItem backColorRed = new JMenuItem("Red");
+		backColorMenu.add(backColorRed);
+		JMenuItem backColorBlue = new JMenuItem("Blue");
+		backColorMenu.add(backColorBlue);
+		JMenuItem backColorYellow = new JMenuItem("Yellow");
+		backColorMenu.add(backColorYellow);
+		JMenuItem backColorPink = new JMenuItem("Pink");
+		backColorMenu.add(backColorPink);
 		propMenu.addSeparator();
 		// [exit]
 		JMenuItem closeClock = new JMenuItem("exit");
@@ -215,14 +232,30 @@ public class Clock extends JWindow implements MouseInputListener,
 
 		fontSerif.addActionListener(this);
 		fontSansSerif.addActionListener(this);
+		fontDialog.addActionListener(this);
+		fontDialogInput.addActionListener(this);
+		fontMonospaced.addActionListener(this);
+		
 		fontLarge.addActionListener(this);
 		fontNormal.addActionListener(this);
 		colorWhite.addActionListener(this);
 		colorBlack.addActionListener(this);
+		colorBlue.addActionListener(this);
+		colorPink.addActionListener(this);
+		colorYellow.addActionListener(this);
+		colorRed.addActionListener(this);
 		backColorWhite.addActionListener(this);
 		backColorWhite.setActionCommand("BackWhite");
 		backColorBlack.addActionListener(this);
 		backColorBlack.setActionCommand("BackBlack");
+		backColorRed.addActionListener(this);
+		backColorRed.setActionCommand("BackRed");
+		backColorBlue.addActionListener(this);
+		backColorBlue.setActionCommand("BackBlue");
+		backColorYellow.addActionListener(this);
+		backColorYellow.setActionCommand("BackYellow");
+		backColorPink.addActionListener(this);
+		backColorPink.setActionCommand("BackPink");
 		closeClock.addActionListener(this);
 
 		return propMenu;
@@ -255,6 +288,12 @@ public class Clock extends JWindow implements MouseInputListener,
 			return Color.white;
 		else if (obj.equals("BLUE"))
 			return Color.blue;
+		else if (obj.equals("PINK"))
+			return Color.pink;
+		else if (obj.equals("RED"))
+			return Color.red;
+		else if (obj.equals("YELLOW"))
+			return Color.yellow;
 		else
 			return Color.white;
 	}
@@ -268,6 +307,12 @@ public class Clock extends JWindow implements MouseInputListener,
 			setFontName(Font.SERIF);
 		if (e.getActionCommand() == "SansSerif")
 			setFontName(Font.SANS_SERIF);
+		if (e.getActionCommand() == "Dialog")
+			setFontName(Font.DIALOG);
+		if (e.getActionCommand() == "Dialog_input")
+			setFontName(Font.DIALOG_INPUT);
+		if (e.getActionCommand() == "Monospaced")
+			setFontName(Font.MONOSPACED);
 		if (e.getActionCommand() == "Large")
 			setFontSize(150);
 		if (e.getActionCommand() == "Normal")
@@ -276,12 +321,28 @@ public class Clock extends JWindow implements MouseInputListener,
 			setFontColor("BLACK");
 		if (e.getActionCommand() == "White")
 			setFontColor("WHITE");
+		if ((e.getActionCommand() == "Pink"))
+			setFontColor("PINK");
+		if ((e.getActionCommand() == "Blue"))
+			setFontColor("BLUE");
+		if ((e.getActionCommand() == "Yellow"))
+			setFontColor("YELLOW");
+		if ((e.getActionCommand() == "Red"))
+			setFontColor("RED");
 		if (e.getActionCommand() == "BackBlack")
 			setBackColor("BLACK");
 		if (e.getActionCommand() == "BackWhite")
 			setBackColor("WHITE");
+		if ((e.getActionCommand() == "BackPink"))
+			setBackColor("PINK");
+		if ((e.getActionCommand() == "BackBlue"))
+			setBackColor("BLUE");
+		if ((e.getActionCommand() == "BackYellow"))
+			setBackColor("YELLOW");
+		if ((e.getActionCommand() == "BackRed"))
+			setBackColor("RED");
 		fontType = new Font(getFontName(), Font.PLAIN, getFontSize());
-	
+
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -344,40 +405,13 @@ public class Clock extends JWindow implements MouseInputListener,
 
 	public void mouseMoved(MouseEvent e) {
 		/*
-		 * Point nowPoint = e.getPoint();
-		 * oldClockX = newClockX; oldClockY =
-		 * newClockY; newClockX = nowPoint.x;
-		 * newClockY = nowPoint.y;
-		 * this.mainClock.x += (newClockX -
-		 * oldClockX); this.mainClock.y +=
+		 * Point nowPoint = e.getPoint(); oldClockX = newClockX; oldClockY =
+		 * newClockY; newClockX = nowPoint.x; newClockY = nowPoint.y;
+		 * this.mainClock.x += (newClockX - oldClockX); this.mainClock.y +=
 		 * (newClockY - oldClockY);
 		 */
 		// this.setLocation(this.mainClock.x,
 		// this.mainClock.y);
 
-	}
-}
-
-class FillIcon implements Icon {
-	int width, height;
-	Color color = Color.BLACK;
-
-	public FillIcon(Color color, int width, int height) {
-		this.color = color;
-		this.width = width;
-		this.height = height;
-	}
-
-	public int getIconWidth() {
-		return width;
-	}
-
-	public int getIconHeight() {
-		return height;
-	}
-
-	public void paintIcon(Component c, Graphics g, int x, int y) {
-		g.setColor(color);
-		g.fillRect(x, y, width, height);
 	}
 }

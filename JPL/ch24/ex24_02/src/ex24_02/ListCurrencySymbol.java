@@ -15,7 +15,7 @@ import java.util.Locale;
 
 /**
  * @author budougumi0617
- * 
+ * @note 6つの異なるロケールと6つの異なる通過を選択して、各ロケールで各通貨に対する通貨記号を示す記号を表示しなさい。
  */
 public class ListCurrencySymbol {
 	static Locale[] locales = { Locale.JAPAN, Locale.US, Locale.UK,

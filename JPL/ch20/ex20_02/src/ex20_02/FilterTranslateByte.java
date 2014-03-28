@@ -40,6 +40,13 @@ public class FilterTranslateByte extends FilterInputStream {
 		}
 		return c;
 	}
+	/**
+	 * TODO 未実装
+	 */
+	@Override
+	public int read(byte[] b){
+		
+	}
 
 	/**
 	 * @param args
@@ -54,6 +61,7 @@ public class FilterTranslateByte extends FilterInputStream {
 		while ((b = target.read()) != -1) {
 			System.out.write(b);
 		}
+		target.close();
 	}
 
 }

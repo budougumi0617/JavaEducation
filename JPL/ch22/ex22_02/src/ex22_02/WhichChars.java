@@ -22,6 +22,7 @@ import java.util.Iterator;
  */
 public class WhichChars {
 	private HashSet<Character> used = new HashSet<Character>();
+	//ソートした結果を欲しいならば、TreeSetにする
 
 	public WhichChars(String str) {
 		for (int i = 0; i < str.length(); i++) {

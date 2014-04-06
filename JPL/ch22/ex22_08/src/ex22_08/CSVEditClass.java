@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
  * @note 現状では、readCSVFileは、それが期待する入力形式に関して、厳格すぎると同時に
  * 寛容すぎます。入力の終わりに空行があると、IOExceptionをスローしますので、厳格すぎます。
  * ４つ以上のカンマを持つ行でも例外が発生しませんので、寛容すぎます。この両方の問題を修正しなさい。
+ * @note 正規表現で終端"$"を見ていなくてダイジョブ？
  * 
  */
 public class CSVEditClass {

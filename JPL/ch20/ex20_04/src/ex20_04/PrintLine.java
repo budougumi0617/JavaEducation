@@ -33,6 +33,7 @@ public class PrintLine extends FilterReader {
 	public String readLine() throws IOException {
 
 		String ls = System.getProperty("line.separator");
+		// StringBuilder使おうね！！！
 		StringBuffer sb = new StringBuffer();
 
 		while (!sb.toString().endsWith(ls)) {

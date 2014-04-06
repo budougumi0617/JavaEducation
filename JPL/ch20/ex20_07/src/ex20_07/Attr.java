@@ -9,6 +9,13 @@
  */
 package ex20_07;
 
+
+/**
+ * TODO 何バイト書くのか
+ * ByteArrayStreamクラスをつかう。
+ * @author Yoichiro Shimizu
+ *
+ */
 public class Attr {
 
 	private final String name;

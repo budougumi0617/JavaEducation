@@ -9,15 +9,18 @@
  */
 package ex22_05;
 
+import java.util.Random;
+
 /**
  * @author budougumi0617
  * @note no comment
  */
 public class Dice {
 	int result = 0;
-	
+	Random rand = new Random();
 	int roll(){
-		result = (int)(Math.random() * 6) + 1;
+		
+		result = rand.nextInt(6) + 1; //整数の乱数でよい
 		return result;
 	}
 

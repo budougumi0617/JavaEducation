@@ -17,6 +17,7 @@ import java.util.Random;
  * @author budougumi0617
  *         nextGaussianを検査するプログラムを作成して、
  *         膨大な数の呼び出し結果をグラフ（*文字の棒グラフ）で表示しなさい。
+ *         TODO やりなおし。。。
  */
 public class CheckNextGaussian {
 	private static Random random = new Random();
@@ -24,7 +25,7 @@ public class CheckNextGaussian {
 	final int trialNum = 10000;
 
 	CheckNextGaussian() {
-		countResultList = new ArrayList<Integer>(100);
+		countResultList = new ArrayList<Integer>(150);
 	}
 
 	String createGraph(int count) {
@@ -44,14 +45,14 @@ public class CheckNextGaussian {
 	void computeGaussian() {
 		double doubleValue;
 		int result;
-		for (int i = 0; i < 100; i++) {
-			countResultList.add(0, 0);
+		for (int i = 0; i < 150; i++) {
+			countResultList.add(i, 0);
 		}
 		for (int i = 0; i < trialNum; i++) {
 			doubleValue = random.nextGaussian();
-			System.out.println(doubleValue);
+			//System.out.println(doubleValue);
 			result = computeAddNumber(doubleValue);
-			if (0 <= result && result < 100) {
+			if (0 <= result && result < 150) {
 				countResultList.set(result, countResultList.get(result) + 1);
 			}
 		}

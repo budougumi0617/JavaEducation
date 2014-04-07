@@ -91,7 +91,7 @@ public class Clock extends JFrame implements ActionListener {
 			this.setFont(fontType);
 			owner.setFont(fontType);
 			// System.out.println("fontSize = " + owner.getFontSize());
-			// System.out.println("fontType = " + owner.getFontName());
+			System.out.println("fontType = " + owner.getFontName());
 			g.drawString(h + ":" + m + ":" + s, (int) (strWidth * 0.05),
 					(int) (strHeight * 0.5));
 
@@ -244,13 +244,15 @@ public class Clock extends JFrame implements ActionListener {
 
 	public Color returnColor(String obj) {
 		if (obj.equals("BLACK"))
-			return Color.black;
+			return Color.BLACK;
 		else if (obj.equals("WHITE"))
-			return Color.white;
+			return Color.WHITE;
 		else if (obj.equals("BLUE"))
-			return Color.blue;
+			return Color.BLUE;
+		else if (obj.equals("RED"))
+			return Color.RED;
 		else
-			return Color.white;
+			return Color.WHITE;
 	}
 
 	public void actionPerformed(ActionEvent e) {

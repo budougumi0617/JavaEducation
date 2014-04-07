@@ -1,14 +1,15 @@
 package twoFour;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
-import java.awt.List;
-import java.awt.event.*;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
@@ -40,6 +41,8 @@ class MyProperties extends JDialog implements ActionListener {
 	DefaultComboBoxModel fontModel = new DefaultComboBoxModel();
 	DefaultComboBoxModel backModel = new DefaultComboBoxModel();
 	GridBagLayout gbl = new GridBagLayout();
+	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	String fontfamilys[] = ge.getAvailableFontFamilyNames();
 
 	public MyProperties(Clock owner) {
 		super(owner, "properties", false);
@@ -59,8 +62,9 @@ class MyProperties extends JDialog implements ActionListener {
 		backModel.addElement(new ComboLabel("Blue", blue));
 		this.add(new JLabel("FontType", JLabel.CENTER));
 		// this.addComp(new JLabel("FontType", JLabel.CENTER), 0, 0, 1, 1);
-		fontType.addItem("Serif");
-		fontType.addItem("SansSerif");
+		for (String fontNameString : fontfamilys) {
+			fontType.addItem(makeObj(fontNameString));
+		}
 		this.add(fontType);
 		// this.addComp(fontType, 1, 0, 1, 1);
 		this.add(new JLabel("FontSize", JLabel.CENTER));
@@ -106,18 +110,25 @@ class MyProperties extends JDialog implements ActionListener {
 		add((Component) b);
 	}
 
+	private Object makeObj(final String item) {
+		return new Object() {
+			public String toString() {
+				return item;
+			}
+		};
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "OK") {
 			saveSetting();
 			this.setVisible(false);
-		}
-		else if (e.getActionCommand() == "Cancel") {
+		} else if (e.getActionCommand() == "Cancel") {
 			setListDefault();
 			this.setVisible(false);
 		}
 		System.out.println("Actions 発生元" + e.getActionCommand());
 		if (e.getActionCommand() == "fontType") {
-			changeFontType(fontType);
+			changeFontType(fontType.getSelectedItem());
 		}
 		if (e.getActionCommand() == "fontSize") {
 			changeFontSize(fontSize);
@@ -134,7 +145,7 @@ class MyProperties extends JDialog implements ActionListener {
 	public void itemStateChanged(ItemEvent e) {
 		System.out.println("ItemEvent 発生元" + e.getSource());
 		if (e.getSource() == fontType) {
-			changeFontType(fontType);
+			changeFontType(fontType.getSelectedItem());
 		}
 		if (e.getSource() == fontSize) {
 			changeFontSize(fontSize);
@@ -145,17 +156,23 @@ class MyProperties extends JDialog implements ActionListener {
 		if (e.getSource() == backColor) {
 			changeBackground(backColor);
 		}
-		owner.fontType = new Font(owner.getFontName(), Font.PLAIN, owner.getFontSize());
+		owner.fontType = new Font(owner.getFontName(), Font.PLAIN,
+				owner.getFontSize());
 	}
-	void changeFontType(JComboBox obj){
-		if (obj.getSelectedIndex() == 0) owner.setFontName(Font.SERIF);
-		if (obj.getSelectedIndex() == 1) owner.setFontName(Font.SANS_SERIF);
+
+	void changeFontType(Object obj) {
+		owner.setFontName(obj.toString());
 	}
-	void changeFontSize(JComboBox obj){
-		if (obj.getSelectedIndex() == 0) owner.setFontSize(50);
-		if (obj.getSelectedIndex() == 1) owner.setFontSize(100);
-		if (obj.getSelectedIndex() == 2) owner.setFontSize(150);
+
+	void changeFontSize(JComboBox obj) {
+		if (obj.getSelectedIndex() == 0)
+			owner.setFontSize(50);
+		if (obj.getSelectedIndex() == 1)
+			owner.setFontSize(100);
+		if (obj.getSelectedIndex() == 2)
+			owner.setFontSize(150);
 	}
+
 	void changeFontColor(JComboBox obj) {
 		if (obj.getSelectedIndex() == 0)
 			owner.setFontColor("BLACK");
@@ -179,7 +196,8 @@ class MyProperties extends JDialog implements ActionListener {
 			System.out.println("owner.backcolor = " + owner.getBackColor());
 		}
 	}
-	void setListDefault(){
+
+	void setListDefault() {
 		fontType.setSelectedIndex(owner.intLoad("fontType", 0));
 		changeFontType(fontType);
 		fontSize.setSelectedIndex(owner.intLoad("fontSize", 1));
@@ -189,7 +207,8 @@ class MyProperties extends JDialog implements ActionListener {
 		backColor.setSelectedIndex(owner.intLoad("backColor", 0));
 		changeBackground(backColor);
 	}
-	void saveSetting(){
+
+	void saveSetting() {
 		owner.intSave("fontType", fontType.getSelectedIndex());
 		owner.intSave("fontSize", fontSize.getSelectedIndex());
 		owner.intSave("fontColor", fontColor.getSelectedIndex());
@@ -197,41 +216,38 @@ class MyProperties extends JDialog implements ActionListener {
 	}
 
 }
-class ComboLabel{
-	  String text;
-	  FillIcon icon;
 
-	  ComboLabel(String text, FillIcon icon){
-	    this.text = text;
-	    this.icon = icon;
-	  }
+class ComboLabel {
+	String text;
+	FillIcon icon;
 
-	  public String getText(){
-	    return text;
-	  }
-
-	  public Icon getIcon(){
-	    return icon;
-	  }
+	ComboLabel(String text, FillIcon icon) {
+		this.text = text;
+		this.icon = icon;
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public Icon getIcon() {
+		return icon;
+	}
+}
+
 class MyCellRenderer extends JLabel implements ListCellRenderer {
-	  /**
+	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public Component getListCellRendererComponent(
-	            JList list,
-	            Object value,
-	            int index,
-	            boolean isSelected,
-	            boolean cellHasFocus){
+	public Component getListCellRendererComponent(JList list, Object value,
+			int index, boolean isSelected, boolean cellHasFocus) {
 
-	      ComboLabel data = (ComboLabel)value;
-	      setText(data.getText());
-	      setIcon(data.getIcon());
+		ComboLabel data = (ComboLabel) value;
+		setText(data.getText());
+		setIcon(data.getIcon());
 
-	    return this;
-	  }
+		return this;
 	}
+}

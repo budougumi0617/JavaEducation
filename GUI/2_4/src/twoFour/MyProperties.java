@@ -36,6 +36,16 @@ class MyProperties extends JDialog implements ActionListener {
 	FillIcon black = new FillIcon(Color.BLACK, 20, 20);
 	FillIcon white = new FillIcon(Color.WHITE, 20, 20);
 	FillIcon blue = new FillIcon(Color.BLUE, 20, 20);
+	FillIcon red = new FillIcon(Color.RED, 20, 20);
+	FillIcon yellow = new FillIcon(Color.YELLOW, 20, 20);
+	FillIcon cyan = new FillIcon(Color.CYAN, 20, 20);
+	FillIcon pink = new FillIcon(Color.PINK, 20, 20);
+	FillIcon green = new FillIcon(Color.GREEN, 20, 20);
+	FillIcon gray = new FillIcon(Color.GRAY, 20, 20);
+	FillIcon dark_gray = new FillIcon(Color.DARK_GRAY, 20, 20);
+	FillIcon light_gray = new FillIcon(Color.LIGHT_GRAY, 20, 20);
+	FillIcon magenta = new FillIcon(Color.MAGENTA, 20, 20);
+	FillIcon orange = new FillIcon(Color.ORANGE, 20, 20);
 	MyCellRenderer fontRenderer = new MyCellRenderer();
 	MyCellRenderer backRenderer = new MyCellRenderer();
 	DefaultComboBoxModel fontModel = new DefaultComboBoxModel();
@@ -54,12 +64,32 @@ class MyProperties extends JDialog implements ActionListener {
 		fontSize.setActionCommand("fontSize");
 		fontType.addActionListener(this);
 		fontType.setActionCommand("fontType");
-		fontModel.addElement(new ComboLabel("black", black));
+		fontModel.addElement(new ComboLabel("Black", black));
 		fontModel.addElement(new ComboLabel("White", white));
 		fontModel.addElement(new ComboLabel("Blue", blue));
+		fontModel.addElement(new ComboLabel("Red", red));
+		fontModel.addElement(new ComboLabel("Yellow", yellow));
+		fontModel.addElement(new ComboLabel("Cyan", cyan));
+		fontModel.addElement(new ComboLabel("Pink", pink));
+		fontModel.addElement(new ComboLabel("Green", green));
+		fontModel.addElement(new ComboLabel("Gray", gray));
+		fontModel.addElement(new ComboLabel("Dark_gray", dark_gray));
+		fontModel.addElement(new ComboLabel("Light_gray", light_gray));
+		fontModel.addElement(new ComboLabel("Magenta", magenta));
+		fontModel.addElement(new ComboLabel("Orange", orange));
 		backModel.addElement(new ComboLabel("black", black));
 		backModel.addElement(new ComboLabel("White", white));
 		backModel.addElement(new ComboLabel("Blue", blue));
+		backModel.addElement(new ComboLabel("Red", red));
+		backModel.addElement(new ComboLabel("Yellow", yellow));
+		backModel.addElement(new ComboLabel("Cyan", cyan));
+		backModel.addElement(new ComboLabel("Pink", pink));
+		backModel.addElement(new ComboLabel("Green", green));
+		backModel.addElement(new ComboLabel("Gray", gray));
+		backModel.addElement(new ComboLabel("Dark_gray", dark_gray));
+		backModel.addElement(new ComboLabel("Light_gray", light_gray));
+		backModel.addElement(new ComboLabel("Magenta", magenta));
+		backModel.addElement(new ComboLabel("Orange", orange));
 		this.add(new JLabel("FontType", JLabel.CENTER));
 		// this.addComp(new JLabel("FontType", JLabel.CENTER), 0, 0, 1, 1);
 		for (String fontNameString : fontfamilys) {
@@ -174,15 +204,37 @@ class MyProperties extends JDialog implements ActionListener {
 	}
 
 	void changeFontColor(JComboBox obj) {
-		if (obj.getSelectedIndex() == 0)
-			owner.setFontColor("BLACK");
-		if (obj.getSelectedIndex() == 1) {
-			owner.setFontColor("WHITE");
-			System.out.println("fontcolor = white");
-			System.out.println("owner.fontcolor = " + owner.getFontColor());
+		String colorName = null;
+		switch (obj.getSelectedIndex()) {
+		case 0:
+			colorName = "BLACK";
+			break;
+		case 1:
+			colorName = "WHITE";
+			break;
+		case 2:
+			colorName = "BLUE";
+			break;
+		case 3:
+			colorName = "RED";
+			break;
+		case 4:
+			colorName = "YELLOW";
+			break;
+		case 5:
+			colorName = "CYAN";
+			break;
+		case 6:
+			colorName = "PINK";
+			break;
+		case 7:
+			colorName = "GREEN";
+			break;
+		default:
+			colorName = "WHITE";
+			break;
 		}
-		if (obj.getSelectedIndex() == 2)
-			owner.setFontColor("BLUE");
+		owner.setFontColor(colorName);
 	}
 
 	void changeBackground(JComboBox obj) {

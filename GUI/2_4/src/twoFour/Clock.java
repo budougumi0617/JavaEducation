@@ -1,6 +1,5 @@
 package twoFour;
 
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -91,7 +90,7 @@ public class Clock extends JFrame implements ActionListener {
 			this.setFont(fontType);
 			owner.setFont(fontType);
 			// System.out.println("fontSize = " + owner.getFontSize());
-			System.out.println("fontType = " + owner.getFontName());
+			//System.out.println("fontType = " + owner.getFontName());
 			g.drawString(h + ":" + m + ":" + s, (int) (strWidth * 0.05),
 					(int) (strHeight * 0.5));
 
@@ -146,8 +145,12 @@ public class Clock extends JFrame implements ActionListener {
 				try {
 					prefs.putInt("windowPositonX", getX());
 					prefs.putInt("windowPositonY", getY());
-					System.out.println("end  prefs.putInt(windowPositonX, wsize.x):" + getX());
-					System.out.println("end  prefs.putInt(windowPositonY, wsize.y):" + getY());
+					System.out
+							.println("end  prefs.putInt(windowPositonX, wsize.x):"
+									+ getX());
+					System.out
+							.println("end  prefs.putInt(windowPositonY, wsize.y):"
+									+ getY());
 					prefs.flush();
 				} catch (BackingStoreException e1) {
 					// TODO 自動生成された catch ブロック
@@ -175,8 +178,8 @@ public class Clock extends JFrame implements ActionListener {
 				windowPositonX = getX();
 				windowPositonY = getY();
 				wSize.setLocation(windowPositonX, windowPositonY);
-				System.out.println("return getInt() :" + getX()
-						+ " Y: " + getY());
+				System.out.println("return getInt() :" + getX() + " Y: "
+						+ getY());
 			}
 
 			@Override
@@ -251,6 +254,24 @@ public class Clock extends JFrame implements ActionListener {
 			return Color.BLUE;
 		else if (obj.equals("RED"))
 			return Color.RED;
+		else if (obj.equals("YELLOW"))
+			return Color.YELLOW;
+		else if (obj.equals("CYAN"))
+			return Color.CYAN;
+		else if (obj.equals("PINK"))
+			return Color.PINK;
+		else if (obj.equals("GREEN"))
+			return Color.GREEN;
+		else if (obj.equals("GRAY"))
+			return Color.GRAY;
+		else if (obj.equals("DARK_GRAY"))
+			return Color.DARK_GRAY;
+		else if (obj.equals("LIGHT_GRAY"))
+			return Color.LIGHT_GRAY;
+		else if (obj.equals("MAGENTA"))
+			return Color.MAGENTA;
+		else if (obj.equals("ORANGE"))
+			return Color.ORANGE;
 		else
 			return Color.WHITE;
 	}

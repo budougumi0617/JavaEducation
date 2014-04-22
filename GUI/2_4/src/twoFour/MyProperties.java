@@ -7,6 +7,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -51,13 +52,21 @@ class MyProperties extends JDialog implements ActionListener {
 	DefaultComboBoxModel fontModel = new DefaultComboBoxModel();
 	DefaultComboBoxModel backModel = new DefaultComboBoxModel();
 	GridBagLayout gbl = new GridBagLayout();
+	
+	
+	
 	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	String fontfamilys[] = ge.getAvailableFontFamilyNames();
 
 	public MyProperties(Clock owner) {
 		super(owner, "properties", false);
 		this.owner = owner;
-		this.setLayout(new GridLayout(0, 2));
+		this.setSize(300, 200);
+		getContentPane().setLayout(gbl);
+		gbl.columnWidths = new int[] {150, 0, 0, 2};
+		gbl.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		okBtn.addActionListener(this);
 		ngBtn.addActionListener(this);
 		fontSize.addActionListener(this);
@@ -90,40 +99,115 @@ class MyProperties extends JDialog implements ActionListener {
 		backModel.addElement(new ComboLabel("Light_gray", light_gray));
 		backModel.addElement(new ComboLabel("Magenta", magenta));
 		backModel.addElement(new ComboLabel("Orange", orange));
-		this.add(new JLabel("FontType", JLabel.CENTER));
+		//this.add(new JLabel("FontType", JLabel.CENTER));
 		// this.addComp(new JLabel("FontType", JLabel.CENTER), 0, 0, 1, 1);
 		for (String fontNameString : fontfamilys) {
 			fontType.addItem(makeObj(fontNameString));
 		}
-		this.add(fontType);
-		// this.addComp(fontType, 1, 0, 1, 1);
-		this.add(new JLabel("FontSize", JLabel.CENTER));
+		//this.add(fontType);
+		JLabel fontTypeLabel = new JLabel("FontType", JLabel.CENTER);
+		GridBagConstraints gbc_label1 = new GridBagConstraints();
+		gbc_label1.anchor = GridBagConstraints.EAST;
+		gbc_label1.insets = new Insets(0, 0, 5, 5);
+		gbc_label1.gridx = 0;
+		gbc_label1.gridy = 0;
+		getContentPane().add(fontTypeLabel, gbc_label1);
+		
+		GridBagConstraints gbc_comboBox1 = new GridBagConstraints();
+		gbc_comboBox1.anchor = GridBagConstraints.WEST;
+		gbc_comboBox1.gridwidth = 2;
+		gbc_comboBox1.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox1.gridx = 1;
+		gbc_comboBox1.gridy = 0;
+		getContentPane().add(fontType, gbc_comboBox1);
+		
+		JLabel fontSizeLabel = new JLabel("FontSize", JLabel.CENTER);
+		GridBagConstraints gbc_label2 = new GridBagConstraints();
+		gbc_label2.anchor = GridBagConstraints.EAST;
+		gbc_label2.insets = new Insets(0, 0, 5, 5);
+		gbc_label2.gridx = 0;
+		gbc_label2.gridy = 1;
+		getContentPane().add(fontSizeLabel, gbc_label2);
+		
+		//this.add(new JLabel("FontSize", JLabel.CENTER));
 		// this.addComp(new JLabel("FontSize", JLabel.CENTER), 0, 1, 1, 1);
-		fontSize.addItem("Small");
-		fontSize.addItem("Middle");
-		fontSize.addItem("Large");
+		for(int i = 10; i <= 200; i += 10){
+			fontSize.addItem(i);
+		}
+		GridBagConstraints gbc_comboBox2 = new GridBagConstraints();
+		gbc_comboBox2.anchor = GridBagConstraints.WEST;
+		gbc_comboBox2.gridwidth = 2;
+		gbc_comboBox2.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBox2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox2.gridx = 1;
+		gbc_comboBox2.gridy = 1;
+		getContentPane().add(fontSize, gbc_comboBox2);
 		// this.addComp(fontSize, 1, 1, 1, 1);
-		this.add(fontSize);
-		this.add(new JLabel("FontColor", JLabel.CENTER));
+		//this.add(fontSize);
+		//this.add(new JLabel("FontColor", JLabel.CENTER));
 		// this.addComp(new JLabel("FontColor", JLabel.CENTER), 0, 2, 1, 1);
+		JLabel label3 = new JLabel("FontColor", JLabel.CENTER);
+		GridBagConstraints gbc_label3 = new GridBagConstraints();
+		gbc_label3.anchor = GridBagConstraints.EAST;
+		gbc_label3.insets = new Insets(0, 0, 5, 5);
+		gbc_label3.gridx = 0;
+		gbc_label3.gridy = 2;
+		getContentPane().add(label3, gbc_label3);
+		
 		fontColor = new JComboBox(fontModel);
 		fontColor.addActionListener(this);
 		fontColor.setActionCommand("fontColor");
 		fontColor.setRenderer(fontRenderer);
-		this.add(fontColor);
+		GridBagConstraints gbc_comboBox3 = new GridBagConstraints();
+		gbc_comboBox3.anchor = GridBagConstraints.WEST;
+		gbc_comboBox3.gridwidth = 2;
+		gbc_comboBox3.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox3.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox3.gridx = 1;
+		gbc_comboBox3.gridy = 2;
+		getContentPane().add(fontColor, gbc_comboBox3);
+		//this.add(fontColor);
 
-		fontColor.setSelectedIndex(1);
+		
 		// this.addComp(fontColor, 1, 2, 1, 1);
-		this.add(new JLabel("BackColor", JLabel.CENTER));
+		//this.add(new JLabel("BackColor", JLabel.CENTER));
 		// this.addComp(new JLabel("BackColor", JLabel.CENTER), 0, 3, 1, 1);
+		JLabel label4 = new JLabel("BackColor", JLabel.CENTER);
+		GridBagConstraints gbc_label4 = new GridBagConstraints();
+		gbc_label4.anchor = GridBagConstraints.EAST;
+		gbc_label4.insets = new Insets(0, 0, 5, 5);
+		gbc_label4.gridx = 0;
+		gbc_label4.gridy = 3;
+		getContentPane().add(label4, gbc_label4);
+		
 		backColor = new JComboBox(backModel);
 		backColor.addActionListener(this);
 		backColor.setActionCommand("backColor");
 		backColor.setRenderer(backRenderer);
-		this.add(backColor);
+		GridBagConstraints gbc_comboBox4 = new GridBagConstraints();
+		gbc_comboBox4.anchor = GridBagConstraints.WEST;
+		gbc_comboBox4.gridwidth = 2;
+		gbc_comboBox4.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox4.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox4.gridx = 1;
+		gbc_comboBox4.gridy = 3;
+		getContentPane().add(backColor, gbc_comboBox4);
+		//this.add(backColor);
 		// this.addComp(backColor, 1, 3, 1, 1);
-		this.add(okBtn);
-		this.add(ngBtn);
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 5;
+		getContentPane().add(okBtn, gbc_btnNewButton);
+		GridBagConstraints gbc_btnNg = new GridBagConstraints();
+		gbc_btnNg.anchor = GridBagConstraints.WEST;
+		gbc_btnNg.gridx = 2;
+		gbc_btnNg.gridy = 5;
+		getContentPane().add(ngBtn, gbc_btnNg);
+		//this.add(okBtn);
+		//this.add(ngBtn);
 		// this.addComp(okBtn, 0, 4, 2, 2);
 		// this.addComp(ngBtn, 0, 1, 0, 2);
 		setListDefault();
@@ -195,64 +279,69 @@ class MyProperties extends JDialog implements ActionListener {
 	}
 
 	void changeFontSize(JComboBox obj) {
-		if (obj.getSelectedIndex() == 0)
-			owner.setFontSize(50);
-		if (obj.getSelectedIndex() == 1)
-			owner.setFontSize(100);
-		if (obj.getSelectedIndex() == 2)
-			owner.setFontSize(150);
+		System.out.println("selectedItem : " + obj.getSelectedItem());
+			owner.setFontSize((Integer)obj.getSelectedItem());
 	}
-
+String getColorString(JComboBox obj){
+	String colorName;
+	switch (obj.getSelectedIndex()) {
+	case 0:
+		colorName = "BLACK";
+		break;
+	case 1:
+		colorName = "WHITE";
+		break;
+	case 2:
+		colorName = "BLUE";
+		break;
+	case 3:
+		colorName = "RED";
+		break;
+	case 4:
+		colorName = "YELLOW";
+		break;
+	case 5:
+		colorName = "CYAN";
+		break;
+	case 6:
+		colorName = "PINK";
+		break;
+	case 7:
+		colorName = "GREEN";
+		break;
+	case 8:
+		colorName = "GRAY";
+		break;
+	case 9:
+		colorName = "DARK_GRAY";
+		break;
+	case 10:
+		colorName = "LIGHT_GRAY";
+		break;
+	case 11:
+		colorName = "MAGENTA";
+		break;
+	case 12:
+		colorName = "ORANGE";
+		break;
+	default:
+		colorName = "WHITE";
+		break;
+	}
+	return colorName;
+}
 	void changeFontColor(JComboBox obj) {
-		String colorName = null;
-		switch (obj.getSelectedIndex()) {
-		case 0:
-			colorName = "BLACK";
-			break;
-		case 1:
-			colorName = "WHITE";
-			break;
-		case 2:
-			colorName = "BLUE";
-			break;
-		case 3:
-			colorName = "RED";
-			break;
-		case 4:
-			colorName = "YELLOW";
-			break;
-		case 5:
-			colorName = "CYAN";
-			break;
-		case 6:
-			colorName = "PINK";
-			break;
-		case 7:
-			colorName = "GREEN";
-			break;
-		default:
-			colorName = "WHITE";
-			break;
-		}
-		owner.setFontColor(colorName);
+		owner.setFontColor(getColorString(obj));
 	}
 
 	void changeBackground(JComboBox obj) {
-		if (obj.getSelectedIndex() == 0)
-			owner.setBackColor("BLACK");
-		if (obj.getSelectedIndex() == 1)
-			owner.setBackColor("WHITE");
-		if (obj.getSelectedIndex() == 2) {
-			owner.setBackColor("BLUE");
-			System.out.println("backcolor = blue");
-			System.out.println("owner.backcolor = " + owner.getBackColor());
-		}
+			owner.setBackColor(getColorString(obj));
 	}
 
 	void setListDefault() {
 		fontType.setSelectedIndex(owner.intLoad("fontType", 0));
 		changeFontType(fontType);
-		fontSize.setSelectedIndex(owner.intLoad("fontSize", 1));
+		fontSize.setSelectedIndex(owner.intLoad("fontSize", 10));
 		changeFontSize(fontSize);
 		fontColor.setSelectedIndex(owner.intLoad("fontColor", 1));
 		changeFontColor(fontColor);

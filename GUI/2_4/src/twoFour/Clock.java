@@ -92,7 +92,7 @@ public class Clock extends JFrame implements ActionListener {
 			// System.out.println("fontSize = " + owner.getFontSize());
 			//System.out.println("fontType = " + owner.getFontName());
 			g.drawString(h + ":" + m + ":" + s, (int) (strWidth * 0.05),
-					(int) (strHeight * 0.5));
+					(int) (strHeight * 0.6));
 
 		}
 
@@ -104,13 +104,13 @@ public class Clock extends JFrame implements ActionListener {
 						Calendar.getInstance().get(Calendar.MINUTE)); // 分を代入
 				s = String.format("%1$02d",
 						Calendar.getInstance().get(Calendar.SECOND)); // 秒を代入
-				strWidth = (int) (fontSize * 5 * 1.1);
+				strWidth = (int) (fontSize * 6);
 				strHeight = (int) (fontSize * 1.5);
 				if (strHeight < 200)
 					strHeight = 200;
 				mainClock.setSize(strWidth - 8, strHeight - 16);
 				// System.out.println("Height = " + (int)(strHeight));
-				owner.setSize(strWidth - 8, strHeight);
+				owner.setSize(strWidth - 8, strHeight -16);
 				repaint();
 				try {
 					Thread.sleep(500); // スリープ0.5秒
@@ -278,7 +278,7 @@ public class Clock extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand() == "Prop") {
-			dialog.setSize(400, 600);
+			//dialog.setSize(400, 600);
 			dialog.setVisible(true);
 		}
 

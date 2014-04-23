@@ -209,7 +209,7 @@ public class Clock extends JFrame implements ActionListener {
 		clock.setJMenuBar(clock.createMenu());
 
 		clock.setVisible(true);
-		clock.setFontColor("WHITE");
+		//clock.setFontColor("WHITE");
 		th.start(); // スレッドスタート
 	}
 

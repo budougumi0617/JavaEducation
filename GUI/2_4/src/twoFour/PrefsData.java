@@ -7,7 +7,7 @@ import java.util.prefs.Preferences;
 public class PrefsData {
 	private Preferences prefs;
 	public PrefsData(){
-		prefs = Preferences.systemNodeForPackage(this.getClass());
+		prefs = Preferences.userNodeForPackage(this.getClass());
 	}
 
 	public void intSave(String key, int data){

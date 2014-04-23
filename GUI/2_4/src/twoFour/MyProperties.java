@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -132,7 +131,7 @@ class MyProperties extends JDialog implements ActionListener {
 		
 		//this.add(new JLabel("FontSize", JLabel.CENTER));
 		// this.addComp(new JLabel("FontSize", JLabel.CENTER), 0, 1, 1, 1);
-		for(int i = 10; i <= 200; i += 10){
+		for(int i = 50; i <= 200; i += 10){
 			fontSize.addItem(i);
 		}
 		GridBagConstraints gbc_comboBox2 = new GridBagConstraints();
@@ -142,6 +141,7 @@ class MyProperties extends JDialog implements ActionListener {
 		gbc_comboBox2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox2.gridx = 1;
 		gbc_comboBox2.gridy = 1;
+		
 		getContentPane().add(fontSize, gbc_comboBox2);
 		// this.addComp(fontSize, 1, 1, 1, 1);
 		//this.add(fontSize);
